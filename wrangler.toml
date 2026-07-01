@@ -1,0 +1,2 @@
+name = "lingmo-os"
+pages_build_output_dir = ".vercel/output/static"
