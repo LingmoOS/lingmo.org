@@ -37,6 +37,7 @@
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/26b01",
+        "summary": "<h2>Lingmo OS 2.1.0-beta2</h2><p><strong>Release Date:</strong> July 1, 2026</p><h3>What's New</h3><ul><li>Next-gen desktop environment preview</li><li>Experimental Wayland improvements</li><li>Updated core applications</li></ul>",
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso",
@@ -59,6 +60,7 @@
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/26a20",
+        "summary": "<h2>Lingmo OS Nightly (20260701)</h2><p><strong>Build:</strong> 26a20</p><ul><li>Latest development snapshot</li><li>Includes experimental features</li><li>May contain unstable changes</li></ul>",
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso",
