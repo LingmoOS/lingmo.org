@@ -1,0 +1,224 @@
+{
+  "404": {
+    "title": "頁面未找到",
+    "description": "抱歉，您查詢的頁面不存在或已被移動。",
+    "goHome": "返回首頁"
+  },
+  "nav": {
+    "home": "首頁",
+    "about": "關於",
+    "download": "下載",
+    "documentation": "文件",
+    "releases": "版本",
+    "blog": "部落格",
+    "community": "社群",
+    "gallery": "圖庫",
+    "donate": "捐贈",
+    "sponsors": "贊助商",
+    "faq": "常見問題",
+    "search": "搜尋",
+    "signIn": "登入",
+    "signUp": "註冊"
+  },
+  "hero": {
+    "title": "Lingmo OS",
+    "subtitle": "優雅. 快速. 開源.",
+    "description": "為每一個人而生。為未來而設計。",
+    "downloadCta": "立即下載",
+    "docsCta": "閱讀文件"
+  },
+  "features": {
+    "title": "為什麼選擇 Lingmo OS？",
+    "description": "了解是什麼讓 Lingmo OS 成為您日常運算需求的完美選擇。",
+    "items": {
+      "performance": {
+        "title": "效能卓越",
+        "description": "即使在較舊的硬體上也有優秀的啟動速度和回應效能。Lingmo OS 經過最佳化，充分利用系統資源，確保流暢的多工處理和靈敏的使用者體驗。"
+      },
+      "security": {
+        "title": "安全可靠",
+        "description": "基於堅如磐石的 Linux 基礎構建，提供定期安全更新、強制存取控制和加密儲存。您的資料在 Lingmo OS 中始終安全。"
+      },
+      "developer": {
+        "title": "開發者友善",
+        "description": "開箱即用，提供全面的開發工具和環境支援。從編譯器到容器，Lingmo OS 為您構建、測試和部署軟體提供一切所需。"
+      },
+      "design": {
+        "title": "精美設計",
+        "description": "現代化、直觀的使用者介面，既美觀又高度實用。Lingmo OS 為您帶來整個桌面統一的視覺體驗。"
+      },
+      "openSource": {
+        "title": "開源免費",
+        "description": "在 GPL v3.0 下完全開源。每一行程式碼都是透明、可審計的，並且可以自由使用、修改和分享。社群主導專案的發展方向。"
+      },
+      "communityDriven": {
+        "title": "社群驅動",
+        "description": "由社群構建，為社群服務。您的貢獻、回饋和想法每天都在塑造 Lingmo OS 的未來。"
+      }
+    }
+  },
+  "download": {
+    "pageTitle": "下載 Lingmo OS",
+    "pageDescription": "獲取最新版本的 Lingmo OS。從穩定版、測試版或每日構建版中選擇。",
+    "stable": "穩定版",
+    "beta": "測試版",
+    "nightly": "每日構建版",
+    "version": "版本號",
+    "releaseDate": "發佈日期",
+    "iso": "ISO 映像",
+    "sha256": "下載 SHA256",
+    "torrent": "種子檔案",
+    "mirror": "鏡像站",
+    "releaseNotes": "發行說明",
+    "systemRequirements": "系統需求",
+    "historicalVersions": "歷史版本",
+    "downloadButton": "下載",
+    "comingSoon": "即將推出",
+    "dialogTitle": "下載 Lingmo OS",
+    "dialogSubtitle": "請在下載前選擇版本和架構。",
+    "edition": "版本",
+    "architecture": "架構",
+    "recommended": "推薦",
+    "cancel": "取消",
+    "download": "下載",
+    "downloadStarted": "您的下載已開始。",
+    "downloadHint": "您可以安全關閉此彈窗。",
+    "notAvailable": "暫不可用",
+    "isoSize": "ISO 大小",
+    "quickLinks": "快速連結",
+    "installationGuide": "安裝指南",
+    "mirrors": "鏡像列表",
+    "reportIssue": "回報下載問題"
+  },
+  "about": {
+    "pageTitle": "關於 Lingmo OS",
+    "pageDescription": "了解 Lingmo OS 背後的歷史、使命和願景。",
+    "story": "我們的故事",
+    "mission": "我們的使命",
+    "vision": "我們的願景",
+    "timeline": "發展歷程",
+    "developers": "開發者",
+    "contributors": "貢獻者",
+    "architecture": "系統架構",
+    "roadmap": "發展路線圖"
+  },
+  "documentation": {
+    "pageTitle": "文件",
+    "pageDescription": "Lingmo OS 的全面指南、教學和參考資料。",
+    "searchPlaceholder": "搜尋文件...",
+    "tableOfContents": "目錄",
+    "previousPage": "上一頁",
+    "nextPage": "下一頁",
+    "onThisPage": "本頁內容"
+  },
+  "community": {
+    "pageTitle": "社群",
+    "pageDescription": "加入 Lingmo OS 社群，與其他使用者和開發者交流。",
+    "joinDiscord": "加入 Discord",
+    "joinMatrix": "加入 Matrix",
+    "joinTelegram": "加入 Telegram",
+    "joinQQ": "加入 QQ 群",
+    "followWeChat": "關注微信",
+    "joinForum": "加入論壇",
+    "mailingList": "郵件列表"
+  },
+  "gallery": {
+    "pageTitle": "圖庫",
+    "pageDescription": "瀏覽展示 Lingmo OS 的截圖和多媒體內容。"
+  },
+  "donate": {
+    "pageTitle": "捐贈",
+    "pageDescription": "通過捐贈支援 Lingmo OS 專案。",
+    "supportVia": "支援方式",
+    "oneTime": "一次性捐贈",
+    "monthly": "每月捐贈",
+    "customAmount": "自訂金額",
+    "donateButton": "捐贈",
+    "transparency": "我們致力於透明公開。所有捐贈都將被記錄並公開發佈。"
+  },
+  "sponsors": {
+    "pageTitle": "贊助商",
+    "pageDescription": "了解支援 Lingmo OS 的組織和個人。",
+    "becomeSponsor": "成為贊助商",
+    "ourSponsors": "我們的贊助商"
+  },
+  "faq": {
+    "pageTitle": "常見問題",
+    "pageDescription": "查找關於 Lingmo OS 的常見問題解答。",
+    "searchPlaceholder": "搜尋常見問題..."
+  },
+  "privacy": {
+    "pageTitle": "隱私政策",
+    "pageDescription": "Lingmo OS 如何處理您的資料和隱私。",
+    "lastUpdated": "最後更新：2026 年 6 月"
+  },
+  "license": {
+    "pageTitle": "授權條款",
+    "pageDescription": "Lingmo OS 在 GNU 通用公共授權條款 v3.0 下發佈。"
+  },
+  "footer": {
+    "description": "一個為每個人打造的現代、優雅、開源作業系統。",
+    "lingmo": "靈墨",
+    "downloads": "下載",
+    "resources": "資源",
+    "community": "社群",
+    "legal": "法律",
+    "about": "關於",
+    "download": "下載",
+    "docs": "文件",
+    "gallery": "圖庫",
+    "donate": "捐贈",
+    "faq": "常見問題",
+    "blog": "部落格",
+    "github": "GitHub",
+    "discord": "Discord",
+    "releases": "版本",
+    "roadmap": "路線圖",
+    "privacy": "隱私",
+    "license": "授權",
+    "copyright": "© 2026 Lingmo 專案。保留所有權利。",
+    "poweredBy": "開源社群驅動",
+    "builtWith": "由 Lingmo 社群傾心打造",
+    "friendLinks": "友情連結"
+  },
+  "search": {
+    "pageTitle": "搜尋",
+    "inputPlaceholder": "搜尋網站...",
+    "noResults": "未找到結果。",
+    "resultsFor": "搜尋結果"
+  },
+  "blog": {
+    "pageTitle": "部落格",
+    "pageDescription": "來自 Lingmo OS 團隊的最新新聞、更新和文章。",
+    "readMore": "閱讀更多",
+    "publishedOn": "發佈於",
+    "by": "作者",
+    "tags": "標籤"
+  },
+  "releases": {
+    "pageTitle": "版本發佈",
+    "pageDescription": "查看所有 Lingmo OS 版本，包含版本歷史和更新日誌。",
+    "viewDetails": "查看詳情"
+  },
+  "common": {
+    "loading": "載入中...",
+    "error": "發生錯誤",
+    "success": "成功",
+    "warning": "警告",
+    "info": "提示",
+    "close": "關閉",
+    "menu": "選單",
+    "language": "語言",
+    "theme": "主題",
+    "light": "淺色",
+    "dark": "深色",
+    "auto": "自動",
+    "comingSoon": "即將推出",
+    "learnMore": "了解更多",
+    "getStarted": "開始使用",
+    "viewAll": "檢視全部",
+    "subscribe": "訂閱",
+    "newsletter": "電子報",
+    "emailPlaceholder": "輸入您的電子郵件"
+  }
+}

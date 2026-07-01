@@ -1,0 +1,10 @@
+[
+  { "name": "Linux Foundation", "tier": "platinum", "url": "https://www.linuxfoundation.org", "amount": 100000 },
+  { "name": "Debian Project", "tier": "gold", "url": "https://www.debian.org", "amount": 50000 },
+  { "name": "GNOME Foundation", "tier": "gold", "url": "https://www.gnome.org", "amount": 40000 },
+  { "name": "KDE e.V.", "tier": "silver", "url": "https://kde.org", "amount": 20000 },
+  { "name": "Cloudflare", "tier": "silver", "url": "https://www.cloudflare.com", "amount": 15000 },
+  { "name": "GitHub", "tier": "bronze", "url": "https://github.com", "amount": 10000 },
+  { "name": "Vercel", "tier": "bronze", "url": "https://vercel.com", "amount": 8000 },
+  { "name": "JetBrains", "tier": "bronze", "url": "https://www.jetbrains.com", "amount": 5000 }
+]

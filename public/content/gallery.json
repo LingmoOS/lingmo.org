@@ -1,0 +1,12 @@
+[
+  { "id": "desktop-1", "title": "Lingmo Desktop", "description": "The main desktop environment with a clean, modern layout", "src": "", "width": 1920, "height": 1080, "category": "desktop" },
+  { "id": "settings-1", "title": "Settings Panel", "description": "System settings with intuitive navigation", "src": "", "width": 1920, "height": 1080, "category": "settings" },
+  { "id": "terminal-1", "title": "Terminal", "description": "Built-in terminal emulator with modern features", "src": "", "width": 1920, "height": 1080, "category": "terminal" },
+  { "id": "store-1", "title": "Software Center", "description": "Browse and install applications", "src": "", "width": 1920, "height": 1080, "category": "store" },
+  { "id": "dock-1", "title": "Dock and App Launcher", "description": "Elegant dock with application launcher", "src": "", "width": 1920, "height": 1080, "category": "dock" },
+  { "id": "file-manager-1", "title": "File Manager", "description": "Powerful file management with tabbed browsing", "src": "", "width": 1920, "height": 1080, "category": "file-manager" },
+  { "id": "control-center-1", "title": "Control Center", "description": "Quick access to system controls", "src": "", "width": 1920, "height": 1080, "category": "control-center" },
+  { "id": "wallpaper-1", "title": "Default Wallpaper", "description": "Lingmo OS default wallpaper", "src": "", "width": 3840, "height": 2160, "category": "wallpaper" },
+  { "id": "desktop-2", "title": "Desktop with Apps", "description": "Productivity workflow on Lingmo OS", "src": "", "width": 1920, "height": 1080, "category": "desktop" },
+  { "id": "terminal-2", "title": "Terminal with Neofetch", "description": "System information displayed in terminal", "src": "", "width": 1920, "height": 1080, "category": "terminal" }
+]

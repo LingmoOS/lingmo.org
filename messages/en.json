@@ -1,0 +1,224 @@
+{
+  "404": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "goHome": "Go Home"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "download": "Download",
+    "documentation": "Documentation",
+    "releases": "Releases",
+    "blog": "Blog",
+    "community": "Community",
+    "gallery": "Gallery",
+    "donate": "Donate",
+    "sponsors": "Sponsors",
+    "faq": "FAQ",
+    "search": "Search",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "hero": {
+    "title": "Lingmo OS",
+    "subtitle": "Elegant. Fast. Open.",
+    "description": "Built for everyone. Designed for the future.",
+    "downloadCta": "Download Now",
+    "docsCta": "Read the Docs"
+  },
+  "features": {
+    "title": "Why Lingmo OS?",
+    "description": "Discover what makes Lingmo OS the perfect choice for your daily computing needs.",
+    "items": {
+      "performance": {
+        "title": "Performance",
+        "description": "Fast boot times and responsive performance even on older hardware. Lingmo OS is optimized to make the most of your system resources, ensuring smooth multitasking and a snappy user experience."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Built on a rock-solid Linux foundation with regular security updates, mandatory access controls, and encrypted storage. Your data stays safe with Lingmo OS."
+      },
+      "developer": {
+        "title": "Developer Friendly",
+        "description": "Comprehensive development tools and environment support out of the box. From compilers to containers, Lingmo OS provides everything you need to build, test, and deploy software."
+      },
+      "design": {
+        "title": "Beautiful Design",
+        "description": "A modern, intuitive user interface that is both aesthetically pleasing and highly functional. Lingmo OS brings you a cohesive visual experience across the entire desktop."
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "Fully open source under GPL v3.0. Every line of code is transparent, auditable, and free to use, modify, and share. The community drives the direction of the project."
+      },
+      "communityDriven": {
+        "title": "Community Driven",
+        "description": "Built by the community, for the community. Your contributions, feedback, and ideas shape the future of Lingmo OS every day."
+      }
+    }
+  },
+  "download": {
+    "pageTitle": "Download Lingmo OS",
+    "pageDescription": "Get the latest version of Lingmo OS. Choose from stable, beta, or nightly builds.",
+    "stable": "Stable",
+    "beta": "Beta",
+    "nightly": "Nightly",
+    "version": "Version",
+    "releaseDate": "Release Date",
+    "iso": "ISO Image",
+    "sha256": "Download SHA256",
+    "torrent": "Torrent",
+    "mirror": "Mirror",
+    "releaseNotes": "Release Notes",
+    "systemRequirements": "System Requirements",
+    "historicalVersions": "Historical Versions",
+    "downloadButton": "Download",
+    "comingSoon": "Coming Soon",
+    "dialogTitle": "Download Lingmo OS",
+    "dialogSubtitle": "Choose the edition and architecture before downloading.",
+    "edition": "Edition",
+    "architecture": "Architecture",
+    "recommended": "Recommended",
+    "cancel": "Cancel",
+    "download": "Download",
+    "downloadStarted": "Your download has started.",
+    "downloadHint": "You may safely close this dialog.",
+    "notAvailable": "Not available yet.",
+    "isoSize": "ISO Size",
+    "quickLinks": "Quick Links",
+    "installationGuide": "Installation Guide",
+    "mirrors": "Mirror List",
+    "reportIssue": "Report Download Issue"
+  },
+  "about": {
+    "pageTitle": "About Lingmo OS",
+    "pageDescription": "Learn about the history, mission, and vision behind Lingmo OS.",
+    "story": "Our Story",
+    "mission": "Our Mission",
+    "vision": "Our Vision",
+    "timeline": "Timeline",
+    "developers": "Developers",
+    "contributors": "Contributors",
+    "architecture": "Architecture",
+    "roadmap": "Roadmap"
+  },
+  "documentation": {
+    "pageTitle": "Documentation",
+    "pageDescription": "Comprehensive guides, tutorials, and references for Lingmo OS.",
+    "searchPlaceholder": "Search documentation...",
+    "tableOfContents": "Table of Contents",
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "onThisPage": "On This Page"
+  },
+  "community": {
+    "pageTitle": "Community",
+    "pageDescription": "Join the Lingmo OS community and connect with other users and developers.",
+    "joinDiscord": "Join Discord",
+    "joinMatrix": "Join Matrix",
+    "joinTelegram": "Join Telegram",
+    "joinQQ": "Join QQ Group",
+    "followWeChat": "Follow WeChat",
+    "joinForum": "Join Forum",
+    "mailingList": "Mailing List"
+  },
+  "gallery": {
+    "pageTitle": "Gallery",
+    "pageDescription": "Browse screenshots and media showcasing Lingmo OS."
+  },
+  "donate": {
+    "pageTitle": "Donate",
+    "pageDescription": "Support the Lingmo OS project with a donation.",
+    "supportVia": "Support Via",
+    "oneTime": "One-Time",
+    "monthly": "Monthly",
+    "customAmount": "Custom Amount",
+    "donateButton": "Donate",
+    "transparency": "We are committed to transparency. All donations are tracked and reported publicly."
+  },
+  "sponsors": {
+    "pageTitle": "Sponsors",
+    "pageDescription": "Meet the organizations and individuals that support Lingmo OS.",
+    "becomeSponsor": "Become a Sponsor",
+    "ourSponsors": "Our Sponsors"
+  },
+  "faq": {
+    "pageTitle": "Frequently Asked Questions",
+    "pageDescription": "Find answers to common questions about Lingmo OS.",
+    "searchPlaceholder": "Search FAQ..."
+  },
+  "privacy": {
+    "pageTitle": "Privacy Policy",
+    "pageDescription": "How Lingmo OS handles your data and privacy.",
+    "lastUpdated": "Last updated: June 2026"
+  },
+  "license": {
+    "pageTitle": "License",
+    "pageDescription": "Lingmo OS is released under the GNU General Public License v3.0."
+  },
+  "footer": {
+    "description": "A modern, elegant, and open-source operating system built for everyone.",
+    "lingmo": "Lingmo",
+    "downloads": "Downloads",
+    "resources": "Resources",
+    "community": "Community",
+    "legal": "Legal",
+    "about": "About",
+    "download": "Download",
+    "docs": "Docs",
+    "gallery": "Gallery",
+    "donate": "Donate",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "github": "GitHub",
+    "discord": "Discord",
+    "releases": "Releases",
+    "roadmap": "Roadmap",
+    "privacy": "Privacy",
+    "license": "License",
+    "copyright": "© 2026 Lingmo Project. All rights reserved.",
+    "poweredBy": "Powered by the open-source community",
+    "builtWith": "Built with passion by the Lingmo community",
+    "friendLinks": "Friendship Links"
+  },
+  "search": {
+    "pageTitle": "Search",
+    "inputPlaceholder": "Search the site...",
+    "noResults": "No results found.",
+    "resultsFor": "Results for"
+  },
+  "blog": {
+    "pageTitle": "Blog",
+    "pageDescription": "Latest news, updates, and articles from the Lingmo OS team.",
+    "readMore": "Read More",
+    "publishedOn": "Published on",
+    "by": "by",
+    "tags": "Tags"
+  },
+  "releases": {
+    "pageTitle": "Releases",
+    "pageDescription": "View all Lingmo OS releases with version history and changelogs.",
+    "viewDetails": "View Details"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "close": "Close",
+    "menu": "Menu",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "Auto",
+    "comingSoon": "Coming Soon",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "viewAll": "View All",
+    "subscribe": "Subscribe",
+    "newsletter": "Newsletter",
+    "emailPlaceholder": "Enter your email"
+  }
+}

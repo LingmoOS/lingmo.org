@@ -1,0 +1,224 @@
+{
+  "404": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しないか、移動された可能性があります。",
+    "goHome": "ホームに戻る"
+  },
+  "nav": {
+    "home": "ホーム",
+    "about": "概要",
+    "download": "ダウンロード",
+    "documentation": "ドキュメント",
+    "releases": "リリース",
+    "blog": "ブログ",
+    "community": "コミュニティ",
+    "gallery": "ギャラリー",
+    "donate": "寄付",
+    "sponsors": "スポンサー",
+    "faq": "よくある質問",
+    "search": "検索",
+    "signIn": "ログイン",
+    "signUp": "登録"
+  },
+  "hero": {
+    "title": "Lingmo OS",
+    "subtitle": "エレガント。高速。オープン。",
+    "description": "すべての人のために。未来のために設計されました。",
+    "downloadCta": "今すぐダウンロード",
+    "docsCta": "ドキュメントを読む"
+  },
+  "features": {
+    "title": "Lingmo OS を選ぶ理由",
+    "description": "Lingmo OS が日常のコンピューティングに最適な選択肢である理由をご紹介します。",
+    "items": {
+      "performance": {
+        "title": "パフォーマンス",
+        "description": "古いハードウェアでも優れた起動速度と応答性の高いパフォーマンスを実現。Lingmo OS はシステムリソースを最大限に活用し、スムーズなマルチタスクと快適なユーザーエクスペリエンスを提供します。"
+      },
+      "security": {
+        "title": "セキュリティ",
+        "description": "堅牢な Linux 基盤に定期的なセキュリティ更新、強制アクセス制御、暗号化ストレージを組み合わせています。Lingmo OS であなたのデータは常に安全です。"
+      },
+      "developer": {
+        "title": "開発者フレンドリー",
+        "description": "すぐに使える包括的な開発ツールと環境をサポート。コンパイラからコンテナまで、Lingmo OS はソフトウェアの構築、テスト、デプロイに必要なすべてを提供します。"
+      },
+      "design": {
+        "title": "美しいデザイン",
+        "description": "美しく機能的で直感的なモダンなユーザーインターフェース。Lingmo OS はデスクトップ全体に一貫性のある視覚体験をお届けします。"
+      },
+      "openSource": {
+        "title": "オープンソース",
+        "description": "GPL v3.0 の下で完全にオープンソース。すべてのコードは透明で監査可能であり、自由に使用、変更、共有できます。コミュニティがプロジェクトの方向性を決定します。"
+      },
+      "communityDriven": {
+        "title": "コミュニティ主導",
+        "description": "コミュニティによって構築され、コミュニティのために。あなたの貢献、フィードバック、アイデアが Lingmo OS の未来を日々形作っています。"
+      }
+    }
+  },
+  "download": {
+    "pageTitle": "Lingmo OS をダウンロード",
+    "pageDescription": "最新バージョンの Lingmo OS を入手。安定版、ベータ版、ナイトリービルドから選択できます。",
+    "stable": "安定版",
+    "beta": "ベータ版",
+    "nightly": "ナイトリービルド",
+    "version": "バージョン",
+    "releaseDate": "リリース日",
+    "iso": "ISO イメージ",
+    "sha256": "SHA256 をダウンロード",
+    "torrent": "トレント",
+    "mirror": "ミラー",
+    "releaseNotes": "リリースノート",
+    "systemRequirements": "システム要件",
+    "historicalVersions": "過去のバージョン",
+    "downloadButton": "ダウンロード",
+    "comingSoon": "近日公開",
+    "dialogTitle": "Lingmo OS をダウンロード",
+    "dialogSubtitle": "エディションとアーキテクチャを選択してください。",
+    "edition": "エディション",
+    "architecture": "アーキテクチャ",
+    "recommended": "推奨",
+    "cancel": "キャンセル",
+    "download": "ダウンロード",
+    "downloadStarted": "ダウンロードが開始されました。",
+    "downloadHint": "このダイアログは安全に閉じていただけます。",
+    "notAvailable": "利用不可",
+    "isoSize": "ISO サイズ",
+    "quickLinks": "クイックリンク",
+    "installationGuide": "インストールガイド",
+    "mirrors": "ミラーリスト",
+    "reportIssue": "ダウンロード問題を報告"
+  },
+  "about": {
+    "pageTitle": "Lingmo OS について",
+    "pageDescription": "Lingmo OS の歴史、使命、ビジョンについて学びます。",
+    "story": "私たちのストーリー",
+    "mission": "私たちの使命",
+    "vision": "私たちのビジョン",
+    "timeline": "沿革",
+    "developers": "開発者",
+    "contributors": "貢献者",
+    "architecture": "アーキテクチャ",
+    "roadmap": "ロードマップ"
+  },
+  "documentation": {
+    "pageTitle": "ドキュメント",
+    "pageDescription": "Lingmo OS の包括的なガイド、チュートリアル、リファレンス。",
+    "searchPlaceholder": "ドキュメントを検索...",
+    "tableOfContents": "目次",
+    "previousPage": "前へ",
+    "nextPage": "次へ",
+    "onThisPage": "このページの内容"
+  },
+  "community": {
+    "pageTitle": "コミュニティ",
+    "pageDescription": "Lingmo OS コミュニティに参加して、他のユーザーや開発者と交流しましょう。",
+    "joinDiscord": "Discord に参加",
+    "joinMatrix": "Matrix に参加",
+    "joinTelegram": "Telegram に参加",
+    "joinQQ": "QQ グループに参加",
+    "followWeChat": "WeChat をフォロー",
+    "joinForum": "フォーラムに参加",
+    "mailingList": "メーリングリスト"
+  },
+  "gallery": {
+    "pageTitle": "ギャラリー",
+    "pageDescription": "Lingmo OS のスクリーンショットとメディアを閲覧。"
+  },
+  "donate": {
+    "pageTitle": "寄付",
+    "pageDescription": "寄付で Lingmo OS プロジェクトを支援してください。",
+    "supportVia": "支援方法",
+    "oneTime": "一回限り",
+    "monthly": "月額",
+    "customAmount": "カスタム金額",
+    "donateButton": "寄付する",
+    "transparency": "私たちは透明性を重視しています。すべての寄付は追跡され、公開されます。"
+  },
+  "sponsors": {
+    "pageTitle": "スポンサー",
+    "pageDescription": "Lingmo OS を支援する組織や個人をご紹介します。",
+    "becomeSponsor": "スポンサーになる",
+    "ourSponsors": "スポンサー一覧"
+  },
+  "faq": {
+    "pageTitle": "よくある質問",
+    "pageDescription": "Lingmo OS に関するよくある質問とその回答を確認できます。",
+    "searchPlaceholder": "FAQを検索..."
+  },
+  "privacy": {
+    "pageTitle": "プライバシーポリシー",
+    "pageDescription": "Lingmo OS がお客様のデータとプライバシーをどのように取り扱うか。",
+    "lastUpdated": "最終更新：2026年6月"
+  },
+  "license": {
+    "pageTitle": "ライセンス",
+    "pageDescription": "Lingmo OS は GNU General Public License v3.0 の下で公開されています。"
+  },
+  "footer": {
+    "description": "すべての人のために作られた、モダンでエレガントなオープンソースオペレーティングシステム。",
+    "lingmo": "Lingmo",
+    "downloads": "ダウンロード",
+    "resources": "リソース",
+    "community": "コミュニティ",
+    "legal": "法的情報",
+    "about": "概要",
+    "download": "ダウンロード",
+    "docs": "ドキュメント",
+    "gallery": "ギャラリー",
+    "donate": "寄付",
+    "faq": "よくある質問",
+    "blog": "ブログ",
+    "github": "GitHub",
+    "discord": "Discord",
+    "releases": "リリース",
+    "roadmap": "ロードマップ",
+    "privacy": "プライバシー",
+    "license": "ライセンス",
+    "copyright": "© 2026 Lingmo Project. All rights reserved.",
+    "poweredBy": "オープンソースコミュニティによって支えられています",
+    "builtWith": "Lingmo コミュニティの情熱によって構築されました",
+    "friendLinks": "フレンドリンク"
+  },
+  "search": {
+    "pageTitle": "検索",
+    "inputPlaceholder": "サイト内検索...",
+    "noResults": "結果が見つかりませんでした。",
+    "resultsFor": "の検索結果"
+  },
+  "blog": {
+    "pageTitle": "ブログ",
+    "pageDescription": "Lingmo OS チームからの最新ニュース、アップデート、記事。",
+    "readMore": "続きを読む",
+    "publishedOn": "公開日",
+    "by": "著者",
+    "tags": "タグ"
+  },
+  "releases": {
+    "pageTitle": "リリース",
+    "pageDescription": "すべての Lingmo OS リリースをバージョン履歴と変更ログで表示します。",
+    "viewDetails": "詳細を見る"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "success": "成功",
+    "warning": "警告",
+    "info": "情報",
+    "close": "閉じる",
+    "menu": "メニュー",
+    "language": "言語",
+    "theme": "テーマ",
+    "light": "ライト",
+    "dark": "ダーク",
+    "auto": "自動",
+    "comingSoon": "近日公開",
+    "learnMore": "もっと詳しく",
+    "getStarted": "はじめる",
+    "viewAll": "すべて表示",
+    "subscribe": "購読",
+    "newsletter": "ニュースレター",
+    "emailPlaceholder": "メールアドレスを入力"
+  }
+}

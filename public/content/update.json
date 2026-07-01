@@ -1,0 +1,74 @@
+{
+  "channels": {
+    "stable": {
+      "latest": {
+        "version": "2.0.26",
+        "buildVersion": "26R01",
+        "buildCode": 2026070101,
+        "releaseDate": "2026-07-01",
+        "security": false,
+        "critical": false,
+        "mandatory": false,
+        "releaseNotesUrl": "/releases/26R01",
+        "download": {
+          "x86_64": {
+            "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso.sha256"
+          },
+          "arm64": {
+            "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-arm64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-arm64.iso.sha256"
+          },
+          "loongarch": {
+            "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-loongarch.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-loongarch.iso.sha256"
+          }
+        }
+      }
+    },
+    "beta": {
+      "latest": {
+        "version": "2.1.0-beta2",
+        "buildVersion": "26b01",
+        "buildCode": 2026070102,
+        "releaseDate": "2026-07-01",
+        "security": false,
+        "critical": false,
+        "mandatory": false,
+        "releaseNotesUrl": "/releases/26b01",
+        "download": {
+          "x86_64": {
+            "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso.sha256"
+          },
+          "arm64": {
+            "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-arm64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-arm64.iso.sha256"
+          }
+        }
+      }
+    },
+    "nightly": {
+      "latest": {
+        "version": "20260701",
+        "buildVersion": "26a20",
+        "buildCode": 2026070103,
+        "releaseDate": "2026-07-01",
+        "security": false,
+        "critical": false,
+        "mandatory": false,
+        "releaseNotesUrl": "/releases/26a20",
+        "download": {
+          "x86_64": {
+            "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso.sha256"
+          },
+          "arm64": {
+            "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-arm64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-arm64.iso.sha256"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+[
+  { "name": "United States (New York)", "url": "https://us-ny.mirrors.lingmo.org", "location": "New York, USA" },
+  { "name": "United States (San Francisco)", "url": "https://us-sf.mirrors.lingmo.org", "location": "San Francisco, USA" },
+  { "name": "Germany (Frankfurt)", "url": "https://de.mirrors.lingmo.org", "location": "Frankfurt, Germany" },
+  { "name": "Japan (Tokyo)", "url": "https://jp.mirrors.lingmo.org", "location": "Tokyo, Japan" },
+  { "name": "Singapore", "url": "https://sg.mirrors.lingmo.org", "location": "Singapore" },
+  { "name": "Brazil (São Paulo)", "url": "https://br.mirrors.lingmo.org", "location": "São Paulo, Brazil" },
+  { "name": "Australia (Sydney)", "url": "https://au.mirrors.lingmo.org", "location": "Sydney, Australia" },
+  { "name": "China (Beijing)", "url": "https://cn.mirrors.lingmo.org", "location": "Beijing, China" }
+]

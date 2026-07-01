@@ -1,0 +1,56 @@
+{
+  "channels": {
+    "stable": {
+      "version": "2.0.26",
+      "build": 2026070101,
+      "mandatory": false,
+      "releaseNotes": "/releases/2.0.26",
+      "architectures": {
+        "x86_64": {
+          "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso.sha256"
+        },
+        "arm64": {
+          "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-arm64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-arm64.iso.sha256"
+        },
+        "loongarch": {
+          "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-loongarch.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-loongarch.iso.sha256"
+        }
+      }
+    },
+    "beta": {
+      "version": "2.1.0-beta2",
+      "build": 2026070102,
+      "mandatory": false,
+      "releaseNotes": "/releases/2.1.0-beta2",
+      "architectures": {
+        "x86_64": {
+          "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso.sha256"
+        },
+        "arm64": {
+          "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-arm64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-arm64.iso.sha256"
+        }
+      }
+    },
+    "nightly": {
+      "version": "20260701",
+      "build": 2026070103,
+      "mandatory": false,
+      "releaseNotes": "/releases/nightly",
+      "architectures": {
+        "x86_64": {
+          "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso.sha256"
+        },
+        "arm64": {
+          "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-arm64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-arm64.iso.sha256"
+        }
+      }
+    }
+  }
+}

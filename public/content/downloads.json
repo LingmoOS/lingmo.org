@@ -1,0 +1,66 @@
+{
+  "latest": "2.0.25",
+  "editions": [
+    { "id": "standard", "name": "Standard", "recommended": true, "available": true },
+    { "id": "full", "name": "Full", "recommended": false, "available": false },
+    { "id": "lite", "name": "Lite", "recommended": false, "available": false }
+  ],
+  "architectures": [
+    { "id": "x86_64", "label": "x86_64", "available": true, "recommended": true },
+    { "id": "arm64", "label": "ARM64", "available": false, "badge": "Coming Soon" },
+    { "id": "loongarch", "label": "LoongArch", "available": false, "badge": "Coming Soon" }
+  ],
+  "versions": [
+    {
+      "version": "2.0.25",
+      "type": "stable",
+      "releaseDate": "2026-06-20",
+      "edition": "standard",
+      "architectures": {
+        "x86_64": {
+          "available": true,
+          "size": "3.2 GB",
+          "iso": "https://mirrors.lingmo.org/releases/2.0.25/lingmo-os-2.0.25-amd64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.0.25/lingmo-os-2.0.25-amd64.iso.sha256",
+          "torrent": "https://mirrors.lingmo.org/releases/2.0.25/lingmo-os-2.0.25-amd64.iso.torrent"
+        },
+        "arm64": { "available": false },
+        "loongarch": { "available": false }
+      },
+      "releaseNotes": "/releases/2.0.25",
+      "installationGuide": "/docs/install",
+      "systemRequirements": "/docs/system-requirements",
+      "mirrors": "/downloads/mirrors",
+      "reportIssue": "https://github.com/lingmo-os/lingmo/issues/new"
+    },
+    {
+      "version": "2.0.24",
+      "releaseDate": "2026-05-15",
+      "edition": "standard",
+      "architectures": {
+        "x86_64": {
+          "available": true,
+          "size": "3.1 GB",
+          "iso": "https://mirrors.lingmo.org/releases/2.0.24/lingmo-os-2.0.24-amd64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/2.0.24/lingmo-os-2.0.24-amd64.iso.sha256",
+          "torrent": "https://mirrors.lingmo.org/releases/2.0.24/lingmo-os-2.0.24-amd64.iso.torrent"
+        },
+        "arm64": { "available": false },
+        "loongarch": { "available": false }
+      },
+      "releaseNotes": "/releases/2.0.24",
+      "installationGuide": "/docs/install",
+      "systemRequirements": "/docs/system-requirements",
+      "mirrors": "/downloads/mirrors",
+      "reportIssue": "https://github.com/lingmo-os/lingmo/issues/new"
+    }
+  ],
+  "quickLinks": {
+    "sha256": "https://mirrors.lingmo.org/releases/2.0.25/sha256sums.txt",
+    "releaseNotes": "/releases/2.0.25",
+    "installationGuide": "/docs/install",
+    "systemRequirements": "/docs/system-requirements",
+    "mirrors": "/downloads/mirrors",
+    "reportIssue": "https://github.com/lingmo-os/lingmo/issues/new"
+  }
+}
