@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit",
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:deploy": "npx wrangler pages deploy .vercel/output/static --project-name=lingmo-os",
+    "pages:deploy:ci": "npx wrangler pages deploy .vercel/output/static --project-name=lingmo-os --commit-dirty=true",
     "pages:preview": "npx wrangler pages dev .vercel/output/static"
   },
   "dependencies": {
