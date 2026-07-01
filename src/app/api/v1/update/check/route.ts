@@ -64,11 +64,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Invalid channel" }, { status: 400, headers: corsHeaders });
   }
 
-  if (!channelData.latest.download[arch]) {
+  const latest = channelData.latest;
+  const archDownload = latest.download[arch];
+  if (!archDownload) {
     return NextResponse.json({ error: "Architecture not available for this channel" }, { status: 400, headers: corsHeaders });
   }
 
-  const latest = channelData.latest;
   const available = isUpdateAvailable(build, latest.buildVersion);
 
   const response: Record<string, unknown> = {
@@ -79,7 +80,6 @@ export async function GET(request: NextRequest) {
 
   if (available) {
     const notes = loadReleaseNotes(latest.buildVersion, locale);
-    const archDownload = latest.download[arch];
 
     response.latest = {
       version: latest.version,
