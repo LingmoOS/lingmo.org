@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFileSync, existsSync } from "fs";
-import { join } from "path";
 import updateData from "@/../public/content/update.json";
 import { isUpdateAvailable, parseBuildVersion } from "@/lib/buildVersion";
-import { mdToHtml } from "@/lib/mdToHtml";
+export const runtime = "edge";
 
 type UpdateChannel = {
   latest: {
@@ -15,6 +13,7 @@ type UpdateChannel = {
     critical: boolean;
     mandatory: boolean;
     releaseNotesUrl: string;
+    summary: string;
     download: Record<string, { iso: string; checksum: string }>;
   };
 };
@@ -29,19 +28,6 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",
 };
-
-function loadReleaseNotes(buildVersion: string, locale: string): { summary: string } | null {
-  const base = join(process.cwd(), "public", "content", "releases", buildVersion);
-  const locales = [locale, locale.split("-")[0], "en"];
-  for (const l of locales) {
-    const path = join(base, `${l}.md`);
-    if (existsSync(path)) {
-      const md = readFileSync(path, "utf-8");
-      return { summary: mdToHtml(md) };
-    }
-  }
-  return null;
-}
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -79,8 +65,6 @@ export async function GET(request: NextRequest) {
   };
 
   if (available) {
-    const notes = loadReleaseNotes(latest.buildVersion, locale);
-
     response.latest = {
       version: latest.version,
       buildVersion: latest.buildVersion,
@@ -90,7 +74,7 @@ export async function GET(request: NextRequest) {
       critical: latest.critical,
       mandatory: latest.mandatory,
     };
-    response.summary = notes?.summary || "";
+    response.summary = latest.summary;
     response.releaseNotesUrl = latest.releaseNotesUrl;
     response.download = {
       iso: archDownload.iso,

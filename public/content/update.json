@@ -10,6 +10,7 @@
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/26R01",
+        "summary": "<h2>Lingmo OS 2.0.26</h2><p><strong>Release Date:</strong> July 1, 2026</p><h3>What's New</h3><ul><li>New Settings Panel with redesigned layout</li><li>Performance improvements for older hardware</li><li>Updated kernel to Linux 6.10</li></ul><h3>Bug Fixes</h3><ul><li>Fixed file manager crash when opening large directories</li><li>Fixed network settings not applying after reboot</li><li>Fixed display scaling issues on HiDPI monitors</li></ul><h3>Known Issues</h3><ul><li>ARM64 build not yet available</li></ul>",
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso",

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import updatesData from "@/../public/content/updates.json";
+export const runtime = "edge";
 
 type ChannelData = {
   version: string;
