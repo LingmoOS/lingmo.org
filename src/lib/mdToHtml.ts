@@ -17,7 +17,7 @@ export function mdToHtml(md: string): string {
   html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
   html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => {
     const items = match.trim();
-    if (/^\d+\./.test(md.slice(md.indexOf(match.split("\n")[0])))) {
+    if (/^\d+\./.test(md.slice(md.indexOf(match.split("\n")[0]!)))) {
       return `<ol>${items}</ol>`;
     }
     return `<ul>${items}</ul>`;

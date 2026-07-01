@@ -32,15 +32,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Invalid channel" }, { status: 400, headers: corsHeaders });
   }
 
-  if (!channelData.architectures[arch]) {
+  const archDownload = channelData.architectures[arch];
+  if (!archDownload) {
     return NextResponse.json({ error: "Architecture not available for this channel" }, { status: 400, headers: corsHeaders });
   }
 
   if (current === channelData.version) {
     return NextResponse.json({ success: true, latest: false }, { headers: corsHeaders });
   }
-
-  const archDownload = channelData.architectures[arch];
 
   return NextResponse.json({
     success: true,
