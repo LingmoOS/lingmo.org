@@ -20,9 +20,9 @@ export function parseBuildVersion(bv: string): ParsedBuildVersion | null {
   const m = bv.match(BUILD_VERSION_RE);
   if (!m) return null;
   return {
-    major: parseInt(m[1], 10),
-    stage: m[2],
-    revision: parseInt(m[3], 10),
+    major: parseInt(m[1]!, 10),
+    stage: m[2]!,
+    revision: parseInt(m[3]!, 10),
     raw: bv,
   };
 }
