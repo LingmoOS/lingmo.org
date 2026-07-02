@@ -13,7 +13,7 @@ const communities = [
   { icon: MessageCircle, title: "Discord", description: "Chat with the community in real-time", href: "https://discord.gg/lingmo", key: "discord" },
   { icon: Globe, title: "Matrix", description: "Decentralized chat for open discussions", href: "https://matrix.to/#/#lingmo:matrix.org", key: "matrix" },
   { icon: Send, title: "Telegram", description: "Announcements and group discussions", href: "https://t.me/lingmo", key: "telegram" },
-  { icon: QrCode, title: "QQ", description: "Chinese community on QQ", href: "https://qm.qq.com/q/552152860", key: "qq" },
+  { icon: QrCode, title: "QQ", description: "QQ group: 552152860", href: "#", key: "qq" },
   { icon: Mail, title: "Mailing List", description: "Developer and user mailing lists", href: "#", key: "mailingList" },
 ];
 
@@ -40,13 +40,17 @@ export default function CommunityPage() {
                 <item.icon className="h-10 w-10 text-primary" />
                 <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted dark:text-muted-dark">{item.description}</p>
-                <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-4 block">
-                  <Button variant="glass" className="w-full">
-                    {item.title === "QQ" ? t("joinQQ") : 
-                     item.title === "Mailing List" ? t("mailingList") :
-                     `Join ${item.title}`}
+                {item.href === "#" ? (
+                  <Button variant="glass" className="w-full mt-4" disabled>
+                    {item.title === "QQ" ? t("joinQQ") : t("mailingList")}
                   </Button>
-                </a>
+                ) : (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-4 block">
+                    <Button variant="glass" className="w-full">
+                      {`Join ${item.title}`}
+                    </Button>
+                  </a>
+                )}
               </Card>
             </motion.div>
           ))}
