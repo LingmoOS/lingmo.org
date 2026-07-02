@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import updatesData from "@/../public/content/updates.json";
 export const runtime = "edge";
-
 type UpdatesConfig = {
   channels: Record<string, { version: string }>;
 };

@@ -53,6 +53,8 @@
     "postcss": "^8.5.0",
     "prettier": "^3.4.0",
     "prettier-plugin-tailwindcss": "^0.6.0",
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "wrangler": "^3.107.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   }

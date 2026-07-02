@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import updateData from "@/../public/content/update.json";
 import { isUpdateAvailable, parseBuildVersion } from "@/lib/buildVersion";
 export const runtime = "edge";
-
 type UpdateChannel = {
   latest: {
     version: string;
