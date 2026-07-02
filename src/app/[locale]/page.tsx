@@ -41,6 +41,9 @@ export default function HomePage() {
       <section className="relative overflow-hidden py-20 md:py-32">
         <div className="pointer-events-none absolute -right-60 -top-60 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-accent/5 blur-3xl" />
+        <div className="hero-particle" /><div className="hero-particle" /><div className="hero-particle" />
+        <div className="hero-particle" /><div className="hero-particle" /><div className="hero-particle" />
+        <div className="hero-particle" /><div className="hero-particle" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <motion.div
