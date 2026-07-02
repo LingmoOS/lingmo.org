@@ -18,12 +18,6 @@ const systemRequirements = [
   { icon: ShieldCheck, label: "Graphics", value: "OpenGL 3.3+ capable GPU" },
 ];
 
-const historicalVersions = [
-  { version: "2.0.24", date: "2026-05-15", type: "stable" },
-  { version: "2.0.23", date: "2026-04-01", type: "stable" },
-  { version: "2.0.22", date: "2026-02-15", type: "stable" },
-];
-
 const downloadTypes = ["stable", "beta", "nightly"] as const;
 
 export default function DownloadPage() {
@@ -118,7 +112,7 @@ export default function DownloadPage() {
       <Section>
         <h2 className="mb-8 text-center text-2xl font-bold">{t("historicalVersions")}</h2>
         <div className="mx-auto max-w-2xl space-y-3">
-          {historicalVersions.map((v) => (
+          {(config?.historicalVersions ?? []).map((v) => (
             <Card key={v.version} className="flex items-center justify-between">
               <div>
                 <span className="font-semibold">{v.version}</span>

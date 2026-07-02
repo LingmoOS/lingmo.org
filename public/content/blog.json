@@ -1,6 +1,42 @@
 [
-  { "slug": "announcing-lingmo-os-1-0", "title": "Announcing Lingmo OS 1.0 — A New Dawn for Linux", "date": "2026-06-15", "author": "Lingmo Team", "tags": ["release", "announcement"], "excerpt": "After years of development, we are thrilled to announce the first stable release of Lingmo OS. Built with passion and precision, Lingmo OS 1.0 marks a new chapter in open-source desktop computing.", "cover": "news" },
-  { "slug": "lingmo-desktop-deep-dive", "title": "Lingmo Desktop: A Deep Dive into Our Custom Desktop Environment", "date": "2026-06-20", "author": "Lingmo Team", "tags": ["desktop", "technology"], "excerpt": "Explore the architecture and design philosophy behind the Lingmo Desktop Environment. From the compositor to the application menu, every detail is crafted for productivity.", "cover": "desktop" },
-  { "slug": "security-in-lingmo-os", "title": "Security First: How Lingmo OS Protects Your Data", "date": "2026-06-28", "author": "Lingmo Team", "tags": ["security", "privacy"], "excerpt": "Learn about the security features built into Lingmo OS, including full disk encryption, sandboxed applications, and our responsible disclosure policy.", "cover": "news" },
-  { "slug": "wayland-journey", "title": "Our Journey to Wayland: Why We Chose the Future of Display Servers", "date": "2026-07-05", "author": "Lingmo Team", "tags": ["wayland", "technology"], "excerpt": "Why Lingmo OS uses Wayland as the default display server and how it benefits users with smoother graphics, better security, and modern features.", "cover": "news" }
+  {
+    "slug": "announcing-lingmo-os-1-0",
+    "title": "Announcing Lingmo OS 1.0 — A New Dawn for Linux",
+    "date": "2026-06-15",
+    "author": "Lingmo Team",
+    "tags": ["release", "announcement"],
+    "excerpt": "After years of development, we are thrilled to announce the first stable release of Lingmo OS.",
+    "cover": "news",
+    "content": "We are proud to announce the first stable release of Lingmo OS. Built on Debian 13 with a custom desktop environment, Lingmo OS brings a fresh, modern experience to Linux users worldwide.\n\n## Key Features\n\n- **Lingmo Desktop Environment**: A modern, intuitive desktop built with Qt Quick and tailored for productivity.\n- **Wayland by Default**: Experience smooth, secure graphics with Wayland as the default display server.\n- **Performance Optimizations**: Boot times under 5 seconds on modern hardware, with minimal memory usage.\n- **Enhanced Security**: Full disk encryption, secure boot support, and regular security updates.\n\n## Getting Started\n\nDownload the ISO from our [download page](/download) and follow the [installation guide](/docs/install) to get started."
+  },
+  {
+    "slug": "lingmo-desktop-deep-dive",
+    "title": "Lingmo Desktop: A Deep Dive into Our Custom Desktop Environment",
+    "date": "2026-06-20",
+    "author": "Lingmo Team",
+    "tags": ["desktop", "technology"],
+    "excerpt": "Explore the architecture and design philosophy behind the Lingmo Desktop Environment.",
+    "cover": "desktop",
+    "content": "The Lingmo Desktop Environment (LingmoDE) is the heart of the Lingmo OS experience. Built from the ground up using Qt Quick and the LingmoUI toolkit, it delivers a cohesive and elegant user interface.\n\n## Design Philosophy\n\nLingmoDE follows three core principles:\n\n1. **Simplicity**: Every element serves a purpose. No clutter, no confusion.\n2. **Consistency**: A unified design language across all system applications.\n3. **Performance**: Smooth animations and fast response times, even on older hardware.\n\n## Architecture\n\nThe desktop environment consists of several key components:\n\n- **Shell**: The main desktop shell managing windows, workspaces, and the global menu.\n- **Dock**: A macOS-style dock for launching and switching applications.\n- **Control Center**: Centralized settings for system configuration.\n- **Notifications**: A unified notification system with Do Not Disturb support."
+  },
+  {
+    "slug": "security-in-lingmo-os",
+    "title": "Security First: How Lingmo OS Protects Your Data",
+    "date": "2026-06-28",
+    "author": "Lingmo Team",
+    "tags": ["security", "privacy"],
+    "excerpt": "Learn about the security features built into Lingmo OS.",
+    "cover": "news",
+    "content": "Security is a top priority for Lingmo OS. We believe that users should have full control over their data and privacy.\n\n## Built-in Security Features\n\n- **Full Disk Encryption**: LUKS-based encryption during installation to protect your data at rest.\n- **Secure Boot**: Support for UEFI Secure Boot to prevent unauthorized code from running during startup.\n- **Firewall**: Pre-configured firewall with sensible defaults.\n- **Regular Updates**: Security patches delivered through automatic updates.\n\n## Privacy\n\nLingmo OS does not collect telemetry or user data. We respect your privacy by default, with no phone-home features enabled out of the box."
+  },
+  {
+    "slug": "wayland-journey",
+    "title": "Our Journey to Wayland: Why We Chose the Future of Display Servers",
+    "date": "2026-07-05",
+    "author": "Lingmo Team",
+    "tags": ["wayland", "technology"],
+    "excerpt": "Why Lingmo OS uses Wayland as the default display server.",
+    "cover": "news",
+    "content": "Wayland is the next-generation display protocol for Linux, designed to replace the aging X11 system. Lingmo OS has adopted Wayland as the default display server from the start.\n\n## Why Wayland?\n\n- **Security**: Wayland's design prevents keyloggers and screen scrapers by isolating windows.\n- **Performance**: Direct buffer management reduces latency and improves frame rates.\n- **Modern Architecture**: Simplified driver model with better support for modern graphics hardware.\n\n## Current Status\n\nWayland support in Lingmo OS is mature and production-ready. All LingmoDE components are fully Wayland-native, providing a smooth and secure desktop experience."
+  }
 ]

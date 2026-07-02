@@ -46,11 +46,18 @@ export interface VersionEntry {
   reportIssue?: string;
 }
 
+export interface HistoricalVersion {
+  version: string;
+  date: string;
+  type: string;
+}
+
 export interface DownloadConfig {
   latest: string;
   editions: Edition[];
   architectures: Architecture[];
   versions: VersionEntry[];
+  historicalVersions?: HistoricalVersion[];
   quickLinks: {
     sha256: string;
     releaseNotes: string;
@@ -83,6 +90,7 @@ export interface BlogPost {
   tags: string[];
   excerpt: string;
   cover?: string;
+  content?: string;
 }
 
 export interface DocItem {

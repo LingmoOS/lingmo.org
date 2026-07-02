@@ -1,23 +1,27 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, User, Tag } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Link } from "@/i18n/navigation";
 import { NewsCoverSvg } from "@/components/svg/NewsCoverSvg";
-
-const posts = [
-  { slug: "announcing-lingmo-os-1-0", title: "Announcing Lingmo OS 1.0 — A New Dawn for Linux", date: "2026-06-15", author: "Lingmo Team", tags: ["release", "announcement"], excerpt: "After years of development, we are thrilled to announce the first stable release of Lingmo OS." },
-  { slug: "lingmo-desktop-deep-dive", title: "Lingmo Desktop: A Deep Dive into Our Custom Desktop Environment", date: "2026-06-20", author: "Lingmo Team", tags: ["desktop", "technology"], excerpt: "Explore the architecture and design philosophy behind the Lingmo Desktop Environment." },
-  { slug: "security-in-lingmo-os", title: "Security First: How Lingmo OS Protects Your Data", date: "2026-06-28", author: "Lingmo Team", tags: ["security", "privacy"], excerpt: "Learn about the security features built into Lingmo OS." },
-  { slug: "wayland-journey", title: "Our Journey to Wayland: Why We Chose the Future of Display Servers", date: "2026-07-05", author: "Lingmo Team", tags: ["wayland", "technology"], excerpt: "Why Lingmo OS uses Wayland as the default display server." },
-];
+import type { BlogPost } from "@/types";
 
 export default function BlogPage() {
   const t = useTranslations("blog");
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    fetch("/content/blog.json")
+      .then((r) => r.json() as Promise<BlogPost[]>)
+      .then(setPosts)
+      .catch(() => {});
+  }, []);
 
   return (
     <>
@@ -60,9 +64,11 @@ export default function BlogPage() {
                     ))}
                   </div>
                   <div className="mt-4">
-                    <Button variant="ghost" size="sm">
-                      {t("readMore")}
-                    </Button>
+                    <Link href={`/blog/${post.slug}`}>
+                      <Button variant="ghost" size="sm">
+                        {t("readMore")}
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Card>
