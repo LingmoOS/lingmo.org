@@ -13,7 +13,7 @@ const communities = [
   { icon: MessageCircle, title: "Discord", description: "Chat with the community in real-time", href: "https://discord.gg/lingmo", key: "discord" },
   { icon: Globe, title: "Matrix", description: "Decentralized chat for open discussions", href: "https://matrix.to/#/#lingmo:matrix.org", key: "matrix" },
   { icon: Send, title: "Telegram", description: "Announcements and group discussions", href: "https://t.me/lingmo", key: "telegram" },
-  { icon: QrCode, title: "QQ", description: "QQ group: 552152860", href: "#", key: "qq" },
+  { icon: QrCode, title: "QQ", description: "QQ group: 552152860", href: "https://qm.qq.com/q/C8alHXXXVg", key: "qq" },
   { icon: Mail, title: "Mailing List", description: "Developer and user mailing lists", href: "#", key: "mailingList" },
 ];
 
@@ -42,12 +42,12 @@ export default function CommunityPage() {
                 <p className="mt-2 flex-1 text-sm text-muted dark:text-muted-dark">{item.description}</p>
                 {item.href === "#" ? (
                   <Button variant="glass" className="w-full mt-4" disabled>
-                    {item.title === "QQ" ? t("joinQQ") : t("mailingList")}
+                    {t("mailingList")}
                   </Button>
                 ) : (
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-4 block">
                     <Button variant="glass" className="w-full">
-                      {`Join ${item.title}`}
+                      {item.key === "qq" ? t("joinQQ") : `Join ${item.title}`}
                     </Button>
                   </a>
                 )}
