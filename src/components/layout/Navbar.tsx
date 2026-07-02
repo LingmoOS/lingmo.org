@@ -30,7 +30,7 @@ export function Navbar({ onSearchOpen }: NavbarProps) {
   const scrollY = useScrollY();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isScrolled = scrollY > 20;
+  const isScrolled = true;
 
   return (
     <header
