@@ -65,15 +65,15 @@ body {
 
 /* Glass card styles */
 .glass {
-  background: var(--color-card);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .dark .glass {
-  background: var(--color-card-dark);
-  border-color: var(--color-border-dark);
+  background: rgba(9, 9, 11, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Scrollbar */
