@@ -122,6 +122,7 @@
     "joinQQ": "QQ グループに参加",
     "followWeChat": "WeChat をフォロー",
     "joinForum": "フォーラムに参加",
+    "joinGithub": "GitHub に参加",
     "mailingList": "メーリングリスト"
   },
   "gallery": {
@@ -218,6 +219,10 @@
     "comingSoon": "近日公開",
     "learnMore": "もっと詳しく",
     "getStarted": "はじめる",
+    "downloads": "ダウンロード",
+    "contributors": "貢献者",
+    "packages": "パッケージ",
+    "countries": "国",
     "viewAll": "すべて表示",
     "subscribe": "購読",
     "newsletter": "ニュースレター",

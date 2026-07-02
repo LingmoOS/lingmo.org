@@ -122,6 +122,7 @@
     "joinQQ": "加入 QQ 群",
     "followWeChat": "关注微信",
     "joinForum": "加入论坛",
+    "joinGithub": "加入 GitHub",
     "mailingList": "邮件列表"
   },
   "gallery": {
@@ -218,6 +219,10 @@
     "comingSoon": "即将推出",
     "learnMore": "了解更多",
     "getStarted": "开始使用",
+    "downloads": "下载",
+    "contributors": "贡献者",
+    "packages": "软件包",
+    "countries": "国家和地区",
     "viewAll": "查看全部",
     "subscribe": "订阅",
     "newsletter": "新闻通讯",

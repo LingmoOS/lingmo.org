@@ -122,6 +122,7 @@
     "joinQQ": "Join QQ Group",
     "followWeChat": "Follow WeChat",
     "joinForum": "Join Forum",
+    "joinGithub": "Join GitHub",
     "mailingList": "Mailing List"
   },
   "gallery": {
@@ -218,6 +219,10 @@
     "comingSoon": "Coming Soon",
     "learnMore": "Learn More",
     "getStarted": "Get Started",
+    "downloads": "Downloads",
+    "contributors": "Contributors",
+    "packages": "Packages",
+    "countries": "Countries",
     "viewAll": "View All",
     "subscribe": "Subscribe",
     "newsletter": "Newsletter",
