@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 const donateMethods = [
-  { icon: Github, title: "GitHub Sponsors", description: "Sponsor via GitHub", href: "https://github.com/sponsors/lingmo-os" },
+  { icon: Github, title: "GitHub Sponsors", description: "Sponsor via GitHub", href: "https://github.com/sponsors/LingmoOS" },
   { icon: CreditCard, title: "OpenCollective", description: "Open collective funding", href: "https://opencollective.com/lingmo" },
   { icon: Wallet, title: "PayPal", description: "One-time or monthly via PayPal", href: "https://paypal.me/lingmo" },
   { icon: Banknote, title: "Alipay", description: "支付宝扫码支付" },

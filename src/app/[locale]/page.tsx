@@ -234,7 +234,7 @@ export default function HomePage() {
         </SectionHeader>
         <div className="flex flex-wrap justify-center gap-4">
           {[
-            { icon: Github, href: "https://github.com/lingmo-os", key: "github" },
+            { icon: Github, href: "https://github.com/LingmoOS", key: "github" },
             { icon: MessageCircle, href: "https://discord.gg/lingmo", key: "discord" },
             { icon: Globe, href: "https://t.me/lingmo", key: "telegram" },
             { icon: Code2, href: "https://matrix.to/#/#lingmo:matrix.org", key: "matrix" },

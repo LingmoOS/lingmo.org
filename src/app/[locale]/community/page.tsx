@@ -9,11 +9,11 @@ import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 const communities = [
-  { icon: Github, title: "GitHub", description: "Contribute code, report issues, and star the project", href: "https://github.com/lingmo-os", key: "github" },
+  { icon: Github, title: "GitHub", description: "Contribute code, report issues, and star the project", href: "https://github.com/LingmoOS", key: "github" },
   { icon: MessageCircle, title: "Discord", description: "Chat with the community in real-time", href: "https://discord.gg/lingmo", key: "discord" },
   { icon: Globe, title: "Matrix", description: "Decentralized chat for open discussions", href: "https://matrix.to/#/#lingmo:matrix.org", key: "matrix" },
   { icon: Send, title: "Telegram", description: "Announcements and group discussions", href: "https://t.me/lingmo", key: "telegram" },
-  { icon: QrCode, title: "QQ", description: "Chinese community on QQ", href: "#", key: "qq" },
+  { icon: QrCode, title: "QQ", description: "Chinese community on QQ", href: "https://qm.qq.com/q/552152860", key: "qq" },
   { icon: Mail, title: "Mailing List", description: "Developer and user mailing lists", href: "#", key: "mailingList" },
 ];
 

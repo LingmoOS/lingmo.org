@@ -32,7 +32,7 @@
       "installationGuide": "/docs/install",
       "systemRequirements": "/docs/system-requirements",
       "mirrors": "/downloads/mirrors",
-      "reportIssue": "https://github.com/orgs/LingmoOS/discussions"
+"reportIssue": "https://github.com/LingmoOS"
     }
   ],
   "historicalVersions": [
@@ -46,6 +46,6 @@
     "installationGuide": "/docs/install",
     "systemRequirements": "/docs/system-requirements",
     "mirrors": "/downloads/mirrors",
-    "reportIssue": "https://github.com/orgs/LingmoOS/discussions"
+    "reportIssue": "https://github.com/LingmoOS"
   }
 }
