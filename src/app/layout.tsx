@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
-import { ThemeProvider } from "@/components/ui/ThemeProvider";
-import { MainLayout } from "@/components/layout/MainLayout";
 import "./globals.css";
-
-export const runtime = "edge";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,23 +35,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html lang={locale} suppressHydrationWarning className={inter.variable}>
-      <body className="min-h-screen antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <MainLayout>{children}</MainLayout>
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
+    <html suppressHydrationWarning className={inter.variable}>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   );
 }
