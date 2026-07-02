@@ -10,7 +10,7 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { useScrollY } from "@/hooks/useScrollY";
 
-const navLinks = [
+const navLinks: { href: string; key: string; external?: boolean }[] = [
   { href: "/about", key: "about" },
   { href: "/download", key: "download" },
   { href: "/documentation", key: "documentation" },
@@ -18,6 +18,7 @@ const navLinks = [
   { href: "/blog", key: "blog" },
   { href: "/community", key: "community" },
   { href: "/donate", key: "donate" },
+  { href: "https://wiki.lingmo.org/", key: "wiki", external: true },
 ];
 
 interface NavbarProps {
@@ -49,20 +50,36 @@ export function Navbar({ onSearchOpen }: NavbarProps) {
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "rounded-xl px-4 py-2 text-sm transition-colors",
-                pathname.startsWith(link.href)
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted dark:text-muted-dark hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-foreground-dark"
-              )}
-            >
-              {t(link.key)}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = !link.external && pathname.startsWith(link.href);
+            if (link.external) {
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl px-4 py-2 text-sm transition-colors text-muted dark:text-muted-dark hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-foreground-dark"
+                >
+                  {t(link.key)}
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "rounded-xl px-4 py-2 text-sm transition-colors",
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted dark:text-muted-dark hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-foreground-dark"
+                )}
+              >
+                {t(link.key)}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -113,21 +130,37 @@ export function Navbar({ onSearchOpen }: NavbarProps) {
               </button>
             </div>
             <nav className="p-4 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "block rounded-xl px-4 py-3 text-sm transition-colors",
-                    pathname.startsWith(link.href)
-                      ? "bg-primary/10 text-primary"
-                      : "hover:bg-black/5 dark:hover:bg-white/5"
-                  )}
-                >
-                  {t(link.key)}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                if (link.external) {
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMobileOpen(false)}
+                      className="block rounded-xl px-4 py-3 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+                    >
+                      {t(link.key)}
+                    </a>
+                  );
+                }
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "block rounded-xl px-4 py-3 text-sm transition-colors",
+                      pathname.startsWith(link.href)
+                        ? "bg-primary/10 text-primary"
+                        : "hover:bg-black/5 dark:hover:bg-white/5"
+                    )}
+                  >
+                    {t(link.key)}
+                  </Link>
+                );
+              })}
             </nav>
             <div className="p-4 border-t border-border dark:border-border-dark space-y-3">
               <ThemeSwitcher className="w-full justify-center" />
