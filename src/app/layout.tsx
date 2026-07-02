@@ -6,6 +6,8 @@ import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 import "./globals.css";
 
+export const runtime = "edge";
+
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
