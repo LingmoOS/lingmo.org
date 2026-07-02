@@ -30,7 +30,7 @@ export function Navbar({ onSearchOpen }: NavbarProps) {
   const scrollY = useScrollY();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isScrolled = true;
+  const isScrolled = scrollY > 20;
 
   return (
     <header
@@ -43,9 +43,7 @@ export function Navbar({ onSearchOpen }: NavbarProps) {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <span className="text-sm font-bold text-white">L</span>
-          </div>
+          <img src="/logo.svg" alt="Lingmo OS" className="h-8 w-8" />
           <span className="text-lg font-semibold tracking-tight">Lingmo</span>
         </Link>
 
