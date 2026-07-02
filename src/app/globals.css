@@ -122,34 +122,36 @@ html {
   overflow: hidden;
 }
 
-@keyframes particle-drift {
-  0% { transform: translate(0, 0) scale(1); opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: translate(30px, -50px) scale(0.3); opacity: 0; }
+@keyframes photon-flow {
+  0% { transform: translate(-20px, 10px) scale(0); opacity: 0; }
+  15% { opacity: 1; transform: translate(0, 0) scale(1); }
+  70% { opacity: 1; }
+  100% { transform: translate(60px, -20px) scale(0); opacity: 0; }
 }
 
 .hero-particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
-  background: #6ee7ff;
   opacity: 0;
   pointer-events: none;
+  background: currentColor;
+  box-shadow: 0 0 6px 2px currentColor;
+  color: #6ee7ff;
 }
 
-.hero-particle:nth-child(1) { left: 10%; bottom: 10%; animation: particle-drift 5s ease-in-out 0s infinite; }
-.hero-particle:nth-child(2) { left: 30%; bottom: 5%; animation: particle-drift 6s ease-in-out 1s infinite; width: 3px; height: 3px; }
-.hero-particle:nth-child(3) { left: 50%; bottom: 15%; animation: particle-drift 7s ease-in-out 2s infinite; }
-.hero-particle:nth-child(4) { left: 70%; bottom: 8%; animation: particle-drift 5.5s ease-in-out 0.5s infinite; width: 3px; height: 3px; }
-.hero-particle:nth-child(5) { left: 85%; bottom: 12%; animation: particle-drift 6.5s ease-in-out 3s infinite; }
-.hero-particle:nth-child(6) { left: 20%; bottom: 20%; animation: particle-drift 7.5s ease-in-out 1.5s infinite; width: 3px; height: 3px; }
-.hero-particle:nth-child(7) { left: 60%; bottom: 5%; animation: particle-drift 5s ease-in-out 2.5s infinite; }
-.hero-particle:nth-child(8) { left: 40%; bottom: 18%; animation: particle-drift 6s ease-in-out 0.8s infinite; width: 3px; height: 3px; }
+.hero-particle:nth-child(1) { left: 5%; bottom: 30%; animation: photon-flow 4s ease-in-out 0s infinite; }
+.hero-particle:nth-child(2) { left: 20%; bottom: 60%; animation: photon-flow 5s ease-in-out 0.8s infinite; }
+.hero-particle:nth-child(3) { left: 40%; bottom: 20%; animation: photon-flow 4.5s ease-in-out 1.6s infinite; }
+.hero-particle:nth-child(4) { left: 55%; bottom: 70%; animation: photon-flow 5.5s ease-in-out 0.3s infinite; }
+.hero-particle:nth-child(5) { left: 70%; bottom: 40%; animation: photon-flow 4.8s ease-in-out 2.2s infinite; }
+.hero-particle:nth-child(6) { left: 85%; bottom: 55%; animation: photon-flow 5.2s ease-in-out 1.2s infinite; }
+.hero-particle:nth-child(7) { left: 30%; bottom: 80%; animation: photon-flow 4.2s ease-in-out 3s infinite; }
+.hero-particle:nth-child(8) { left: 65%; bottom: 10%; animation: photon-flow 5.8s ease-in-out 2.8s infinite; }
 
 .dark .hero-particle {
-  background: #4f7cff;
+  color: #4f7cff;
 }
 
 @media (prefers-reduced-motion: reduce) {
