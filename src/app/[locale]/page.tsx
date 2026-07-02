@@ -48,7 +48,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl hero-title">
                 Lingmo OS
               </h1>
               <p className="mt-4 text-xl text-muted dark:text-muted-dark sm:text-2xl">

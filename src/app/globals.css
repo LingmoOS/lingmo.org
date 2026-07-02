@@ -97,6 +97,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Animated gradient text */
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-title {
+  background: linear-gradient(135deg, #4f7cff, #6ee7ff, #4f7cff, #8b5cf6, #4f7cff);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 8s ease infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
