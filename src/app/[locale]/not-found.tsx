@@ -1,11 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-
 export default function LocaleNotFound() {
-  const t = useTranslations();
-
   return (
     <div
       style={{
@@ -22,9 +15,9 @@ export default function LocaleNotFound() {
       <div>
         <h1 style={{ fontSize: "4rem", margin: 0, color: "#4f7cff" }}>404</h1>
         <p style={{ fontSize: "1.2rem", color: "#73737c", marginTop: "0.5rem" }}>
-          {t("notFound") || "Page Not Found"}
+          Page Not Found
         </p>
-        <Link
+        <a
           href="/"
           style={{
             display: "inline-block",
@@ -36,8 +29,8 @@ export default function LocaleNotFound() {
             textDecoration: "none",
           }}
         >
-          {t("backToHome") || "Back to Home"}
-        </Link>
+          Back to Home
+        </a>
       </div>
     </div>
   );
