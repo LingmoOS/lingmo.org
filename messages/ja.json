@@ -137,11 +137,20 @@
   "documentation": {
     "pageTitle": "ドキュメント",
     "pageDescription": "Lingmo OS の包括的なガイド、チュートリアル、リファレンス。",
-    "searchPlaceholder": "ドキュメントを検索...",
-    "tableOfContents": "目次",
-    "previousPage": "前へ",
-    "nextPage": "次へ",
-    "onThisPage": "このページの内容"
+    "secGettingStarted": "はじめに",
+    "secUserGuide": "ユーザーガイド",
+    "secDevelopment": "開発",
+    "secMore": "その他",
+    "itemInstallationGuide": "インストールガイド",
+    "itemSystemRequirements": "システム要件",
+    "itemFaq": "FAQ",
+    "itemAboutWiki": "Lingmo Wiki について",
+    "itemGlossary": "用語集",
+    "itemTutorials": "チュートリアルとハウツー",
+    "itemDevelopersGuide": "開発者ガイド",
+    "itemHistory": "沿革",
+    "browseFullWiki": "Wiki を全て見る",
+    "wikiDescription": "Lingmo Wiki には Lingmo OS の包括的なガイド、チュートリアル、リファレンスが含まれており、すべて GitHub でコミュニティコントリビューションを受け付けています。"
   },
   "community": {
     "pageTitle": "コミュニティ",

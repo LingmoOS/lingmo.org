@@ -8,37 +8,37 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
 
 interface WikiSection {
-  title: string;
-  items: { title: string; slug: string }[];
+  titleKey: string;
+  items: { titleKey: string; slug: string }[];
 }
 
 const wikiSections: WikiSection[] = [
   {
-    title: "Getting Started",
+    titleKey: "secGettingStarted",
     items: [
-      { title: "Installation Guide", slug: "installation-guide" },
-      { title: "System Requirements", slug: "getting-started" },
-      { title: "FAQ", slug: "faq" },
+      { titleKey: "itemInstallationGuide", slug: "installation-guide" },
+      { titleKey: "itemSystemRequirements", slug: "getting-started" },
+      { titleKey: "itemFaq", slug: "faq" },
     ],
   },
   {
-    title: "User Guide",
+    titleKey: "secUserGuide",
     items: [
-      { title: "About Lingmo Wiki", slug: "about-wiki" },
-      { title: "Glossary", slug: "glossary" },
-      { title: "Tutorials & Howtos", slug: "tutorials" },
+      { titleKey: "itemAboutWiki", slug: "about-wiki" },
+      { titleKey: "itemGlossary", slug: "glossary" },
+      { titleKey: "itemTutorials", slug: "tutorials" },
     ],
   },
   {
-    title: "Development",
+    titleKey: "secDevelopment",
     items: [
-      { title: "Developers' Guide", slug: "develop-guide" },
+      { titleKey: "itemDevelopersGuide", slug: "develop-guide" },
     ],
   },
   {
-    title: "More",
+    titleKey: "secMore",
     items: [
-      { title: "History", slug: "history" },
+      { titleKey: "itemHistory", slug: "history" },
     ],
   },
 ];
@@ -63,9 +63,9 @@ export default function DocumentationPage() {
           <aside className="w-64 shrink-0 hidden lg:block">
             <div className="sticky top-24 space-y-6">
               {wikiSections.map((section) => (
-                <div key={section.title}>
+                <div key={section.titleKey}>
                   <h3 className="mb-2 text-sm font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">
-                    {section.title}
+                    {t(section.titleKey)}
                   </h3>
                   <ul className="space-y-1">
                     {section.items.map((item) => (
@@ -76,7 +76,7 @@ export default function DocumentationPage() {
                           rel="noopener noreferrer"
                           className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-muted dark:text-muted-dark hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-foreground-dark transition-colors"
                         >
-                          {item.title}
+                          {t(item.titleKey)}
                           <ExternalLink className="h-3 w-3 shrink-0 opacity-50" />
                         </a>
                       </li>
@@ -91,7 +91,7 @@ export default function DocumentationPage() {
                 className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
               >
                 <Book className="h-4 w-4" />
-                Browse Full Wiki
+                {t("browseFullWiki")}
                 <ExternalLink className="h-3 w-3" />
               </a>
             </div>
@@ -101,8 +101,8 @@ export default function DocumentationPage() {
           <div className="flex-1 min-w-0">
             <div className="grid gap-6 md:grid-cols-2">
               {wikiSections.map((section) => (
-                <Card key={section.title} className="p-6">
-                  <h2 className="text-lg font-bold mb-4">{section.title}</h2>
+                <Card key={section.titleKey} className="p-6">
+                  <h2 className="text-lg font-bold mb-4">{t(section.titleKey)}</h2>
                   <ul className="space-y-2">
                     {section.items.map((item) => (
                       <li key={item.slug}>
@@ -114,7 +114,7 @@ export default function DocumentationPage() {
                         >
                           <span className="flex items-center gap-2">
                             <ChevronRight className="h-3 w-3 text-primary shrink-0" />
-                            {item.title}
+                            {t(item.titleKey)}
                           </span>
                           <ExternalLink className="h-3 w-3 shrink-0 opacity-50" />
                         </a>
@@ -128,7 +128,7 @@ export default function DocumentationPage() {
             <div className="mt-8 rounded-xl bg-primary/5 p-6 text-center">
               <h3 className="text-lg font-semibold">Lingmo Wiki</h3>
               <p className="mt-2 text-sm text-muted dark:text-muted-dark max-w-lg mx-auto">
-                {t("pageDescription")} The Lingmo Wiki contains comprehensive guides, tutorials, and references — all open for community contributions on GitHub.
+                {t("wikiDescription")}
               </p>
               <a
                 href={`${wikiBase}`}

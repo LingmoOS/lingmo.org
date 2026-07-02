@@ -137,11 +137,20 @@
   "documentation": {
     "pageTitle": "文档",
     "pageDescription": "Lingmo OS 的综合指南、教程和参考资料。",
-    "searchPlaceholder": "搜索文档...",
-    "tableOfContents": "目录",
-    "previousPage": "上一页",
-    "nextPage": "下一页",
-    "onThisPage": "本页内容"
+    "secGettingStarted": "快速入门",
+    "secUserGuide": "用户指南",
+    "secDevelopment": "开发",
+    "secMore": "更多",
+    "itemInstallationGuide": "安装指南",
+    "itemSystemRequirements": "系统要求",
+    "itemFaq": "常见问题",
+    "itemAboutWiki": "关于 Lingmo Wiki",
+    "itemGlossary": "词汇表",
+    "itemTutorials": "教程与指南",
+    "itemDevelopersGuide": "开发者指南",
+    "itemHistory": "发展历史",
+    "browseFullWiki": "浏览完整维基",
+    "wikiDescription": "Lingmo Wiki 包含 Lingmo OS 的全面指南、教程和参考资料，所有内容均在 GitHub 上开放社区贡献。"
   },
   "community": {
     "pageTitle": "社区",

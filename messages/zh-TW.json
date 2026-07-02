@@ -137,11 +137,20 @@
   "documentation": {
     "pageTitle": "文件",
     "pageDescription": "Lingmo OS 的全面指南、教學和參考資料。",
-    "searchPlaceholder": "搜尋文件...",
-    "tableOfContents": "目錄",
-    "previousPage": "上一頁",
-    "nextPage": "下一頁",
-    "onThisPage": "本頁內容"
+    "secGettingStarted": "快速入門",
+    "secUserGuide": "使用者指南",
+    "secDevelopment": "開發",
+    "secMore": "更多",
+    "itemInstallationGuide": "安裝指南",
+    "itemSystemRequirements": "系統需求",
+    "itemFaq": "常見問題",
+    "itemAboutWiki": "關於 Lingmo Wiki",
+    "itemGlossary": "詞彙表",
+    "itemTutorials": "教學與指南",
+    "itemDevelopersGuide": "開發者指南",
+    "itemHistory": "發展歷史",
+    "browseFullWiki": "瀏覽完整維基",
+    "wikiDescription": "Lingmo Wiki 包含 Lingmo OS 的全面指南、教學和參考資料，所有內容均在 GitHub 上開放社群貢獻。"
   },
   "community": {
     "pageTitle": "社群",

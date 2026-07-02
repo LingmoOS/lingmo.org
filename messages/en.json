@@ -137,11 +137,20 @@
   "documentation": {
     "pageTitle": "Documentation",
     "pageDescription": "Comprehensive guides, tutorials, and references for Lingmo OS.",
-    "searchPlaceholder": "Search documentation...",
-    "tableOfContents": "Table of Contents",
-    "previousPage": "Previous",
-    "nextPage": "Next",
-    "onThisPage": "On This Page"
+    "secGettingStarted": "Getting Started",
+    "secUserGuide": "User Guide",
+    "secDevelopment": "Development",
+    "secMore": "More",
+    "itemInstallationGuide": "Installation Guide",
+    "itemSystemRequirements": "System Requirements",
+    "itemFaq": "FAQ",
+    "itemAboutWiki": "About Lingmo Wiki",
+    "itemGlossary": "Glossary",
+    "itemTutorials": "Tutorials & Howtos",
+    "itemDevelopersGuide": "Developers' Guide",
+    "itemHistory": "History",
+    "browseFullWiki": "Browse Full Wiki",
+    "wikiDescription": "The Lingmo Wiki contains comprehensive guides, tutorials, and references for Lingmo OS — all open for community contributions on GitHub."
   },
   "community": {
     "pageTitle": "Community",
