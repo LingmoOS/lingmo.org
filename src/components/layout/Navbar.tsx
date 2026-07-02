@@ -43,7 +43,8 @@ export function Navbar({ onSearchOpen }: NavbarProps) {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center">
-          <img src="/logo.svg" alt="Lingmo OS" className="h-8 w-auto" />
+          <img src="/logo-dark.svg" alt="Lingmo OS" className="h-8 w-auto block dark:hidden" />
+          <img src="/logo-light.svg" alt="Lingmo OS" className="h-8 w-auto hidden dark:block" />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
