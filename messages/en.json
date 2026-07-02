@@ -88,7 +88,9 @@
     "quickLinks": "Quick Links",
     "installationGuide": "Installation Guide",
     "mirrors": "Mirror List",
-    "reportIssue": "Report Download Issue"
+    "reportIssue": "Report Download Issue",
+    "source": "Source",
+    "officialSource": "Official Source"
   },
   "about": {
     "pageTitle": "About Lingmo OS",

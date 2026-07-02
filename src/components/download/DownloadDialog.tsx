@@ -30,6 +30,7 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
   const [step, setStep] = useState<1 | 2>(1);
   const [selectedEdition, setSelectedEdition] = useState<string>("");
   const [selectedArch, setSelectedArch] = useState<string>("");
+  const [source, setSource] = useState<"official" | "sourceforge">("official");
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
     setSelectedArch(finalArch);
     const defaultEdition = config.editions.find((e) => e.available)?.id || "";
     setSelectedEdition(defaultEdition);
+    setSource("official");
     setStep(1);
     setDownloading(false);
   }, [open, config]);
@@ -51,16 +53,17 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
   const canDownload = !!edition?.available && !!archObj?.available && !!archInfo?.available;
 
   const handleDownload = useCallback(() => {
-    if (!canDownload || !archInfo?.iso) return;
+    const url = source === "sourceforge" ? archInfo?.sourceforge : archInfo?.iso;
+    if (!canDownload || !url) return;
     setDownloading(true);
     const a = document.createElement("a");
-    a.href = archInfo.iso;
+    a.href = url;
     a.download = "";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     setStep(2);
-  }, [canDownload, archInfo]);
+  }, [canDownload, archInfo, source]);
 
   useEffect(() => {
     if (step === 2 && downloading) {
@@ -177,13 +180,43 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
                     </div>
                   </section>
 
+                  <section>
+                    <h3 className="text-sm font-medium text-muted dark:text-muted-dark mb-3">{t("source")}</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => setSource("official")}
+                        className={cn(
+                          "rounded-xl border p-4 text-left transition-all duration-150",
+                          source === "official"
+                            ? "border-primary bg-primary/5 dark:bg-primary/10"
+                            : "border-border dark:border-border-dark hover:border-primary/40"
+                        )}
+                      >
+                        <p className="font-medium">{t("officialSource")}</p>
+                      </button>
+                      <button
+                        onClick={() => setSource("sourceforge")}
+                        disabled={!archInfo?.sourceforge}
+                        className={cn(
+                          "rounded-xl border p-4 text-left transition-all duration-150",
+                          source === "sourceforge" && archInfo?.sourceforge
+                            ? "border-primary bg-primary/5 dark:bg-primary/10"
+                            : "border-border dark:border-border-dark hover:border-primary/40",
+                          !archInfo?.sourceforge && "opacity-40 cursor-not-allowed"
+                        )}
+                      >
+                        <p className="font-medium">SourceForge</p>
+                      </button>
+                    </div>
+                  </section>
+
                   <div className="flex items-center justify-between border-t border-border dark:border-border-dark pt-4">
                     <Button variant="ghost" onClick={handleClose}>
                       {t("cancel")}
                     </Button>
                     <Button
                       variant="primary"
-                      disabled={!canDownload}
+                      disabled={!canDownload || (source === "sourceforge" && !archInfo?.sourceforge)}
                       onClick={handleDownload}
                     >
                       <Download className="mr-2 h-4 w-4" />
@@ -225,6 +258,10 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
                     <div className="flex justify-between px-4 py-2.5">
                       <span className="text-sm text-muted dark:text-muted-dark">{t("releaseDate")}</span>
                       <span className="text-sm font-medium">{versionInfo?.releaseDate || "—"}</span>
+                    </div>
+                    <div className="flex justify-between px-4 py-2.5">
+                      <span className="text-sm text-muted dark:text-muted-dark">{t("source")}</span>
+                      <span className="text-sm font-medium">{source === "official" ? t("officialSource") : "SourceForge"}</span>
                     </div>
                   </div>
 

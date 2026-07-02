@@ -88,7 +88,9 @@
     "quickLinks": "クイックリンク",
     "installationGuide": "インストールガイド",
     "mirrors": "ミラーリスト",
-    "reportIssue": "ダウンロード問題を報告"
+    "reportIssue": "ダウンロード問題を報告",
+    "source": "ダウンロード元",
+    "officialSource": "公式ソース"
   },
   "about": {
     "pageTitle": "Lingmo OS について",

@@ -88,7 +88,9 @@
     "quickLinks": "快速链接",
     "installationGuide": "安装指南",
     "mirrors": "镜像列表",
-    "reportIssue": "反馈下载问题"
+    "reportIssue": "反馈下载问题",
+    "source": "来源",
+    "officialSource": "官方源"
   },
   "about": {
     "pageTitle": "关于 Lingmo OS",

@@ -30,6 +30,7 @@ export interface ArchInfo {
   iso?: string;
   sha256?: string;
   torrent?: string;
+  sourceforge?: string;
 }
 
 export interface VersionEntry {
