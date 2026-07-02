@@ -6,20 +6,27 @@ import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { PageHeader } from "@/components/ui/PageHeader";
 
-const timeline = [
-  { year: "2018", desc: "Project conceived by a group of open-source enthusiasts" },
-  { year: "2019", desc: "First prototype built on Debian base with custom GTK theme" },
-  { year: "2020", desc: "Alpha release with basic desktop environment" },
-  { year: "2021", desc: "Wayland integration begins; community grows to 100+ contributors" },
-  { year: "2022", desc: "Beta testing phase; redesigned UI and app ecosystem" },
-  { year: "2023", desc: "Performance optimization; security audit; 10K+ downloads" },
-  { year: "2024", desc: "Release candidate; enterprise partnerships begin" },
-  { year: "2025", desc: "Infrastructure scaling; translation into 20+ languages" },
-  { year: "2026", desc: "Lingmo OS 1.0 released — a new standard for open-source desktops" },
-];
-
 export default function AboutPage() {
   const t = useTranslations("about");
+
+  const timeline = [
+    { yearKey: "timeline2023Year", descKey: "timeline2023Desc" },
+    { yearKey: "timeline2024Year", descKey: "timeline2024Desc" },
+    { yearKey: "timeline2025Year", descKey: "timeline2025Desc" },
+    { yearKey: "timeline2026Year", descKey: "timeline2026Desc" },
+  ];
+
+  const archLayers = [
+    { titleKey: "archKernelTitle", descKey: "archKernelDesc", initial: "K" },
+    { titleKey: "archDesktopTitle", descKey: "archDesktopDesc", initial: "D" },
+    { titleKey: "archAppsTitle", descKey: "archAppsDesc", initial: "A" },
+  ];
+
+  const roadmapQuarters = [
+    { titleKey: "roadQ32026Title", itemKeys: ["roadQ32026Item1", "roadQ32026Item2", "roadQ32026Item3"] },
+    { titleKey: "roadQ42026Title", itemKeys: ["roadQ42026Item1", "roadQ42026Item2", "roadQ42026Item3"] },
+    { titleKey: "road2027Title", itemKeys: ["road2027Item1", "road2027Item2", "road2027Item3"] },
+  ];
 
   return (
     <>
@@ -34,23 +41,20 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold">{t("story")}</h2>
             <p className="mt-4 text-muted dark:text-muted-dark leading-relaxed">
-              Lingmo OS began as a small project with a big vision: to create an operating system that combines elegance, performance, and freedom. Our journey started in 2018 when a group of open-source enthusiasts came together to build something truly different.
-            </p>
-            <p className="mt-4 text-muted dark:text-muted-dark leading-relaxed">
-              Today, Lingmo OS is developed by a global community of contributors and used by thousands of people worldwide. We remain committed to our founding principles: simplicity, transparency, and user empowerment.
+              {t("storyText")}
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Card>
               <h3 className="text-lg font-semibold text-primary">{t("mission")}</h3>
               <p className="mt-2 text-sm text-muted dark:text-muted-dark">
-                To provide a free, open-source operating system that respects user privacy and delivers an exceptional computing experience.
+                {t("missionText")}
               </p>
             </Card>
             <Card>
               <h3 className="text-lg font-semibold text-accent">{t("vision")}</h3>
               <p className="mt-2 text-sm text-muted dark:text-muted-dark">
-                A world where everyone has access to powerful, elegant, and secure computing tools, free from corporate control.
+                {t("visionText")}
               </p>
             </Card>
           </div>
@@ -64,7 +68,7 @@ export default function AboutPage() {
           <div className="space-y-8">
             {timeline.map((item, i) => (
               <motion.div
-                key={item.year}
+                key={item.yearKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -73,8 +77,8 @@ export default function AboutPage() {
               >
                 <div className="flex-1">
                   <Card className={i % 2 === 0 ? "text-right" : "text-left"}>
-                    <h3 className="text-xl font-bold text-primary">{item.year}</h3>
-                    <p className="mt-1 text-muted dark:text-muted-dark">{item.desc}</p>
+                    <h3 className="text-xl font-bold text-primary">{t(item.yearKey)}</h3>
+                    <p className="mt-1 text-muted dark:text-muted-dark">{t(item.descKey)}</p>
                   </Card>
                 </div>
                 <div className="hidden md:flex h-4 w-4 rounded-full bg-primary shrink-0 shadow-lg shadow-primary/30" />
@@ -88,17 +92,13 @@ export default function AboutPage() {
       <Section>
         <h2 className="mb-8 text-center text-2xl font-bold">{t("architecture")}</h2>
         <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { title: "Kernel", desc: "Linux kernel with custom patches for optimal performance and hardware support." },
-            { title: "Desktop", desc: "Lingmo Desktop Environment built with GTK4, featuring Wayland compositor." },
-            { title: "Applications", desc: "Curated suite of applications designed for productivity and creativity." },
-          ].map((layer) => (
-            <Card key={layer.title} className="text-center">
+          {archLayers.map((layer) => (
+            <Card key={layer.titleKey} className="text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                <span className="text-2xl font-bold text-primary">{layer.title[0]}</span>
+                <span className="text-2xl font-bold text-primary">{layer.initial}</span>
               </div>
-              <h3 className="font-semibold">{layer.title}</h3>
-              <p className="mt-2 text-sm text-muted dark:text-muted-dark">{layer.desc}</p>
+              <h3 className="font-semibold">{t(layer.titleKey)}</h3>
+              <p className="mt-2 text-sm text-muted dark:text-muted-dark">{t(layer.descKey)}</p>
             </Card>
           ))}
         </div>
@@ -107,18 +107,14 @@ export default function AboutPage() {
       <Section className="bg-black/[0.02] dark:bg-white/[0.02]">
         <h2 className="mb-8 text-center text-2xl font-bold">{t("roadmap")}</h2>
         <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { title: "Q3 2026", items: ["Wayland performance improvements", "New default applications", "Hardware certification program"] },
-            { title: "Q4 2026", items: ["Mobile form factor support", "Cloud sync integration", "Enterprise management tools"] },
-            { title: "2027", items: ["ARM64 native support", "AI-powered desktop assistant", "Community package repository"] },
-          ].map((quarter) => (
-            <Card key={quarter.title}>
-              <h3 className="font-semibold text-primary">{quarter.title}</h3>
+          {roadmapQuarters.map((quarter) => (
+            <Card key={quarter.titleKey}>
+              <h3 className="font-semibold text-primary">{t(quarter.titleKey)}</h3>
               <ul className="mt-4 space-y-2">
-                {quarter.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-muted dark:text-muted-dark">
+                {quarter.itemKeys.map((itemKey) => (
+                  <li key={itemKey} className="flex items-start gap-2 text-sm text-muted dark:text-muted-dark">
                     <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    {item}
+                    {t(itemKey)}
                   </li>
                 ))}
               </ul>
