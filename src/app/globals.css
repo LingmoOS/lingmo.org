@@ -105,12 +105,12 @@ html {
 }
 
 .hero-title {
-  background: linear-gradient(135deg, #4f7cff, #6ee7ff, #4f7cff, #8b5cf6, #4f7cff);
-  background-size: 400% 400%;
+  background: linear-gradient(90deg, #4f7cff, #6ee7ff, #4f7cff);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-flow 8s ease infinite;
+  animation: gradient-flow 4s ease-in-out infinite;
   line-height: 1.2;
   padding-bottom: 0.15em;
 }
