@@ -26,10 +26,10 @@ const features = [
 const screenshotCategories = ["desktop", "settings", "terminal", "store", "file-manager", "wallpaper"] as const;
 
 const stats = [
-  { end: 1000000, suffix: "+", key: "downloads" },
-  { end: 500, suffix: "+", key: "contributors" },
-  { end: 85000, suffix: "+", key: "packages" },
-  { end: 190, suffix: "+", key: "countries" },
+  { end: 88664, suffix: "+", key: "downloads" },
+  { end: 20, suffix: "+", key: "developers" },
+  { end: 200, suffix: "+", key: "repositories" },
+  { end: 200, suffix: "+", key: "stars" },
 ];
 
 export default function HomePage() {
