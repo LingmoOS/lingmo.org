@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import updateData from "@/../public/content/update.json";
 import { isUpdateAvailable, parseBuildVersion } from "@/lib/buildVersion";
-export const runtime = "edge";
+// 说明：此处不再声明 runtime = "edge"。
+// OpenNext 在 Cloudflare Workers 上以 Node.js 运行时执行 route handler（依赖 nodejs_compat），
+// 显式声明 edge 运行时会导致该路由无法被适配器打进 Worker。
 type UpdateChannel = {
   latest: {
     version: string;

@@ -1,0 +1,21 @@
+{
+  // OpenNext（Cloudflare Workers）部署所用的 Wrangler 配置。
+  // 仓库根目录的 wrangler.toml 仍然保留给 Cloudflare Pages 构建使用（pages_build_output_dir），
+  // 二者不会互相干扰：Wrangler 默认只读取 wrangler.toml，
+  // 因此所有 Worker 相关脚本都显式传入 --config wrangler.worker.jsonc。
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "lingmo-org",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true,
+  "workers_dev": true,
+  "preview_urls": true
+}

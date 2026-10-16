@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
-export const runtime = "edge";
+// 说明：此处不再声明 runtime = "edge"。
+// OpenNext 在 Cloudflare Workers 上以 Node.js 运行时执行 route handler（依赖 nodejs_compat），
+// 显式声明 edge 运行时会导致该路由无法被适配器打进 Worker。
 
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lingmo.org";
