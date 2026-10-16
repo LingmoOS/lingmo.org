@@ -10,7 +10,23 @@ import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Link } from "@/i18n/navigation";
 import { mdToHtml } from "@/lib/mdToHtml";
+import blogPosts from "@/../public/content/blog.json";
 import type { BlogPost } from "@/types";
+
+/**
+ * 预生成全部博客详情页。
+ *
+ * 这里必须是枚举式的静态参数：`[locale]` 下再嵌一层动态段时，
+ * 若不枚举，Next 只会在请求期动态渲染，而请求期渲染在
+ * Next 15.2 + `@cloudflare/next-on-pages` 下会 404。
+ * 枚举后详情页变成静态 HTML，由静态资源层直接返回。
+ */
+export function generateStaticParams() {
+  return (blogPosts as BlogPost[]).map((post) => ({ slug: post.slug }));
+}
+
+/** 未知 slug 交给 404，避免回落到不可用的请求期渲染 */
+export const dynamicParams = false;
 
 export default function BlogDetailPage() {
   const t = useTranslations("blog");

@@ -11,7 +11,24 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Link } from "@/i18n/navigation";
 import { mdToHtml } from "@/lib/mdToHtml";
 import { cn } from "@/lib/utils";
+import releaseNotes from "@/../public/content/releases.json";
 import type { ReleaseNote } from "@/types";
+
+/**
+ * 预生成全部版本详情页。
+ *
+ * 与博客详情页同理：`[locale]` 下嵌套动态段必须枚举静态参数，
+ * 否则只能在请求期渲染，而请求期渲染在
+ * Next 15.2 + `@cloudflare/next-on-pages` 下会 404。
+ */
+export function generateStaticParams() {
+  return (releaseNotes as ReleaseNote[]).map((release) => ({
+    version: release.version,
+  }));
+}
+
+/** 未知 version 交给 404，避免回落到不可用的请求期渲染 */
+export const dynamicParams = false;
 
 export default function ReleaseDetailPage() {
   const t = useTranslations("releases");
