@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lingmo.org";
   const locales = ["", "zh-cn", "zh-tw", "en", "ja"];
-  const pages = ["", "about", "download", "documentation", "releases", "blog", "community", "gallery", "donate", "sponsors", "faq", "privacy", "license", "search"];
+  const pages = ["", "about", "download", "documentation", "releases", "blog", "community", "gallery", "donate", "sponsors", "faq", "privacy", "license", "search", "status"];
 
   const entries: MetadataRoute.Sitemap = [];
 

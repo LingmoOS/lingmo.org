@@ -132,6 +132,20 @@ export interface Sponsor {
   amount?: number;
 }
 
+/** 构建状态页面相关类型（定义见 ./status） */
+export type {
+  BuildStatus,
+  ObsOutcomeSnapshot,
+  ObsPackageResult,
+  RateLimitInfo,
+  ReleaseAsset,
+  ReleaseInfo,
+  RepoStatusResult,
+  RepoStatusSummary,
+  StatusSnapshot,
+  WorkflowRun,
+} from "./status";
+
 export interface NavItem {
   label: string;
   href: string;
