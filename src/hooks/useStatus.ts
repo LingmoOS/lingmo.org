@@ -22,7 +22,7 @@ import {
   fetchStatusFromProxy,
   refreshIntervalFor,
 } from "@/lib/buildStatus";
-import type { StatusSnapshot } from "@/types";
+import type { ProxyFailure, StatusSnapshot } from "@/types";
 
 /** 本地缓存结构 */
 interface CachedStatus {
@@ -146,15 +146,19 @@ export function useStatus(): StatusState {
 
     // 优先走服务端聚合代理；任何异常都视为「代理不可用」，继续回落到直连
     let next: StatusSnapshot | null = null;
+    // 代理失败的原因带进直连快照，页面据此区分「代理 500」与「配额耗尽」
+    let proxyFailure: ProxyFailure | "none" = "none";
     try {
-      next = await fetchStatusFromProxy(controller.signal);
+      const outcome = await fetchStatusFromProxy(controller.signal);
+      next = outcome.snapshot;
+      proxyFailure = outcome.failure;
     } catch {
-      next = null;
+      proxyFailure = "network";
     }
 
     if (next === null && !controller.signal.aborted) {
       try {
-        next = await fetchStatusDirect(controller.signal);
+        next = await fetchStatusDirect(controller.signal, proxyFailure);
       } catch {
         next = null;
       }

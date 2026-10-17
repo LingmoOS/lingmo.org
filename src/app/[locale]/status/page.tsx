@@ -72,6 +72,14 @@ export default function StatusPage() {
     return t("rateLimitWarningUnknown");
   })();
 
+  /**
+   * 「服务端代理报错」与「浏览器直连配额不足」是两件事，必须分开说：
+   * - proxyErrorWarning：代理自己返回 5xx，属于站点服务端问题，需要维护者排查；
+   * - rateLimitWarning：访客浏览器直连的 GitHub 配额快用尽，等一段时间会自动恢复。
+   * 只有回落成直连、且代理确实报 5xx 时才显示前者。
+   */
+  const proxyErrorWarning = snapshot?.proxyError === "server" ? t("proxyErrorWarning") : null;
+
   return (
     <>
       <PageHeader
@@ -99,6 +107,12 @@ export default function StatusPage() {
             {refreshing ? t("refreshing") : t("refreshNow")}
           </Button>
         </div>
+
+        {proxyErrorWarning ? (
+          <p className="mt-4 rounded-xl bg-warning/10 px-4 py-3 text-sm text-warning">
+            {proxyErrorWarning}
+          </p>
+        ) : null}
 
         {rateLimitWarning ? (
           <p className="mt-4 rounded-xl bg-warning/10 px-4 py-3 text-sm text-warning">

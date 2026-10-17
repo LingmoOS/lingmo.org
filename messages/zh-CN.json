@@ -261,6 +261,7 @@
     "errorNotFound": "未找到该仓库。",
     "rateLimitWarning": "当前 IP 的 GitHub 接口配额即将用尽，自动刷新将在约 {minutes} 分钟后恢复。",
     "rateLimitWarningUnknown": "当前 IP 的 GitHub 接口配额即将用尽，自动刷新将在配额重置后恢复。",
+    "proxyErrorWarning": "服务端聚合代理返回 500（服务端错误），页面已自动改用浏览器直连，当前数据由直连获得。这不是您的配额问题，需要站点维护者排查。",
     "isoBuildTitle": "ISO 构建",
     "latestReleaseTitle": "最新发布",
     "noRelease": "该仓库暂无发布记录，请稍后再来查看。",

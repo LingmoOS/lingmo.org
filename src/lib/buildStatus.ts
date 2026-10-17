@@ -14,6 +14,7 @@
 import type {
   BuildStatus,
   ObsPackageResult,
+  ProxyFailure,
   RateLimitInfo,
   ReleaseAsset,
   ReleaseInfo,
@@ -513,8 +514,14 @@ export async function fetchObsStatus(signal: AbortSignal): Promise<ObsStatusOutc
  *
  * 直连拿不到 `jobs/steps`（会额外消耗 1~2 次配额），因此 isoProgress 固定为 null，
  * ISO 卡片在这种模式下不显示分步进度。
+ *
+ * proxyFailure 是本次回落之前代理失败的原因，原样写进快照的 proxyError，
+ * 让页面能把「服务端代理 500」与「浏览器配额耗尽」两种提示区分开。
  */
-export async function fetchStatusDirect(signal: AbortSignal): Promise<StatusSnapshot> {
+export async function fetchStatusDirect(
+  signal: AbortSignal,
+  proxyFailure: ProxyFailure | "none" = "none",
+): Promise<StatusSnapshot> {
   const [repoStatus, release, obs] = await Promise.all([
     fetchRepoStatuses(signal),
     fetchLatestRelease(ISO_REPO, signal),
@@ -535,6 +542,8 @@ export async function fetchStatusDirect(signal: AbortSignal): Promise<StatusSnap
     isoProgress: null,
     isoTrend,
     fetchedAt: new Date().toISOString(),
+    // 只有代理确实失败过才带上，代理正常时不写这个字段
+    ...(proxyFailure === "none" ? {} : { proxyError: proxyFailure }),
   };
 }
 
@@ -611,39 +620,79 @@ function mapProxyPayload(payload: StatusApiResponse, fromCache: boolean): Status
   };
 }
 
+/** 代理请求的结果：可用时给快照，不可用时给出原因 */
+export interface ProxyOutcome {
+  /** 代理可用时的快照；不可用时为 null */
+  snapshot: StatusSnapshot | null;
+  /** 不可用的原因；可用时为 none */
+  failure: ProxyFailure | "none";
+}
+
+/**
+ * 代理返回 5xx 时，把服务端给的诊断信息打到控制台（error / stage / envSource）。
+ * 只用于排查，不进入页面；响应体不是 JSON（例如 HTML 错误页）时直接跳过。
+ */
+async function logProxyFailure(response: Response): Promise<void> {
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    console.warn("[status] 服务端代理返回", response.status, "且响应不是 JSON");
+    return;
+  }
+  try {
+    const detail = (await response.json()) as {
+      error?: string;
+      stage?: string;
+      envSource?: string;
+    };
+    console.warn("[status] 服务端代理失败", {
+      status: response.status,
+      stage: detail.stage ?? null,
+      error: detail.error ?? null,
+      envSource: detail.envSource ?? null,
+    });
+  } catch {
+    // 解析失败时忽略，用户侧提示已经足够
+  }
+}
+
 /**
  * 请求服务端聚合代理。
  *
- * 返回 null 表示代理不可用（未部署、超时、非 JSON、结构不符等），
- * 调用方据此回落到直连逻辑；不会抛异常。
+ * snapshot 为 null 表示代理不可用（未部署、超时、非 JSON、结构不符等），
+ * failure 说明是哪一类不可用，调用方据此回落到直连逻辑；不会抛异常。
  */
-export async function fetchStatusFromProxy(signal: AbortSignal): Promise<StatusSnapshot | null> {
+export async function fetchStatusFromProxy(signal: AbortSignal): Promise<ProxyOutcome> {
   let response: Response;
   try {
     response = await requestSameOrigin(STATUS_API_PATH, signal);
   } catch {
-    return null;
+    return { snapshot: null, failure: "network" };
   }
 
   if (!response.ok) {
-    return null;
+    if (response.status >= 500) {
+      // 5xx 是代理自身出错（部署 / 运行时问题），交给控制台并标记为 server
+      void logProxyFailure(response);
+      return { snapshot: null, failure: "server" };
+    }
+    return { snapshot: null, failure: "network" };
   }
 
   // 代理偶尔会被上层改写（例如返回 HTML 错误页），先看内容类型再解析
   const contentType = response.headers.get("content-type") ?? "";
   if (!contentType.includes("application/json")) {
-    return null;
+    return { snapshot: null, failure: "invalid" };
   }
 
   let payload: unknown;
   try {
     payload = await response.json();
   } catch {
-    return null;
+    return { snapshot: null, failure: "invalid" };
   }
 
   if (!isStatusApiResponse(payload)) {
-    return null;
+    return { snapshot: null, failure: "invalid" };
   }
 
   // 代理用 X-Status-Cache 标记本次响应是实时抓取还是命中边缘缓存
@@ -656,10 +705,10 @@ export async function fetchStatusFromProxy(signal: AbortSignal): Promise<StatusS
    * 直连往往还能拿到数据。
    */
   if (snapshot.repos.length > 0 && snapshot.repos.every((item) => item.error !== undefined)) {
-    return null;
+    return { snapshot: null, failure: "network" };
   }
 
-  return snapshot;
+  return { snapshot, failure: "none" };
 }
 
 /**

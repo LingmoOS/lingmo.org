@@ -261,6 +261,7 @@
     "errorNotFound": "Repository not found.",
     "rateLimitWarning": "The GitHub API quota for this IP is almost exhausted. Automatic refresh will resume in about {minutes} minutes.",
     "rateLimitWarningUnknown": "The GitHub API quota for this IP is almost exhausted. Automatic refresh will resume once the quota resets.",
+    "proxyErrorWarning": "The server-side aggregate proxy is returning 500 (a server-side error). The page has fallen back to fetching directly from your browser, so the data shown comes from that path. This is not your quota; the site maintainers need to investigate.",
     "isoBuildTitle": "ISO build",
     "latestReleaseTitle": "Latest release",
     "noRelease": "No release has been published yet. Please check the repository later.",

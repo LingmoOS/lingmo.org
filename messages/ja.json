@@ -261,6 +261,7 @@
     "errorNotFound": "リポジトリが見つかりません。",
     "rateLimitWarning": "この IP の GitHub API 残り回数が少なくなっています。自動更新は約 {minutes} 分後に再開します。",
     "rateLimitWarningUnknown": "この IP の GitHub API 残り回数が少なくなっています。自動更新はクォータの回復後に再開します。",
+    "proxyErrorWarning": "サーバー側の集約プロキシが 500（サーバーエラー）を返しています。ページはブラウザからの直接取得に切り替えたため、表示中のデータはその経路で取得したものです。これはあなたのクォータの問題ではなく、サイト管理者による調査が必要です。",
     "isoBuildTitle": "ISO ビルド",
     "latestReleaseTitle": "最新リリース",
     "noRelease": "まだリリースが公開されていません。後でもう一度ご確認ください。",

@@ -24,6 +24,27 @@ export type StatusSource = "proxy" | "direct";
 /** 数据新鲜度：本次抓取（live），或来自页面 / 边缘缓存（cached） */
 export type StatusFreshness = "live" | "cached";
 
+/**
+ * 代理读取 Cloudflare 环境变量时实际走通的那条路径（仅用于诊断，不含凭据内容）。
+ * - requestContext：从请求上下文（next-on-pages 的 getRequestContext().env）读到；
+ * - processEnv：退回到 process.env 读到；
+ * - none：两条路径都没有读到任何配置。
+ */
+export type StatusEnvSource = "requestContext" | "processEnv" | "none";
+
+/** 三个凭据是否读到（布尔值，永远不含凭据原文） */
+export interface StatusEnvKeys {
+  githubToken: boolean;
+  obsUsername: boolean;
+  obsPassword: boolean;
+}
+
+/**
+ * 回落到浏览器直连时，服务端代理此前失败的原因。
+ * 页面用它来区分「代理 500（服务端错误）」与「直连配额耗尽」两种完全不同的情况。
+ */
+export type ProxyFailure = "server" | "network" | "invalid";
+
 /** 单个仓库最新一次 GitHub Actions 运行 */
 export interface WorkflowRun {
   /** 仓库名（不含 owner 前缀） */
@@ -162,6 +183,11 @@ export interface StatusSnapshot {
   isoTrend: RunTrendItem[];
   /** 本次数据获取完成的时间（ISO 字符串） */
   fetchedAt: string;
+  /**
+   * 直连模式下服务端代理此前失败的原因：server 为 5xx，network 为连不上 / 超时，
+   * invalid 为返回非 JSON 或结构不符；代理正常时没有这个字段。
+   */
+  proxyError?: ProxyFailure;
 }
 
 /** OBS 区块的数据快照 */
@@ -227,4 +253,8 @@ export interface StatusApiResponse {
   iso: StatusApiIsoPart;
   release: StatusApiReleasePart;
   obs: StatusApiObsPart;
+  /** 环境变量是从哪条路径读到的（诊断用） */
+  envSource: StatusEnvSource;
+  /** 三个凭据是否存在（诊断用，只有布尔值） */
+  envKeys: StatusEnvKeys;
 }

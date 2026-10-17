@@ -261,6 +261,7 @@
     "errorNotFound": "找不到此倉庫。",
     "rateLimitWarning": "目前 IP 的 GitHub 介面配額即將用盡，自動重新整理將在約 {minutes} 分鐘後恢復。",
     "rateLimitWarningUnknown": "目前 IP 的 GitHub 介面配額即將用盡，自動重新整理將在配額重置後恢復。",
+    "proxyErrorWarning": "服務端聚合代理回傳 500（伺服器端錯誤），頁面已自動改用瀏覽器直連，目前資料由直連取得。這不是您的配額問題，需要站點維護者排查。",
     "isoBuildTitle": "ISO 建置",
     "latestReleaseTitle": "最新發佈",
     "noRelease": "此倉庫尚無發佈記錄，請稍後再查看。",

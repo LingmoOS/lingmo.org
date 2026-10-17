@@ -24,6 +24,8 @@ import type {
   StatusApiReleasePart,
   StatusApiRepoResult,
   StatusApiResponse,
+  StatusEnvKeys,
+  StatusEnvSource,
   WorkflowRun,
 } from "@/types";
 
@@ -41,12 +43,24 @@ import type {
  * 失败降级：任何一段上游失败都只把该段标成 { ok: false, error }，HTTP 仍返回 200，
  * 页面据此逐块展示，不会因为一个上游抖动而整页空白。
  *
- * 关于运行时：
- * - 本仓库已从 @cloudflare/next-on-pages 迁移到 @opennextjs/cloudflare（见提交 9e13fea），
- *   OpenNext 以 Node.js 运行时（nodejs_compat）执行 route handler；显式声明
- *   `export const runtime = "edge"` 会被适配器判为不支持，要么构建期报错、要么运行时 500。
- *   因此这里与其它 API 路由一致，不声明 runtime。
- * - 如果将来改回 next-on-pages，需要在这里补上 `export const runtime = "edge";`。
+ * 关于运行时（当前是 Pages，需要 edge）：
+ * - 站点当前部署在 Cloudflare Pages + @cloudflare/next-on-pages。该适配器只把声明了
+ *   edge runtime 的路由打进 `_worker.js`，因此下面那行 `export const runtime = "edge"`
+ *   必须保留；去掉它这条路由会退回 Node.js 运行时，Pages 上无法执行。
+ * - 若将来迁移到 @opennextjs/cloudflare（Workers，Node.js 运行时 + nodejs_compat），
+ *   必须删掉该行，否则适配器会拒绝这条路由。
+ *
+ * 关于环境变量（edge 上不能只依赖 process.env）：
+ * - next-on-pages 生成的 `_worker.js` 里，`process.env` 只是包在 AsyncLocalStorage
+ *   之上的 Proxy（见其 generateGlobalJs），在请求作用域外取值会直接抛错；某些部署
+ *   形态下 `process` 根本不存在。原来只读 process.env，异常又被外层漏掉，于是整条
+ *   路由变成 500。
+ * - 它自己的 getRequestContext() 读的就是
+ *   `globalThis[Symbol.for("__cloudflare-request-context__")].env`
+ *   （见 packages/next-on-pages/src/api/getRequestContext.ts），所以这里按同一约定
+ *   先直接取该 Symbol，取不到再退回 process.env；每个键单独 try/catch，
+ *   一条路径抛错不影响另一条。
+ * - 响应里的 envSource / envKeys 只说明「凭据有没有读到」，不含任何凭据内容。
  */
 
 /** 上游请求超时时间（毫秒）：单段超时只影响该段，不影响整次响应 */
@@ -72,13 +86,128 @@ const GITHUB_OWNER = "LingmoOS";
 const OBS_API = "https://api.opensuse.org";
 const OBS_PROJECT = "home:LingmoOS";
 
-/** 让路由始终在请求时执行，避免被静态化后在构建期就去打上游接口 */
-// 站点当前部署在 Cloudflare Pages + @cloudflare/next-on-pages，该适配器要求
-// 路由处理器声明 edge runtime，否则运行时直接 500。
-// 若将来迁移到 @opennextjs/cloudflare（Workers），需删除下面这一行。
+/**
+ * 运行时声明：当前部署在 Cloudflare Pages + @cloudflare/next-on-pages，该适配器要求
+ * 路由处理器声明 edge runtime，否则运行时直接 500。
+ * 迁移到 @opennextjs/cloudflare（Workers）时删掉这一行。
+ */
 export const runtime = "edge";
 
+/** 始终在请求时执行，避免被静态化后在构建期就去打上游接口 */
 export const dynamic = "force-dynamic";
+
+/** 需要从环境变量里读取的键（全部可选） */
+const ENV_GITHUB_TOKEN = "GITHUB_TOKEN";
+const ENV_OBS_USERNAME = "OBS_USERNAME";
+const ENV_OBS_PASSWORD = "OBS_PASSWORD";
+
+/** 需要读取的全部键，顺序即优先级 */
+const ENV_KEYS = [ENV_GITHUB_TOKEN, ENV_OBS_USERNAME, ENV_OBS_PASSWORD] as const;
+
+/**
+ * next-on-pages 存放请求上下文（含 env）的全局 Symbol。
+ * 与 `getRequestContext()` 取自同一位置；直接读它可以避免把适配器包 import 进 edge
+ * bundle（该包入口还导出了依赖 fs / esbuild 的构建期工具）。
+ */
+const REQUEST_CONTEXT_SYMBOL = Symbol.for("__cloudflare-request-context__");
+
+/** 解析后的环境变量：凭据只在本进程内存里，不写日志、不进响应 */
+interface ProxyEnv {
+  /** 实际读到值的那条路径，取不到时为 none */
+  readonly source: StatusEnvSource;
+  readonly githubToken: string;
+  readonly obsUsername: string;
+  readonly obsPassword: string;
+}
+
+/** 读取单个键；Proxy 取值与不存在的 process 都可能抛错，所以逐键收敛 */
+function readEnvValue(bag: unknown, key: string): string {
+  if (bag === null || typeof bag !== "object") {
+    return "";
+  }
+  try {
+    const value = (bag as Record<string, unknown>)[key];
+    if (typeof value !== "string") {
+      return "";
+    }
+    // 密码可能有意包含首尾空白，保留原样；其余键去掉首尾空白
+    return key === ENV_OBS_PASSWORD ? value : value.trim();
+  } catch {
+    return "";
+  }
+}
+
+/** 从请求上下文取 env；在请求作用域外读该 Proxy 会抛 TypeError，按取不到处理 */
+function readRequestContextEnv(): unknown {
+  try {
+    const holder = globalThis as unknown as Record<symbol, unknown>;
+    const context = holder[REQUEST_CONTEXT_SYMBOL];
+    if (context === null || typeof context !== "object") {
+      return null;
+    }
+    return (context as { env?: unknown }).env ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** 退回 process.env；edge 上它可能是 AsyncLocalStorage 的 Proxy，也可能根本不存在 */
+function readProcessEnv(): unknown {
+  try {
+    if (typeof process === "undefined") {
+      return null;
+    }
+    const bag: unknown = process.env;
+    return bag ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 先请求上下文、再 process.env；同一个键取第一个非空值。
+ * 两条路径都取不到时 source 为 none：页面照常工作，只是少了 token 配额加成。
+ */
+function resolveEnv(): ProxyEnv {
+  const sources: ReadonlyArray<readonly [StatusEnvSource, unknown]> = [
+    ["requestContext", readRequestContextEnv()],
+    ["processEnv", readProcessEnv()],
+  ];
+
+  const values: Record<string, string> = {};
+  let source: StatusEnvSource = "none";
+
+  for (const [name, bag] of sources) {
+    for (const key of ENV_KEYS) {
+      if (values[key]) {
+        continue;
+      }
+      const value = readEnvValue(bag, key);
+      if (value !== "") {
+        values[key] = value;
+        if (source === "none") {
+          source = name;
+        }
+      }
+    }
+  }
+
+  return {
+    source,
+    githubToken: values[ENV_GITHUB_TOKEN] ?? "",
+    obsUsername: values[ENV_OBS_USERNAME] ?? "",
+    obsPassword: values[ENV_OBS_PASSWORD] ?? "",
+  };
+}
+
+/** 三个凭据是否存在（只有布尔值，可安全放进响应） */
+function envPresence(env: ProxyEnv): StatusEnvKeys {
+  return {
+    githubToken: env.githubToken !== "",
+    obsUsername: env.obsUsername !== "",
+    obsPassword: env.obsPassword !== "",
+  };
+}
 
 /** 带错误标识的上游失败，便于逐段返回 { ok: false, error } */
 class UpstreamError extends Error {
@@ -104,18 +233,18 @@ function reasonCode(reason: unknown): string {
 
 /**
  * 构造 GitHub 请求头。
- * token 只从这里读取，不会写进日志，也不会出现在响应里；
- * 没有配置 token 时退化为匿名请求（仍可用，只是限流 60 次/小时）。
+ * token 由调用方从 resolveEnv() 的结果传入（不再直接读 process.env），
+ * 不会写进日志，也不会出现在响应里；没有配置 token 时退化为匿名请求
+ * （仍可用，只是限流 60 次/小时）。
  */
-function githubHeaders(): Record<string, string> {
+function githubHeaders(env: ProxyEnv): Record<string, string> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
     "User-Agent": "lingmo-org-status-proxy",
   };
-  const token = (process.env.GITHUB_TOKEN ?? "").trim();
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
+  if (env.githubToken !== "") {
+    headers.Authorization = `Bearer ${env.githubToken}`;
   }
   return headers;
 }
@@ -142,8 +271,9 @@ async function fetchWithTimeout(
 async function fetchGithub<T>(
   url: string,
   signal: AbortSignal,
+  env: ProxyEnv,
 ): Promise<{ payload: T; rateLimit: RateLimitInfo | null }> {
-  const response = await fetchWithTimeout(url, githubHeaders(), signal);
+  const response = await fetchWithTimeout(url, githubHeaders(env), signal);
   const rateLimit = readRateLimit(response);
   if (!response.ok) {
     throw new UpstreamError(describeHttpError(response));
@@ -167,9 +297,13 @@ interface RepoFetch {
  * 读取单个仓库最近 20 次 push 运行：
  * 第一条作为「最新一次」，整段同时用于趋势条，因此一个仓库只花 1 次请求。
  */
-async function fetchRepoRuns(repo: string, signal: AbortSignal): Promise<RepoFetch> {
+async function fetchRepoRuns(
+  repo: string,
+  signal: AbortSignal,
+  env: ProxyEnv,
+): Promise<RepoFetch> {
   const url = `${GITHUB_API}/repos/${GITHUB_OWNER}/${repo}/actions/runs?per_page=${TREND_LIMIT}&event=push`;
-  const { payload, rateLimit } = await fetchGithub<GithubRunsPayload>(url, signal);
+  const { payload, rateLimit } = await fetchGithub<GithubRunsPayload>(url, signal, env);
   const runs = payload.workflow_runs ?? [];
   const latest = runs[0];
   return {
@@ -219,16 +353,19 @@ function toRunStep(payload: GithubStepPayload): RunStep {
  * 读取 lingmo-builder 当前运行「正在哪一步」。
  * 没有进行中的运行（或拿不到 jobs）时返回 null，页面据此不显示进度区块。
  */
-async function fetchIsoProgress(signal: AbortSignal): Promise<RunProgress | null> {
+async function fetchIsoProgress(
+  signal: AbortSignal,
+  env: ProxyEnv,
+): Promise<RunProgress | null> {
   const runsUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${ISO_REPO}/actions/runs?status=in_progress&per_page=1`;
-  const { payload } = await fetchGithub<GithubRunsPayload>(runsUrl, signal);
+  const { payload } = await fetchGithub<GithubRunsPayload>(runsUrl, signal, env);
   const running: GithubRunPayload | undefined = (payload.workflow_runs ?? [])[0];
   if (!running || typeof running.id !== "number") {
     return null;
   }
 
   const jobsUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${ISO_REPO}/actions/runs/${running.id}/jobs?per_page=10`;
-  const { payload: jobsPayload } = await fetchGithub<GithubJobsPayload>(jobsUrl, signal);
+  const { payload: jobsPayload } = await fetchGithub<GithubJobsPayload>(jobsUrl, signal, env);
   const jobs = jobsPayload.jobs ?? [];
   // 一个构建通常只有一个作业；有多个时优先取正在执行的那个
   const job = jobs.find((item) => (item.status ?? "") === "in_progress") ?? jobs[0];
@@ -251,11 +388,14 @@ async function fetchIsoProgress(signal: AbortSignal): Promise<RunProgress | null
 }
 
 /** 读取最新发布；404 表示仓库确实还没有发布，与读取失败区分开 */
-async function fetchReleasePart(signal: AbortSignal): Promise<StatusApiReleasePart> {
+async function fetchReleasePart(
+  signal: AbortSignal,
+  env: ProxyEnv,
+): Promise<StatusApiReleasePart> {
   const url = `${GITHUB_API}/repos/${GITHUB_OWNER}/${ISO_REPO}/releases/latest`;
   let response: Response;
   try {
-    response = await fetchWithTimeout(url, githubHeaders(), signal);
+    response = await fetchWithTimeout(url, githubHeaders(env), signal);
   } catch (error) {
     return { ok: false, error: reasonCode(error), release: null, missing: false };
   }
@@ -352,18 +492,21 @@ function sortObsResults(results: ObsPackageResult[]): ObsPackageResult[] {
     .map((entry) => entry.item);
 }
 
-/** 读取 OBS 凭据并转成 Basic Auth 头；未配置时返回 null */
-function obsAuthorization(): string | null {
-  const username = (process.env.OBS_USERNAME ?? "").trim();
-  const password = process.env.OBS_PASSWORD ?? "";
-  if (!username || !password) {
+/**
+ * 把 OBS 凭据转成 Basic Auth 头；未配置时返回 null。
+ * 凭据来自 resolveEnv()，只在本函数的返回值里出现，不写日志、不进入响应；
+ * btoa 是 Web 标准接口（edge 与浏览器都有），凭据含非 Latin-1 字符时会抛错，
+ * 这里按「未配置」处理，不影响其它区块。
+ */
+function obsAuthorization(env: ProxyEnv): string | null {
+  const username = env.obsUsername;
+  const password = env.obsPassword;
+  if (username === "" || password === "") {
     return null;
   }
   try {
-    // 凭据只在本函数的返回值里出现，不写日志、不进入响应
     return `Basic ${btoa(`${username}:${password}`)}`;
   } catch {
-    // 凭据含非 Latin-1 字符时 btoa 会抛错，按未配置处理
     return null;
   }
 }
@@ -375,8 +518,8 @@ function obsAuthorization(): string | null {
  * 逐包状态；个别实例不接受 view 参数时退一步用默认视图重试一次。
  * 无凭据、鉴权失败、网络失败都返回 available:false + reason，不影响其它区块。
  */
-async function fetchObsPart(signal: AbortSignal): Promise<StatusApiObsPart> {
-  const authorization = obsAuthorization();
+async function fetchObsPart(signal: AbortSignal, env: ProxyEnv): Promise<StatusApiObsPart> {
+  const authorization = obsAuthorization(env);
   if (!authorization) {
     return { available: false, reason: "noCredentials", results: [], total: 0 };
   }
@@ -429,15 +572,15 @@ async function fetchObsPart(signal: AbortSignal): Promise<StatusApiObsPart> {
  * 一次性聚合所有数据。
  * 用 Promise.allSettled 逐段隔离：任一上游失败只影响该段，HTTP 仍然是 200。
  */
-async function buildStatusPayload(): Promise<StatusApiResponse> {
+async function buildStatusPayload(env: ProxyEnv): Promise<StatusApiResponse> {
   // 单请求各有 8 秒超时，这里只提供一个可传递的 signal（本请求内不会主动取消）
   const signal = new AbortController().signal;
 
   const [repoOutcome, releaseOutcome, isoOutcome, obsOutcome] = await Promise.allSettled([
-    Promise.allSettled(STATUS_REPOS.map((repo) => fetchRepoRuns(repo, signal))),
-    fetchReleasePart(signal),
-    fetchIsoProgress(signal),
-    fetchObsPart(signal),
+    Promise.allSettled(STATUS_REPOS.map((repo) => fetchRepoRuns(repo, signal, env))),
+    fetchReleasePart(signal, env),
+    fetchIsoProgress(signal, env),
+    fetchObsPart(signal, env),
   ]);
 
   /** 仓库段落：逐个映射，失败的仓库单独标记 */
@@ -489,6 +632,9 @@ async function buildStatusPayload(): Promise<StatusApiResponse> {
     iso,
     release,
     obs,
+    // 诊断用：凭据到底从哪条路径读到（只有来源与布尔值，没有凭据内容）
+    envSource: env.source,
+    envKeys: envPresence(env),
   };
 }
 
@@ -509,12 +655,63 @@ function edgeCache(): EdgeCacheLike | null {
   }
 }
 
-/** 统一的 JSON 响应：带上缓存策略与「实时 / 缓存」标记 */
-function jsonResponse(payload: StatusApiResponse, cacheState: "HIT" | "MISS"): NextResponse {
+/** 缓存状态：HIT 命中；MISS 本次实时聚合；SKIP 缓存不可用或读写失败（本次跳过缓存） */
+type CacheState = "HIT" | "MISS" | "SKIP";
+
+/** 统一的 JSON 响应：带上缓存策略、「实时 / 缓存」标记与环境变量来源 */
+function jsonResponse(payload: StatusApiResponse, cacheState: CacheState): NextResponse {
   return NextResponse.json(payload, {
     headers: {
       "Cache-Control": CACHE_CONTROL,
       "X-Status-Cache": cacheState,
+      "X-Status-Env": payload.envSource,
+    },
+  });
+}
+
+/** 失败发生的阶段：直接写进 500 响应，便于一次定位 */
+type FailureStage = "env" | "cache" | "aggregate" | "cache-write" | "response";
+
+/** 错误摘要里的凭据一律抹掉：上游报错信息可能夹带请求头内容 */
+function redact(message: string, env: ProxyEnv): string {
+  let text = message;
+  for (const secret of [env.githubToken, env.obsPassword, env.obsUsername]) {
+    if (secret.length >= 4 && text.includes(secret)) {
+      text = text.split(secret).join("***");
+    }
+  }
+  return text;
+}
+
+/** 把异常收敛成一行可读摘要（不含凭据原文） */
+function summarizeError(error: unknown, env: ProxyEnv): string {
+  const raw = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+  const text = redact(raw, env).replace(/\s+/g, " ").trim();
+  if (text === "") {
+    return "unknown";
+  }
+  return text.length > 240 ? `${text.slice(0, 240)}…` : text;
+}
+
+/**
+ * 500 响应：把「哪个阶段失败、错误摘要、env 来源」直接写进 JSON。
+ * 这里不用 NextResponse，保证错误路径本身不会再出问题；凭据原文经过 redact 抹除。
+ */
+function failureResponse(stage: FailureStage, error: unknown, env: ProxyEnv): Response {
+  const body = {
+    error: summarizeError(error, env),
+    stage,
+    envSource: env.source,
+    envKeys: envPresence(env),
+    fetchedAt: new Date().toISOString(),
+  };
+  return new Response(JSON.stringify(body), {
+    status: 500,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Status-Cache": "SKIP",
+      "X-Status-Env": env.source,
     },
   });
 }
@@ -524,37 +721,69 @@ function jsonResponse(payload: StatusApiResponse, cacheState: "HIT" | "MISS"): N
  *
  * 优先读边缘缓存；未命中则实时聚合一次并写回缓存。
  * 即使上游全部失败，也返回 200 + 逐段错误，让页面能展示降级内容。
+ *
+ * 只有本进程自身出错（解析环境变量、聚合、序列化、写缓存）才会走到 500，
+ * 并且 500 一定是 JSON：{ error, stage, envSource, envKeys }，便于一眼定位。
  */
 export async function GET(request: Request): Promise<Response> {
-  const cache = edgeCache();
-  const cacheKey = new Request(new URL("/api/status", request.url).toString(), { method: "GET" });
+  /** 初始值：连环境变量都没解析出来时，失败响应仍然能给出 envSource: "none" */
+  const initialEnv: ProxyEnv = {
+    source: "none",
+    githubToken: "",
+    obsUsername: "",
+    obsPassword: "",
+  };
+  let env = initialEnv;
+  let stage: FailureStage = "env";
 
-  if (cache) {
-    try {
-      const hit = await cache.match(cacheKey);
-      if (hit) {
-        const cachedPayload = (await hit.json()) as StatusApiResponse;
-        const age = Date.now() - Date.parse(cachedPayload.fetchedAt);
-        // 自建年龄上限：边缘缓存若给的时间比预期长，超龄后重新聚合
-        if (Number.isFinite(age) && age < CACHE_MAX_STALE_MS) {
-          return jsonResponse(cachedPayload, "HIT");
+  try {
+    env = resolveEnv();
+
+    // 缓存全部包在 try/catch 里：拿不到、读失败、写失败都只是本次跳过缓存
+    stage = "cache";
+    const cache = edgeCache();
+    let cacheState: CacheState = cache ? "MISS" : "SKIP";
+    const cacheKey = new Request(new URL("/api/status", request.url).toString(), {
+      method: "GET",
+    });
+
+    if (cache) {
+      try {
+        const hit = await cache.match(cacheKey);
+        if (hit) {
+          const cachedPayload = (await hit.json()) as StatusApiResponse;
+          const age = Date.now() - Date.parse(cachedPayload.fetchedAt);
+          // 自建年龄上限：边缘缓存若给的时间比预期长，超龄后重新聚合
+          if (Number.isFinite(age) && age < CACHE_MAX_STALE_MS) {
+            // 诊断字段用本次结果覆盖，保证 envSource 反映当前请求真实情况
+            return jsonResponse(
+              { ...cachedPayload, envSource: env.source, envKeys: envPresence(env) },
+              "HIT",
+            );
+          }
         }
+      } catch {
+        // 缓存读取 / 解析失败：本次跳过缓存，照常实时聚合
+        cacheState = "SKIP";
       }
-    } catch {
-      // 缓存读取 / 解析失败都不影响正常返回，继续实时聚合
     }
-  }
 
-  const payload = await buildStatusPayload();
-  const response = jsonResponse(payload, "MISS");
+    stage = "aggregate";
+    const payload = await buildStatusPayload(env);
 
-  if (cache) {
-    try {
-      await cache.put(cacheKey, response.clone());
-    } catch {
-      // 写入缓存失败时退化为每次实时聚合
+    if (cache) {
+      stage = "cache-write";
+      try {
+        // 写缓存用独立的 Response 对象：写失败只影响缓存标记，不影响本次数据
+        await cache.put(cacheKey, jsonResponse(payload, "MISS"));
+      } catch {
+        cacheState = "SKIP";
+      }
     }
-  }
 
-  return response;
+    stage = "response";
+    return jsonResponse(payload, cacheState);
+  } catch (error) {
+    return failureResponse(stage, error, env);
+  }
 }
