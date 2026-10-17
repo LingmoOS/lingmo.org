@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -5,32 +7,24 @@ import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 
 /**
- * 预生成四个语言的页面（Next.js App Router 的 `generateStaticParams` 约定：
- * 返回 `[{ locale: "en" }, ...]`）。
+ * 本段之下有两类路由：
+ * - 构建期就能枚举的静态页面（`/zh-CN`、`/zh-CN/status` 等），由下面的
+ *   `generateStaticParams()` 在 `next build` 阶段预渲染成 HTML；
+ * - 只能请求期渲染的动态段（`/blog/[slug]`、`/releases/[version]`），它们的页面
+ *   文件首行是 `"use client"`，不能再导出 `generateStaticParams()`，因此留在请求期。
  *
- * 这是本次「全站 404」修复的关键：没有它，`[locale]` 只能走请求期渲染，
- * 而请求期渲染在当前的 Next.js 15.x + `@cloudflare/next-on-pages` 组合下
- * 不会进入 worker 的路由表，表现为所有页面都返回 Next 自带的 404。
- * 有了它，全部页面在 `next build` 阶段就被预渲染为静态 HTML，
- * 由 Cloudflare Pages 的静态资源层直接返回，不再依赖边缘函数运行时。
+ * `runtime = "edge"` 是请求期渲染的前提：当前部署是 Cloudflare Pages +
+ * `@cloudflare/next-on-pages`，该适配器只把声明了 Edge Runtime 的路由打进
+ * `_worker.js`；缺少这条声明时，请求期渲染的路由要么在构建期被适配器拒绝
+ * （要求 Edge Runtime），要么在运行时直接 500。
  *
- * 关于 `runtime = "edge"`：此处已移除。`@cloudflare/next-on-pages` 要求
- * 服务端渲染的路由必须使用 Edge Runtime，但 Next.js 15.2 起已不再支持
- * 通过该适配器在 Cloudflare Pages 上使用 Edge Runtime
- * （见 cloudflare/next-on-pages#952、#954），因此改为完全静态预渲染，
- * 从根上摆脱对边缘函数运行时的依赖。
+ * 两者可以共存：静态页面照旧预渲染成静态资源，动态段交给边缘函数。
  */
 
-/** 预生成的 locale 参数列表 */
+/** 预生成的 locale 参数列表，对应 `routing.locales` 里的四个语言 */
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
-/**
- * 只允许上面预生成的语言，其余路径直接交给 Next 的 404，
- * 避免在请求期回落到（当前不可用的）边缘运行时渲染。
- */
-export const dynamicParams = false;
 
 export default async function LocaleLayout({
   children,

@@ -11,24 +11,17 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Link } from "@/i18n/navigation";
 import { mdToHtml } from "@/lib/mdToHtml";
 import { cn } from "@/lib/utils";
-import releaseNotes from "@/../public/content/releases.json";
 import type { ReleaseNote } from "@/types";
 
 /**
- * 预生成全部版本详情页。
+ * 本页首行是 `"use client"`（客户端组件），不能导出 `generateStaticParams()`：
+ * Next.js 不允许 `"use client"` 与 `generateStaticParams()` 出现在同一个文件里，
+ * 构建期会直接报
+ * `Page "..." cannot use both "use client" and export function "generateStaticParams()"`。
  *
- * 与博客详情页同理：`[locale]` 下嵌套动态段必须枚举静态参数，
- * 否则只能在请求期渲染，而请求期渲染在
- * Next 15.2 + `@cloudflare/next-on-pages` 下会 404。
+ * 所以详情页保持请求期渲染，由上级 `[locale]/layout.tsx` 的 `runtime = "edge"`
+ * 提供的边缘运行时处理；页面所需数据本来就由下面的 `useEffect` 在浏览器端取。
  */
-export function generateStaticParams() {
-  return (releaseNotes as ReleaseNote[]).map((release) => ({
-    version: release.version,
-  }));
-}
-
-/** 未知 version 交给 404，避免回落到不可用的请求期渲染 */
-export const dynamicParams = false;
 
 export default function ReleaseDetailPage() {
   const t = useTranslations("releases");
