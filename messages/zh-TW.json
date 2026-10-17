@@ -222,6 +222,27 @@
     "noPublicDisclosure": "請勿在公開 issue 中披露未修復的漏洞。",
     "reportLink": "提交私有漏洞回報"
   },
+  "lifecycle": {
+    "pageTitle": "版本支援週期",
+    "pageDescription": "各 Lingmo OS 版本的支援狀態與時間安排。",
+    "colVersion": "版本",
+    "colStatus": "狀態",
+    "colReleased": "發布",
+    "colSupportedUntil": "支援到",
+    "colNotes": "說明",
+    "empty": "暫無資料",
+    "tbd": "待公布",
+    "note": "本頁日期以發布公告為準。",
+    "legendTitle": "狀態說明",
+    "statusSupported": "支援中",
+    "statusMaintenance": "僅安全更新",
+    "statusEol": "已停止支援",
+    "statusPlanned": "計劃中",
+    "legendSupportedDesc": "提供常規更新與安全修正。",
+    "legendMaintenanceDesc": "只提供安全修正，不再加入新功能。",
+    "legendEolDesc": "不再提供更新，建議升級。",
+    "legendPlannedDesc": "尚未發布。"
+  },
   "footer": {
     "description": "一個為每個人打造的現代、優雅、開源作業系統。",
     "lingmo": "靈墨",
@@ -247,6 +268,7 @@
     "builtWith": "由 Lingmo 社群傾心打造",
     "status": "狀態",
     "security": "安全公告",
+    "lifecycle": "生命週期",
     "friendLinks": "友情連結"
   },
   "status": {

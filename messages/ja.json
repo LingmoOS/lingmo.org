@@ -222,6 +222,27 @@
     "noPublicDisclosure": "未修正の脆弱性を公開 issue で開示しないでください。",
     "reportLink": "プライベート脆弱性報告を開く"
   },
+  "lifecycle": {
+    "pageTitle": "リリースライフサイクル",
+    "pageDescription": "Lingmo OS 各バージョンのサポート状況と時期。",
+    "colVersion": "バージョン",
+    "colStatus": "状態",
+    "colReleased": "リリース",
+    "colSupportedUntil": "サポート終了",
+    "colNotes": "備考",
+    "empty": "データはまだありません。",
+    "tbd": "未定",
+    "note": "本ページの日付はリリース告知に基づきます。",
+    "legendTitle": "状態の説明",
+    "statusSupported": "サポート中",
+    "statusMaintenance": "セキュリティ修正のみ",
+    "statusEol": "サポート終了",
+    "statusPlanned": "予定",
+    "legendSupportedDesc": "通常の更新とセキュリティ修正を提供します。",
+    "legendMaintenanceDesc": "セキュリティ修正のみを提供し、新機能は追加しません。",
+    "legendEolDesc": "更新は提供されません。アップグレードをおすすめします。",
+    "legendPlannedDesc": "まだリリースされていません。"
+  },
   "footer": {
     "description": "すべての人のために作られた、モダンでエレガントなオープンソースオペレーティングシステム。",
     "lingmo": "Lingmo",
@@ -247,6 +268,7 @@
     "builtWith": "Lingmo コミュニティの情熱によって構築されました",
     "status": "ステータス",
     "security": "セキュリティ",
+    "lifecycle": "ライフサイクル",
     "friendLinks": "フレンドリンク"
   },
   "status": {

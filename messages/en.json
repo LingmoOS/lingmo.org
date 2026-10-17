@@ -222,6 +222,27 @@
     "noPublicDisclosure": "Do not disclose unfixed vulnerabilities in public issues.",
     "reportLink": "Open a private vulnerability report"
   },
+  "lifecycle": {
+    "pageTitle": "Release Lifecycle",
+    "pageDescription": "Support status and timelines for Lingmo OS releases.",
+    "colVersion": "Version",
+    "colStatus": "Status",
+    "colReleased": "Released",
+    "colSupportedUntil": "Supported until",
+    "colNotes": "Notes",
+    "empty": "No data yet.",
+    "tbd": "TBD",
+    "note": "Dates on this page follow the release announcements.",
+    "legendTitle": "Status legend",
+    "statusSupported": "Supported",
+    "statusMaintenance": "Security fixes only",
+    "statusEol": "End of life",
+    "statusPlanned": "Planned",
+    "legendSupportedDesc": "Regular updates and security fixes.",
+    "legendMaintenanceDesc": "Security fixes only, no new features.",
+    "legendEolDesc": "No more updates; upgrading is recommended.",
+    "legendPlannedDesc": "Not released yet."
+  },
   "footer": {
     "description": "A modern, elegant, and open-source operating system built for everyone.",
     "lingmo": "Lingmo",
@@ -247,6 +268,7 @@
     "builtWith": "Built with passion by the Lingmo community",
     "status": "Status",
     "security": "Security",
+    "lifecycle": "Lifecycle",
     "friendLinks": "Friendship Links"
   },
   "status": {
