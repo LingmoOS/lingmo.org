@@ -648,7 +648,18 @@ export async function fetchStatusFromProxy(signal: AbortSignal): Promise<StatusS
 
   // 代理用 X-Status-Cache 标记本次响应是实时抓取还是命中边缘缓存
   const cacheState = (response.headers.get("x-status-cache") ?? "").toUpperCase();
-  return mapProxyPayload(payload, cacheState === "HIT");
+  const snapshot = mapProxyPayload(payload, cacheState === "HIT");
+
+  /**
+   * 代理结构正常但所有仓库都失败了（例如服务端出口 IP 被限流，或 token 失效），
+   * 这时返回 null 让调用方改用浏览器直连：访客 IP 的配额与服务器不同，
+   * 直连往往还能拿到数据。
+   */
+  if (snapshot.repos.length > 0 && snapshot.repos.every((item) => item.error !== undefined)) {
+    return null;
+  }
+
+  return snapshot;
 }
 
 /**
