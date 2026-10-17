@@ -4,27 +4,25 @@
  * 「构建状态」页面的数据获取 Hook
  *
  * 设计要点：
- * - 纯客户端渲染，数据全部来自公开接口（GitHub REST / OBS REST），不含任何密钥；
+ * - 优先请求同源的服务端聚合代理 `/api/status`（1 个请求，鉴权与聚合都在服务端完成）；
+ * - 代理不可用 / 返回异常时自动回落到浏览器直连公开接口，页面不会白屏；
  * - 不会抛异常：任何一块失败都只影响自身区块，页面始终有内容；
- * - 自动刷新间隔与手动刷新节流由 buildStatus 中的常量统一控制，确保未认证的
- *   GitHub 接口（60 次/小时/IP）不会被本页打满；
- * - 命中本地缓存且数据仍新鲜时跳过首次请求，进一步节省配额。
+ * - 自动刷新间隔按数据来源区分：代理 60 秒，直连 540 秒（保护未认证的
+ *   GitHub 60 次/小时配额），两者都由 buildStatus 中的常量统一控制；
+ * - 命中本地缓存且数据仍新鲜时跳过首次请求，进一步节省请求配额。
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   MIN_MANUAL_REFRESH_MS,
-  REFRESH_INTERVAL_MS,
   STATUS_CACHE_KEY,
-  STATUS_CACHE_TTL_MS,
-  fetchLatestRelease,
-  fetchObsStatus,
-  fetchRepoStatuses,
+  cacheTtlFor,
+  fallbackSnapshot,
+  fetchStatusDirect,
+  fetchStatusFromProxy,
+  refreshIntervalFor,
 } from "@/lib/buildStatus";
 import type { StatusSnapshot } from "@/types";
-
-/** ISO 构建产物所属仓库（与 buildStatus 中的 ISO_REPO 保持一致） */
-const ISO_REPO = "lingmo-builder";
 
 /** 本地缓存结构 */
 interface CachedStatus {
@@ -38,7 +36,12 @@ function isStatusSnapshot(value: unknown): value is StatusSnapshot {
     return false;
   }
   const snapshot = value as Partial<StatusSnapshot>;
-  return Array.isArray(snapshot.repos) && typeof snapshot.fetchedAt === "string";
+  return (
+    Array.isArray(snapshot.repos) &&
+    typeof snapshot.fetchedAt === "string" &&
+    (snapshot.source === "proxy" || snapshot.source === "direct") &&
+    (snapshot.freshness === "live" || snapshot.freshness === "cached")
+  );
 }
 
 /** 读取本地缓存；不存在、不可用或结构不符时返回 null */
@@ -73,6 +76,11 @@ function writeCache(snapshot: StatusSnapshot): void {
   }
 }
 
+/** 命中本地缓存时，把新鲜度改写为「缓存」，让页面如实展示数据来源 */
+function asCached(snapshot: StatusSnapshot): StatusSnapshot {
+  return { ...snapshot, freshness: "cached" };
+}
+
 export interface StatusState {
   snapshot: StatusSnapshot | null;
   /** 首次加载且没有任何数据可展示 */
@@ -83,6 +91,8 @@ export interface StatusState {
   refresh: () => void;
   /** 当前是否允许手动刷新 */
   canRefresh: boolean;
+  /** 当前自动刷新间隔（毫秒），随数据来源变化 */
+  intervalMs: number;
 }
 
 export function useStatus(): StatusState {
@@ -111,14 +121,14 @@ export function useStatus(): StatusState {
     };
   }, []);
 
-  /** 拉取全部数据（三类数据并发请求，互不阻塞） */
+  /** 拉取全部数据：先代理、失败再直连，两者都不会让页面白屏 */
   const load = useCallback(async (force: boolean): Promise<void> => {
     const cached = readCache();
 
-    if (!force && cached !== null && Date.now() - cached.savedAt < STATUS_CACHE_TTL_MS) {
-      // 缓存足够新鲜：直接使用，不再消耗接口配额
+    if (!force && cached !== null && Date.now() - cached.savedAt < cacheTtlFor(cached.snapshot.source)) {
+      // 缓存足够新鲜：直接使用，不再消耗任何接口配额
       lastFetchRef.current = cached.savedAt;
-      setSnapshot(cached.snapshot);
+      setSnapshot(asCached(cached.snapshot));
       setLoading(false);
       return;
     }
@@ -130,28 +140,40 @@ export function useStatus(): StatusState {
 
     if (cached !== null) {
       // 先把旧数据渲染出来，避免整页空白
-      setSnapshot(cached.snapshot);
+      setSnapshot(asCached(cached.snapshot));
       setLoading(false);
     }
 
-    const [repoStatus, release, obs] = await Promise.all([
-      fetchRepoStatuses(controller.signal),
-      fetchLatestRelease(ISO_REPO, controller.signal),
-      fetchObsStatus(controller.signal),
-    ]);
+    // 优先走服务端聚合代理；任何异常都视为「代理不可用」，继续回落到直连
+    let next: StatusSnapshot | null = null;
+    try {
+      next = await fetchStatusFromProxy(controller.signal);
+    } catch {
+      next = null;
+    }
+
+    if (next === null && !controller.signal.aborted) {
+      try {
+        next = await fetchStatusDirect(controller.signal);
+      } catch {
+        next = null;
+      }
+    }
 
     if (!mountedRef.current || controller.signal.aborted) {
       return;
     }
-
-    const next: StatusSnapshot = {
-      repos: repoStatus.results,
-      rateLimit: repoStatus.rateLimit,
-      release,
-      releaseMissing: release === null,
-      obs: { available: obs.available, results: obs.results, reason: obs.reason },
-      fetchedAt: new Date().toISOString(),
-    };
+    if (next === null) {
+      // 两个来源都失败：有旧数据就继续用旧数据（并让按钮恢复可用）；
+      // 完全没有任何数据时用兜底快照渲染页面结构，避免整页空白
+      if (cached === null) {
+        setSnapshot(fallbackSnapshot());
+      }
+      setLoading(false);
+      setRefreshing(false);
+      setNow(Date.now());
+      return;
+    }
 
     setSnapshot(next);
     writeCache(next);
@@ -167,6 +189,9 @@ export function useStatus(): StatusState {
     void loadRef.current(false);
   }, []);
 
+  /** 当前数据来源对应的自动刷新间隔；代理可用时是 60 秒，直连时是 540 秒 */
+  const intervalMs = refreshIntervalFor(snapshot?.source ?? "proxy");
+
   /** 定时自动刷新；页面切到后台时暂停轮询，回到前台时补一次 */
   useEffect(() => {
     let intervalId: number | undefined;
@@ -175,7 +200,7 @@ export function useStatus(): StatusState {
       if (intervalId === undefined) {
         intervalId = window.setInterval(() => {
           void loadRef.current(true);
-        }, REFRESH_INTERVAL_MS);
+        }, intervalMs);
       }
     };
 
@@ -192,7 +217,7 @@ export function useStatus(): StatusState {
         return;
       }
       startInterval();
-      if (Date.now() - lastFetchRef.current >= STATUS_CACHE_TTL_MS) {
+      if (Date.now() - lastFetchRef.current >= intervalMs) {
         void loadRef.current(true);
       }
     };
@@ -206,11 +231,10 @@ export function useStatus(): StatusState {
       stopInterval();
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, []);
+  }, [intervalMs]);
 
   /** 手动刷新冷却中时每秒推进一次状态，让按钮能自动恢复可用 */
-  const canRefresh =
-    !refreshing && now - lastFetchRef.current >= MIN_MANUAL_REFRESH_MS;
+  const canRefresh = !refreshing && now - lastFetchRef.current >= MIN_MANUAL_REFRESH_MS;
 
   useEffect(() => {
     if (canRefresh) {
@@ -229,5 +253,5 @@ export function useStatus(): StatusState {
     void loadRef.current(true);
   }, []);
 
-  return { snapshot, loading, refreshing, refresh, canRefresh };
+  return { snapshot, loading, refreshing, refresh, canRefresh, intervalMs };
 }

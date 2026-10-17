@@ -5,21 +5,21 @@
  *
  * 只复用官网已有的 class / 组件写法（glass 卡片、muted 文本、primary 强调色、
  * 与 releases 页一致的 rounded-full 徽章），不修改任何样式表。
+ *
+ * 卡片里同时给出：
+ * - 徽章：颜色 + 图标 + 文字三重表达状态；
+ * - 最近 N 次运行的趋势方条（结论与时间在 title / aria-label 里）；
+ * - 动态区域带 aria-live，数据刷新后读屏能感知到变化。
  */
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { GitBranch, History } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { StatusBadge } from "./StatusBadge";
+import { TrendBars } from "./TrendBars";
 import { actionsUrl } from "@/lib/buildStatus";
-import { cn } from "@/lib/utils";
-import {
-  STATUS_BADGE_CLASS,
-  STATUS_KEY,
-  errorMessage,
-  relativeTime,
-  type Translate,
-} from "./format";
+import { STATUS_KEY, errorMessage, relativeTime, type Translate } from "./format";
 import type { RepoStatusResult } from "@/types";
 
 interface RepoStatusCardProps {
@@ -39,7 +39,6 @@ export function RepoStatusCard({ item, locale, index }: RepoStatusCardProps) {
   const translate = t as unknown as Translate;
 
   const run = item.run;
-  const badgeClass = run ? STATUS_BADGE_CLASS[run.status] : STATUS_BADGE_CLASS.unknown;
   const badgeLabel = run ? t(STATUS_KEY[run.status]) : t("statusUnknown");
 
   return (
@@ -58,31 +57,29 @@ export function RepoStatusCard({ item, locale, index }: RepoStatusCardProps) {
               </p>
             ) : null}
           </div>
-          <span
-            className={cn("shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium", badgeClass)}
-          >
-            {badgeLabel}
-          </span>
+          <StatusBadge status={run?.status ?? "unknown"} label={badgeLabel} />
         </div>
 
-        <div className="mt-4 flex-1 space-y-2 text-sm text-muted dark:text-muted-dark">
+        <div className="mt-4 flex-1 space-y-2 text-sm text-muted dark:text-muted-dark" aria-live="polite">
           {run ? (
             <>
               <p className="flex items-center gap-1.5">
-                <GitBranch className="h-4 w-4" />
+                <GitBranch className="h-4 w-4" aria-hidden="true" />
                 <span className="truncate">
                   {run.branch || t("branchUnknown")}
                   {run.shortSha ? ` · ${run.shortSha}` : ""}
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
-                <History className="h-4 w-4" />
+                <History className="h-4 w-4" aria-hidden="true" />
                 <span>{relativeTime(run.createdAt || run.updatedAt, locale, translate)}</span>
               </p>
             </>
           ) : (
             <p>{item.error ? errorMessage(item.error, translate) : t("noRun")}</p>
           )}
+
+          <TrendBars trend={item.trend ?? []} locale={locale} />
         </div>
 
         <div className="mt-4">

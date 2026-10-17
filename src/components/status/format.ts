@@ -37,6 +37,20 @@ export const STATUS_KEY: Record<BuildStatus, string> = {
 };
 
 /**
+ * 趋势小方条的填充色：同样只用已存在的颜色变量，
+ * 与徽章使用同一套语义（成功=success、失败=warning、进行中=primary）。
+ */
+export const TREND_BAR_CLASS: Record<BuildStatus, string> = {
+  success: "bg-success",
+  failure: "bg-warning",
+  running: "bg-primary",
+  queued: "bg-black/15 dark:bg-white/25",
+  cancelled: "bg-black/15 dark:bg-white/25",
+  skipped: "bg-black/10 dark:bg-white/15",
+  unknown: "bg-black/10 dark:bg-white/15",
+};
+
+/**
  * OBS 构包结果状态 -> 归一化状态。
  * OBS 常见取值：succeeded / failed / broken / unresolvable / disabled / building 等。
  */
@@ -117,4 +131,95 @@ export function formatBytes(bytes: number): string {
   const exponent = Math.min(units.length - 1, Math.floor(Math.log(bytes) / Math.log(1024)));
   const value = bytes / 1024 ** exponent;
   return `${value.toFixed(value >= 100 || exponent === 0 ? 0 : 1)} ${units[exponent]}`;
+}
+
+/** 分片后缀使用的进制：aa / ab / … / az / ba … */
+const SUFFIX_BASE = 26;
+
+/** 分片后缀（如 "ab"）转成从 0 开始的序号；格式不符时返回 null */
+function suffixToIndex(suffix: string): number | null {
+  const normalized = suffix.toLowerCase();
+  if (!/^[a-z]{2}$/.test(normalized)) {
+    return null;
+  }
+  const high = normalized.charCodeAt(0) - 97;
+  const low = normalized.charCodeAt(1) - 97;
+  return high * SUFFIX_BASE + low;
+}
+
+/** 序号转回分片后缀（0 -> "aa"，27 -> "ab"） */
+function indexToSuffix(index: number): string {
+  const high = Math.floor(index / SUFFIX_BASE);
+  const low = index % SUFFIX_BASE;
+  return `${String.fromCharCode(97 + high)}${String.fromCharCode(97 + low)}`;
+}
+
+/** 最新发布里分片与校验文件的完整性分析结果 */
+export interface ShardAnalysis {
+  /** 分片前缀，例如 `LingmoOS-3.0-x86_64.iso` */
+  prefix: string;
+  /** 按 aa 起算应有的分片数（最大后缀序号 + 1） */
+  total: number;
+  /** 缺失的分片文件名 */
+  missing: string[];
+  /** 找到的校验文件名（如 sha256sum.txt / *.sha256） */
+  checksums: string[];
+}
+
+/**
+ * 分析最新发布的资产：
+ * - ISO 被切成 `.part-aa` / `.part-ab` 等分片，这里判断 aa 到最大后缀之间是否连续齐全；
+ * - 同时找出 `sha256sum.txt` 或 `*.sha256` 校验文件。
+ *
+ * 纯函数，不抛异常；没有分片资产时 total 为 0。
+ */
+export function analyzeReleaseAssets(names: string[]): ShardAnalysis {
+  const groups = new Map<string, Set<number>>();
+
+  for (const name of names) {
+    const match = /^(.*)\.part-([a-zA-Z]{2})$/.exec(name);
+    if (!match) {
+      continue;
+    }
+    const prefix = match[1] ?? "";
+    const index = suffixToIndex(match[2] ?? "");
+    if (!prefix || index === null) {
+      continue;
+    }
+    const existing = groups.get(prefix);
+    if (existing) {
+      existing.add(index);
+    } else {
+      groups.set(prefix, new Set([index]));
+    }
+  }
+
+  const checksums = names.filter(
+    (name) =>
+      /sha256sum\.txt$/i.test(name) || /\.sha256$/i.test(name) || /\.sha256\.txt$/i.test(name),
+  );
+
+  // 一次发布里通常只有一组分片；有多组时取分片最多的一组展示
+  let bestPrefix = "";
+  let bestIndexes: Set<number> = new Set();
+  for (const [prefix, indexes] of groups) {
+    if (indexes.size > bestIndexes.size) {
+      bestPrefix = prefix;
+      bestIndexes = indexes;
+    }
+  }
+
+  if (bestIndexes.size === 0) {
+    return { prefix: "", total: 0, missing: [], checksums };
+  }
+
+  const maxIndex = Math.max(...bestIndexes);
+  const missing: string[] = [];
+  for (let index = 0; index <= maxIndex; index += 1) {
+    if (!bestIndexes.has(index)) {
+      missing.push(`${bestPrefix}.part-${indexToSuffix(index)}`);
+    }
+  }
+
+  return { prefix: bestPrefix, total: maxIndex + 1, missing, checksums };
 }

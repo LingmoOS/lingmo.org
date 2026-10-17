@@ -142,7 +142,17 @@ export type {
   ReleaseInfo,
   RepoStatusResult,
   RepoStatusSummary,
+  RunProgress,
+  RunStep,
+  RunTrendItem,
+  StatusApiIsoPart,
+  StatusApiObsPart,
+  StatusApiReleasePart,
+  StatusApiRepoResult,
+  StatusApiResponse,
+  StatusFreshness,
   StatusSnapshot,
+  StatusSource,
   WorkflowRun,
 } from "./status";
 

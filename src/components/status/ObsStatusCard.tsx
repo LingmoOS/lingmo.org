@@ -3,18 +3,17 @@
 /**
  * OBS 打包状态卡片（尽力而为）
  *
- * 实测 api.opensuse.org 需要 SUSE 开发者账号鉴权（匿名请求返回 401，
- * 且响应不带 Access-Control-Allow-Origin），浏览器里通常读不到数据。
- * 因此这里只在成功时展示构包结果，失败时给出说明与跳转链接，
- * 且不影响仓库 CI 与 ISO 两个区块。
+ * api.opensuse.org 需要 Basic Auth，且响应没有 CORS 头，浏览器直连永远读不到。
+ * 配置了 OBS_USERNAME / OBS_PASSWORD 后由服务端代理代取并精简结果，这里只管展示；
+ * 未配置或失败时给出说明与跳转链接，且不影响仓库 CI 与 ISO 两个区块。
  */
 
 import { useTranslations } from "next-intl";
 import { ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { StatusBadge } from "./StatusBadge";
 import { OBS_PROJECT, OBS_MONITOR_URL } from "@/lib/buildStatus";
-import { cn } from "@/lib/utils";
-import { STATUS_BADGE_CLASS, STATUS_KEY, obsStatusToBuildStatus } from "./format";
+import { obsStatusToBuildStatus } from "./format";
 import type { ObsOutcomeSnapshot } from "@/types";
 
 interface ObsStatusCardProps {
@@ -37,8 +36,17 @@ export function ObsStatusCard({ obs, loading }: ObsStatusCardProps) {
     if (obs.reason === "aborted") {
       return t("obsReasonAborted");
     }
+    if (obs.reason === "noCredentials") {
+      return t("obsReasonNoCredentials");
+    }
+    if (obs.reason === "parse") {
+      return t("obsReasonParse");
+    }
     return t("obsReasonCors");
   })();
+
+  /** 结果被截断时给出总数，避免误以为只有这几条 */
+  const total = obs.total ?? obs.results.length;
 
   return (
     <Card hover={false} className="flex flex-col gap-4">
@@ -52,7 +60,7 @@ export function ObsStatusCard({ obs, loading }: ObsStatusCardProps) {
       {loading ? (
         <p className="text-sm text-muted dark:text-muted-dark">{t("obsLoading")}</p>
       ) : obs.available && obs.results.length > 0 ? (
-        <div className="space-y-3">
+        <div className="space-y-3" aria-live="polite">
           {obs.results.map((item, index) => {
             const status = obsStatusToBuildStatus(item.status);
             return (
@@ -67,20 +75,18 @@ export function ObsStatusCard({ obs, loading }: ObsStatusCardProps) {
                     {item.arch ? ` · ${item.arch}` : ""}
                   </p>
                 </div>
-                <span
-                  className={cn(
-                    "shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium",
-                    STATUS_BADGE_CLASS[status],
-                  )}
-                >
-                  {item.status}
-                </span>
+                <StatusBadge status={status} label={item.status} />
               </div>
             );
           })}
+          {obs.total !== undefined && obs.total > obs.results.length ? (
+            <p className="text-xs text-muted dark:text-muted-dark">
+              {t("obsTruncated", { shown: obs.results.length, total })}
+            </p>
+          ) : null}
         </div>
       ) : (
-        <div className="space-y-2 text-sm text-muted dark:text-muted-dark">
+        <div className="space-y-2 text-sm text-muted dark:text-muted-dark" aria-live="polite">
           <p>{t("obsUnavailable")}</p>
           <p className="text-xs">{reasonText}</p>
         </div>
@@ -93,7 +99,7 @@ export function ObsStatusCard({ obs, loading }: ObsStatusCardProps) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
         >
-          <ExternalLink className="h-4 w-4" />
+          <ExternalLink className="h-4 w-4" aria-hidden="true" />
           {t("obsOpenMonitor")}
         </a>
       </div>

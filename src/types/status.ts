@@ -3,6 +3,9 @@
  *
  * 说明：这里只声明从公开接口（GitHub REST / OBS REST）读取到的字段，
  * 不引入任何密钥或私有数据，写法与官网其它类型保持一致。
+ *
+ * 其中 StatusApi* 系列是 `/api/status` 服务端聚合代理的返回结构。
+ * 代理与前端共用这一套类型，避免两边结构各自漂移。
  */
 
 /** 归一化后的构建状态（由 GitHub Actions 的 status + conclusion 推导） */
@@ -14,6 +17,12 @@ export type BuildStatus =
   | "queued"
   | "skipped"
   | "unknown";
+
+/** 数据来源：服务端聚合代理（/api/status），或浏览器直连上游公开接口 */
+export type StatusSource = "proxy" | "direct";
+
+/** 数据新鲜度：本次抓取（live），或来自页面 / 边缘缓存（cached） */
+export type StatusFreshness = "live" | "cached";
 
 /** 单个仓库最新一次 GitHub Actions 运行 */
 export interface WorkflowRun {
@@ -49,6 +58,48 @@ export interface RateLimitInfo {
   resetAt: string | null;
 }
 
+/** 趋势条单项：一次历史运行的结论与时间（每个仓库最近 N 次） */
+export interface RunTrendItem {
+  /** 运行编号，用于给趋势条生成稳定的 key */
+  runNumber: number;
+  /** 归一化状态，决定趋势条的颜色 */
+  status: BuildStatus;
+  /** 原始 conclusion 字段（未完成时为 null） */
+  rawConclusion: string | null;
+  /** 创建时间（ISO 字符串） */
+  createdAt: string;
+  /** 该次运行的页面地址 */
+  htmlUrl: string;
+}
+
+/** 一次运行中的单个步骤（来自 `actions/runs/{id}/jobs` 的 steps 字段） */
+export interface RunStep {
+  /** 步骤序号（接口从 1 开始） */
+  number: number;
+  name: string;
+  /** 原始 status 字段：queued / in_progress / completed */
+  status: string;
+  /** 原始 conclusion 字段（未完成时为 null） */
+  conclusion: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+/** 当前运行的「正在哪一步」进度 */
+export interface RunProgress {
+  runNumber: number;
+  htmlUrl: string;
+  /** 整条运行归一化后的状态 */
+  status: BuildStatus;
+  steps: RunStep[];
+  /** 正在执行的步骤；没有进行中的步骤时取最后一个已完成步骤 */
+  currentStep: RunStep | null;
+  /** 已完成步骤数 */
+  completedSteps: number;
+  /** 步骤总数 */
+  totalSteps: number;
+}
+
 /** 单个仓库的请求结果 */
 export interface RepoStatusResult {
   repo: string;
@@ -56,6 +107,8 @@ export interface RepoStatusResult {
   run: WorkflowRun | null;
   /** 失败原因描述（仅在请求失败时有值） */
   error?: string;
+  /** 最近 N 次运行的结论，用于趋势条；接口不可用时省略 */
+  trend?: RunTrendItem[];
 }
 
 /** 一次仓库状态请求的汇总结果 */
@@ -99,6 +152,14 @@ export interface StatusSnapshot {
   /** 上游仓库还没有发布（404）时为 true，用于区分「没有发布」与「读取失败」 */
   releaseMissing: boolean;
   obs: ObsOutcomeSnapshot;
+  /** 本次数据的来源：proxy 为服务端聚合，direct 为浏览器直连 */
+  source: StatusSource;
+  /** 本次数据是刚抓取（live）还是来自缓存（cached） */
+  freshness: StatusFreshness;
+  /** ISO 构建当前运行的分步进度；直连模式下拿不到 jobs/steps，值为 null */
+  isoProgress: RunProgress | null;
+  /** ISO 构建仓库最近若干次运行，用于趋势条 */
+  isoTrend: RunTrendItem[];
   /** 本次数据获取完成的时间（ISO 字符串） */
   fetchedAt: string;
 }
@@ -107,6 +168,63 @@ export interface StatusSnapshot {
 export interface ObsOutcomeSnapshot {
   available: boolean;
   results: ObsPackageResult[];
-  /** 失败原因标识：cors / auth / network / aborted */
+  /** 失败原因标识：cors / auth / network / aborted / noCredentials / parse */
   reason: string;
+  /** 代理侧筛选前的包结果总数；直连模式下省略 */
+  total?: number;
+}
+
+/**
+ * `/api/status` 中单个仓库的返回结果。
+ * 用 ok 显式区分成功与失败，失败段落不影响其它段落。
+ */
+export interface StatusApiRepoResult {
+  repo: string;
+  ok: boolean;
+  /** 失败原因（ok 为 false 时给出） */
+  error?: string;
+  /** 最近一次 push 运行；仓库没有记录时为 null */
+  run?: WorkflowRun | null;
+  /** 最近 N 次运行（含最新一次），用于趋势条 */
+  trend?: RunTrendItem[];
+}
+
+/** `/api/status` 中 ISO 构建部分 */
+export interface StatusApiIsoPart {
+  ok: boolean;
+  error?: string;
+  /** lingmo-builder 最近 N 次运行 */
+  runs: RunTrendItem[];
+  /** 当前正在运行的详细进度；没有进行中的运行时为 null */
+  current: RunProgress | null;
+}
+
+/** `/api/status` 中最新发布部分 */
+export interface StatusApiReleasePart {
+  ok: boolean;
+  error?: string;
+  release: ReleaseInfo | null;
+  /** 仓库确实没有发布（404）时为 true，用于区分「没有发布」与「读取失败」 */
+  missing: boolean;
+}
+
+/** `/api/status` 中 OBS 部分（已按状态排序并截断） */
+export interface StatusApiObsPart {
+  available: boolean;
+  reason: string;
+  results: ObsPackageResult[];
+  /** 截断前的包结果总数 */
+  total: number;
+}
+
+/** `/api/status` 的完整返回结构 */
+export interface StatusApiResponse {
+  /** 固定为 proxy，供前端判断响应确实来自本代理 */
+  source: "proxy";
+  fetchedAt: string;
+  repos: StatusApiRepoResult[];
+  rateLimit: RateLimitInfo | null;
+  iso: StatusApiIsoPart;
+  release: StatusApiReleasePart;
+  obs: StatusApiObsPart;
 }
