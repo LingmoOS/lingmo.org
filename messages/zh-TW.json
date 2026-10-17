@@ -313,6 +313,13 @@
     "guidelinesTitle": "提交之前",
     "guidelinesText": "各倉庫的貢獻要求寫在對應的 Issue / PR 範本裡，提交前先讀一遍。"
   },
+  "changelog": {
+    "pageTitle": "更新日誌",
+    "pageDescription": "按版本倒序整理 Lingmo OS 的更新重點。",
+    "empty": "暫無",
+    "tbd": "待公布",
+    "highlightsLabel": "更新重點"
+  },
   "footer": {
     "description": "一個為每個人打造的現代、優雅、開源作業系統。",
     "lingmo": "靈墨",
@@ -340,7 +347,8 @@
     "security": "安全公告",
     "lifecycle": "生命週期",
     "friendLinks": "友情連結",
-    "contribute": "參與貢獻"
+    "contribute": "參與貢獻",
+    "changelog": "更新日誌"
   },
   "status": {
     "pageTitle": "建置狀態",

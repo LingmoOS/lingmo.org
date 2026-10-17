@@ -313,6 +313,13 @@
     "guidelinesTitle": "Before you submit",
     "guidelinesText": "Each repository states its contribution requirements in its issue and pull request templates; read them first."
   },
+  "changelog": {
+    "pageTitle": "Changelog",
+    "pageDescription": "Release highlights for Lingmo OS, newest version first.",
+    "empty": "Nothing here yet.",
+    "tbd": "TBD",
+    "highlightsLabel": "Highlights"
+  },
   "footer": {
     "description": "A modern, elegant, and open-source operating system built for everyone.",
     "lingmo": "Lingmo",
@@ -340,7 +347,8 @@
     "security": "Security",
     "lifecycle": "Lifecycle",
     "friendLinks": "Friendship Links",
-    "contribute": "Contribute"
+    "contribute": "Contribute",
+    "changelog": "Changelog"
   },
   "status": {
     "pageTitle": "Build Status",

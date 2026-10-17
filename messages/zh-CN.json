@@ -313,6 +313,13 @@
     "guidelinesTitle": "提交之前",
     "guidelinesText": "各仓库的贡献要求写在对应的 Issue / PR 模板里，提交前先读一遍。"
   },
+  "changelog": {
+    "pageTitle": "更新日志",
+    "pageDescription": "按版本倒序整理 Lingmo OS 的更新要点。",
+    "empty": "暂无",
+    "tbd": "待公布",
+    "highlightsLabel": "更新要点"
+  },
   "footer": {
     "description": "一个为每个人打造的现代、优雅、开源操作系统。",
     "lingmo": "灵墨",
@@ -340,7 +347,8 @@
     "security": "安全公告",
     "lifecycle": "生命周期",
     "friendLinks": "友情链接",
-    "contribute": "参与贡献"
+    "contribute": "参与贡献",
+    "changelog": "更新日志"
   },
   "status": {
     "pageTitle": "构建状态",

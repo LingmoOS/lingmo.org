@@ -313,6 +313,13 @@
     "guidelinesTitle": "送る前に",
     "guidelinesText": "各リポジトリの contributing 要件は issue / pull request テンプレートに書かれています。送る前に目を通してください。"
   },
+  "changelog": {
+    "pageTitle": "変更履歴",
+    "pageDescription": "Lingmo OS の更新内容を新しいバージョン順にまとめています。",
+    "empty": "まだありません。",
+    "tbd": "未定",
+    "highlightsLabel": "主な変更点"
+  },
   "footer": {
     "description": "すべての人のために作られた、モダンでエレガントなオープンソースオペレーティングシステム。",
     "lingmo": "Lingmo",
@@ -340,7 +347,8 @@
     "security": "セキュリティ",
     "lifecycle": "ライフサイクル",
     "friendLinks": "フレンドリンク",
-    "contribute": "コントリビュート"
+    "contribute": "コントリビュート",
+    "changelog": "変更履歴"
   },
   "status": {
     "pageTitle": "ビルドステータス",
