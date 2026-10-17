@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 const footerColumns = [
   { key: "lingmo", links: [{ href: "/about", key: "about" }, { href: "/download", key: "download" }, { href: "/documentation", key: "docs" }, { href: "/gallery", key: "gallery" }] },
   { key: "downloads", links: [{ href: "/download", key: "download" }, { href: "/releases", key: "releases" }, { href: "/donate", key: "donate" }] },
-  { key: "resources", links: [{ href: "/blog", key: "blog" }, { href: "/faq", key: "faq" }, { href: "/documentation", key: "docs" }, { href: "/status", key: "status" }] },
+  { key: "resources", links: [{ href: "/blog", key: "blog" }, { href: "/faq", key: "faq" }, { href: "/documentation", key: "docs" }, { href: "/status", key: "status" }, { href: "/security", key: "security" }] },
   { key: "community", links: [{ href: "/community", key: "community" }, { href: "https://github.com/LingmoOS", key: "github" }, { href: "https://discord.gg/lingmo", key: "discord" }] },
   { key: "legal", links: [{ href: "/privacy", key: "privacy" }, { href: "/license", key: "license" }] },
 ];

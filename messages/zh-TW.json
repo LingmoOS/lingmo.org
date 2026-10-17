@@ -198,6 +198,30 @@
     "pageTitle": "授權條款",
     "pageDescription": "Lingmo OS 在 GNU 通用公共授權條款 v3.0 下發佈。"
   },
+  "security": {
+    "pageTitle": "安全公告",
+    "pageDescription": "Lingmo OS 已公開處理的安全漏洞列表，以及回報漏洞的方式。",
+    "listTitle": "公告列表",
+    "listDescription": "這裡只列出已修復並公開的漏洞。",
+    "colId": "編號",
+    "colAffected": "影響範圍",
+    "colSeverity": "嚴重度",
+    "colDate": "日期",
+    "colLink": "連結",
+    "empty": "暫無公告",
+    "tbd": "待公布",
+    "viewLink": "檢視公告",
+    "noLink": "—",
+    "severityCritical": "嚴重",
+    "severityHigh": "高",
+    "severityMedium": "中",
+    "severityLow": "低",
+    "reportTitle": "如何回報漏洞",
+    "reportText": "發現安全問題後，請透過 GitHub 的私有漏洞回報提交。回報會先由維護者確認，確認過程中請勿公開細節。",
+    "reportHint": "回報時請寫明受影響的版本、重現步驟和影響範圍；如果已有修正建議，也可以一併附上。",
+    "noPublicDisclosure": "請勿在公開 issue 中披露未修復的漏洞。",
+    "reportLink": "提交私有漏洞回報"
+  },
   "footer": {
     "description": "一個為每個人打造的現代、優雅、開源作業系統。",
     "lingmo": "靈墨",
@@ -222,6 +246,7 @@
     "poweredBy": "開源社群驅動",
     "builtWith": "由 Lingmo 社群傾心打造",
     "status": "狀態",
+    "security": "安全公告",
     "friendLinks": "友情連結"
   },
   "status": {

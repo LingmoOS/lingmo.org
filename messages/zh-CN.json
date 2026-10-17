@@ -198,6 +198,30 @@
     "pageTitle": "许可证",
     "pageDescription": "Lingmo OS 在 GNU 通用公共许可证 v3.0 下发布。"
   },
+  "security": {
+    "pageTitle": "安全公告",
+    "pageDescription": "Lingmo OS 已公开处理的安全漏洞列表，以及报告漏洞的方式。",
+    "listTitle": "公告列表",
+    "listDescription": "这里只列出已修复并公开的漏洞。",
+    "colId": "编号",
+    "colAffected": "影响范围",
+    "colSeverity": "严重度",
+    "colDate": "日期",
+    "colLink": "链接",
+    "empty": "暂无公告",
+    "tbd": "待公布",
+    "viewLink": "查看公告",
+    "noLink": "—",
+    "severityCritical": "严重",
+    "severityHigh": "高",
+    "severityMedium": "中",
+    "severityLow": "低",
+    "reportTitle": "如何报告漏洞",
+    "reportText": "发现安全问题后，请通过 GitHub 的私有漏洞报告提交。报告会先由维护者确认，确认过程中不要公开细节。",
+    "reportHint": "报告时请写明受影响的版本、复现步骤和影响范围；如果已有修复建议，也可以一并附上。",
+    "noPublicDisclosure": "请勿在公开 issue 中披露未修复的漏洞。",
+    "reportLink": "提交私有漏洞报告"
+  },
   "footer": {
     "description": "一个为每个人打造的现代、优雅、开源操作系统。",
     "lingmo": "灵墨",
@@ -222,6 +246,7 @@
     "poweredBy": "开源社区驱动",
     "builtWith": "由 Lingmo 社区倾心打造",
     "status": "状态",
+    "security": "安全公告",
     "friendLinks": "友情链接"
   },
   "status": {

@@ -198,6 +198,30 @@
     "pageTitle": "ライセンス",
     "pageDescription": "Lingmo OS は GNU General Public License v3.0 の下で公開されています。"
   },
+  "security": {
+    "pageTitle": "セキュリティアドバイザリ",
+    "pageDescription": "Lingmo OS の公開済みセキュリティアドバイザリと、脆弱性の報告方法。",
+    "listTitle": "アドバイザリ一覧",
+    "listDescription": "修正済みで公開された脆弱性のみを掲載しています。",
+    "colId": "ID",
+    "colAffected": "影響範囲",
+    "colSeverity": "深刻度",
+    "colDate": "日付",
+    "colLink": "リンク",
+    "empty": "アドバイザリはまだありません。",
+    "tbd": "未定",
+    "viewLink": "アドバイザリを見る",
+    "noLink": "—",
+    "severityCritical": "重大",
+    "severityHigh": "高",
+    "severityMedium": "中",
+    "severityLow": "低",
+    "reportTitle": "脆弱性の報告方法",
+    "reportText": "セキュリティ上の問題を見つけた場合は、GitHub のプライベート脆弱性報告から提出してください。報告はまずメンテナが確認するため、その間は詳細を公開しないでください。",
+    "reportHint": "影響を受けるバージョン、再現手順、影響範囲を記載してください。修正案があれば併せて添えてください。",
+    "noPublicDisclosure": "未修正の脆弱性を公開 issue で開示しないでください。",
+    "reportLink": "プライベート脆弱性報告を開く"
+  },
   "footer": {
     "description": "すべての人のために作られた、モダンでエレガントなオープンソースオペレーティングシステム。",
     "lingmo": "Lingmo",
@@ -222,6 +246,7 @@
     "poweredBy": "オープンソースコミュニティによって支えられています",
     "builtWith": "Lingmo コミュニティの情熱によって構築されました",
     "status": "ステータス",
+    "security": "セキュリティ",
     "friendLinks": "フレンドリンク"
   },
   "status": {

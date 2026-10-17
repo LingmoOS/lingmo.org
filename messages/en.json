@@ -198,6 +198,30 @@
     "pageTitle": "License",
     "pageDescription": "Lingmo OS is released under the GNU General Public License v3.0."
   },
+  "security": {
+    "pageTitle": "Security Advisories",
+    "pageDescription": "Published security advisories for Lingmo OS, and how to report a vulnerability.",
+    "listTitle": "Advisories",
+    "listDescription": "Only vulnerabilities that have been fixed and published are listed here.",
+    "colId": "ID",
+    "colAffected": "Affected",
+    "colSeverity": "Severity",
+    "colDate": "Date",
+    "colLink": "Link",
+    "empty": "No advisories yet.",
+    "tbd": "TBD",
+    "viewLink": "View advisory",
+    "noLink": "—",
+    "severityCritical": "Critical",
+    "severityHigh": "High",
+    "severityMedium": "Medium",
+    "severityLow": "Low",
+    "reportTitle": "How to report a vulnerability",
+    "reportText": "If you find a security issue, submit it through GitHub private vulnerability reporting. Maintainers will confirm the report first, so please keep the details private during that time.",
+    "reportHint": "Include the affected version, reproduction steps, and scope of impact. Add a suggested fix if you have one.",
+    "noPublicDisclosure": "Do not disclose unfixed vulnerabilities in public issues.",
+    "reportLink": "Open a private vulnerability report"
+  },
   "footer": {
     "description": "A modern, elegant, and open-source operating system built for everyone.",
     "lingmo": "Lingmo",
@@ -222,6 +246,7 @@
     "poweredBy": "Powered by the open-source community",
     "builtWith": "Built with passion by the Lingmo community",
     "status": "Status",
+    "security": "Security",
     "friendLinks": "Friendship Links"
   },
   "status": {
