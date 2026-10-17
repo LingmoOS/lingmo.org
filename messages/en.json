@@ -284,6 +284,35 @@
     "backToDownload": "Back to the download page",
     "officialReleases": "lingmo-builder releases"
   },
+  "contribute": {
+    "pageTitle": "Contribute",
+    "pageDescription": "Report issues, send code, translate, test images, or improve documentation.",
+    "waysTitle": "Ways to contribute",
+    "wayIssueTitle": "Report a problem",
+    "wayIssueDesc": "Open an issue in the relevant repository with the version, steps to reproduce, and expected result.",
+    "wayPrTitle": "Send code",
+    "wayPrDesc": "Fork the repository you care about and open a pull request. For larger changes, start an issue first.",
+    "wayTranslationTitle": "Translate",
+    "wayTranslationDesc": "The website strings live in the four locale files under messages/; application translations live in each application repository.",
+    "wayTestingTitle": "Test images",
+    "wayTestingDesc": "Download the latest image, try it in a virtual machine or a spare device, and report problems in the relevant repository.",
+    "wayDocsTitle": "Write documentation",
+    "wayDocsDesc": "Improve installation, usage, and development docs on the website or in the README of each repository.",
+    "reposTitle": "Key repositories",
+    "reposDescription": "Send issues and changes to the matching repository.",
+    "repoBuilderDesc": "ISO build workflow and release artifacts",
+    "repoLiveBuildDesc": "Live image build scripts",
+    "repoLiveBootDesc": "Live boot components",
+    "repoInstallerDesc": "Installer configuration",
+    "repoSiteDesc": "Website source, this repository",
+    "githubOrg": "See the LingmoOS organization on GitHub",
+    "localDevTitle": "Run the website locally",
+    "localDevText": "The website uses Next.js and pnpm. After cloning the repository, install dependencies and start the dev server:",
+    "localDevScripts": "package.json also provides pnpm build, pnpm lint, and pnpm typecheck.",
+    "readDocs": "Read the documentation",
+    "guidelinesTitle": "Before you submit",
+    "guidelinesText": "Each repository states its contribution requirements in its issue and pull request templates; read them first."
+  },
   "footer": {
     "description": "A modern, elegant, and open-source operating system built for everyone.",
     "lingmo": "Lingmo",
@@ -310,7 +339,8 @@
     "status": "Status",
     "security": "Security",
     "lifecycle": "Lifecycle",
-    "friendLinks": "Friendship Links"
+    "friendLinks": "Friendship Links",
+    "contribute": "Contribute"
   },
   "status": {
     "pageTitle": "Build Status",

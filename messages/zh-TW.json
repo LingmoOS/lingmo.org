@@ -284,6 +284,35 @@
     "backToDownload": "返回下載頁",
     "officialReleases": "lingmo-builder 發布頁"
   },
+  "contribute": {
+    "pageTitle": "參與貢獻",
+    "pageDescription": "回報問題、提交程式碼、翻譯、測試映像或補充文件，都可以參與 Lingmo OS。",
+    "waysTitle": "貢獻方式",
+    "wayIssueTitle": "回報問題",
+    "wayIssueDesc": "在對應倉庫提交 issue，寫明版本、重現步驟和預期結果。",
+    "wayPrTitle": "提交程式碼",
+    "wayPrDesc": "fork 感興趣的倉庫，改完後提交 pull request；較大的改動建議先開 issue 討論。",
+    "wayTranslationTitle": "翻譯",
+    "wayTranslationDesc": "官網文案在 messages/ 下的四個語言檔案裡，桌面應用的翻譯在各應用倉庫。",
+    "wayTestingTitle": "測試映像",
+    "wayTestingDesc": "下載最新映像，在虛擬機或備用裝置上試用，把問題回報到對應倉庫。",
+    "wayDocsTitle": "寫文件",
+    "wayDocsDesc": "補充安裝、使用與開發文件，官網文件頁和各倉庫的 README 都可以改進。",
+    "reposTitle": "關鍵倉庫",
+    "reposDescription": "問題與改動請提交到對應的倉庫。",
+    "repoBuilderDesc": "ISO 建置流程與發布產物",
+    "repoLiveBuildDesc": "live 映像建置腳本",
+    "repoLiveBootDesc": "live 開機相關元件",
+    "repoInstallerDesc": "安裝器設定",
+    "repoSiteDesc": "官網原始碼，也就是本倉庫",
+    "githubOrg": "在 GitHub 查看 LingmoOS 組織",
+    "localDevTitle": "在本機執行官網",
+    "localDevText": "官網使用 Next.js 與 pnpm。複製倉庫後安裝依賴並啟動開發伺服器：",
+    "localDevScripts": "package.json 裡還有 pnpm build、pnpm lint 和 pnpm typecheck。",
+    "readDocs": "閱讀文件",
+    "guidelinesTitle": "提交之前",
+    "guidelinesText": "各倉庫的貢獻要求寫在對應的 Issue / PR 範本裡，提交前先讀一遍。"
+  },
   "footer": {
     "description": "一個為每個人打造的現代、優雅、開源作業系統。",
     "lingmo": "靈墨",
@@ -310,7 +339,8 @@
     "status": "狀態",
     "security": "安全公告",
     "lifecycle": "生命週期",
-    "friendLinks": "友情連結"
+    "friendLinks": "友情連結",
+    "contribute": "參與貢獻"
   },
   "status": {
     "pageTitle": "建置狀態",

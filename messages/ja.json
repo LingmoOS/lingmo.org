@@ -284,6 +284,35 @@
     "backToDownload": "ダウンロードページに戻る",
     "officialReleases": "lingmo-builder のリリース"
   },
+  "contribute": {
+    "pageTitle": "コントリビュート",
+    "pageDescription": "問題の報告、コードの送信、翻訳、イメージのテスト、ドキュメントの加筆などで参加できます。",
+    "waysTitle": "参加方法",
+    "wayIssueTitle": "問題を報告する",
+    "wayIssueDesc": "該当するリポジトリで issue を作成し、バージョン、再現手順、期待する結果を書いてください。",
+    "wayPrTitle": "コードを送る",
+    "wayPrDesc": "関心のあるリポジトリを fork し、変更後に pull request を送ってください。大きな変更は先に issue で相談してください。",
+    "wayTranslationTitle": "翻訳",
+    "wayTranslationDesc": "ウェブサイトの文言は messages/ にある 4 つの言語ファイル、アプリの翻訳は各アプリのリポジトリにあります。",
+    "wayTestingTitle": "イメージを試す",
+    "wayTestingDesc": "最新のイメージをダウンロードし、仮想マシンや予備の端末で試して、問題を該当リポジトリへ報告してください。",
+    "wayDocsTitle": "ドキュメントを書く",
+    "wayDocsDesc": "インストール、使い方、開発のドキュメントを充実させてください。ウェブサイトのドキュメントページや各リポジトリの README を改善できます。",
+    "reposTitle": "主要なリポジトリ",
+    "reposDescription": "issue と変更は該当するリポジトリへ送ってください。",
+    "repoBuilderDesc": "ISO ビルドの流れとリリース成果物",
+    "repoLiveBuildDesc": "live イメージのビルドスクリプト",
+    "repoLiveBootDesc": "live 起動関連のコンポーネント",
+    "repoInstallerDesc": "インストーラの設定",
+    "repoSiteDesc": "ウェブサイトのソース（このリポジトリ）",
+    "githubOrg": "GitHub で LingmoOS 組織を見る",
+    "localDevTitle": "ウェブサイトをローカルで動かす",
+    "localDevText": "ウェブサイトは Next.js と pnpm を使っています。リポジトリを clone した後、依存関係をインストールして開発サーバーを起動します：",
+    "localDevScripts": "package.json には pnpm build、pnpm lint、pnpm typecheck もあります。",
+    "readDocs": "ドキュメントを読む",
+    "guidelinesTitle": "送る前に",
+    "guidelinesText": "各リポジトリの contributing 要件は issue / pull request テンプレートに書かれています。送る前に目を通してください。"
+  },
   "footer": {
     "description": "すべての人のために作られた、モダンでエレガントなオープンソースオペレーティングシステム。",
     "lingmo": "Lingmo",
@@ -310,7 +339,8 @@
     "status": "ステータス",
     "security": "セキュリティ",
     "lifecycle": "ライフサイクル",
-    "friendLinks": "フレンドリンク"
+    "friendLinks": "フレンドリンク",
+    "contribute": "コントリビュート"
   },
   "status": {
     "pageTitle": "ビルドステータス",

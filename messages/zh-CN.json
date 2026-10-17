@@ -284,6 +284,35 @@
     "backToDownload": "返回下载页",
     "officialReleases": "lingmo-builder 发布页"
   },
+  "contribute": {
+    "pageTitle": "参与贡献",
+    "pageDescription": "报告问题、提交代码、翻译、测试镜像或补充文档，都可以参与 Lingmo OS。",
+    "waysTitle": "贡献方式",
+    "wayIssueTitle": "报告问题",
+    "wayIssueDesc": "在对应仓库提交 issue，写明版本、复现步骤和期望结果。",
+    "wayPrTitle": "提交代码",
+    "wayPrDesc": "fork 感兴趣的仓库，改完后提交 pull request；较大的改动建议先建 issue 讨论。",
+    "wayTranslationTitle": "翻译",
+    "wayTranslationDesc": "官网文案在 messages/ 下的四个语言文件里，桌面应用的翻译在各应用仓库。",
+    "wayTestingTitle": "测试镜像",
+    "wayTestingDesc": "下载最新镜像，在虚拟机或备用设备上试用，把问题反馈到对应仓库。",
+    "wayDocsTitle": "写文档",
+    "wayDocsDesc": "补充安装、使用与开发文档，官网文档页和各仓库的 README 都可以改进。",
+    "reposTitle": "关键仓库",
+    "reposDescription": "问题与改动请提交到对应的仓库。",
+    "repoBuilderDesc": "ISO 构建流程与发布产物",
+    "repoLiveBuildDesc": "live 镜像构建脚本",
+    "repoLiveBootDesc": "live 启动相关组件",
+    "repoInstallerDesc": "安装器配置",
+    "repoSiteDesc": "官网源码，也就是本仓库",
+    "githubOrg": "在 GitHub 查看 LingmoOS 组织",
+    "localDevTitle": "本地运行官网",
+    "localDevText": "官网使用 Next.js 与 pnpm。克隆仓库后安装依赖并启动开发服务器：",
+    "localDevScripts": "package.json 里还有 pnpm build、pnpm lint 和 pnpm typecheck。",
+    "readDocs": "阅读文档",
+    "guidelinesTitle": "提交之前",
+    "guidelinesText": "各仓库的贡献要求写在对应的 Issue / PR 模板里，提交前先读一遍。"
+  },
   "footer": {
     "description": "一个为每个人打造的现代、优雅、开源操作系统。",
     "lingmo": "灵墨",
@@ -310,7 +339,8 @@
     "status": "状态",
     "security": "安全公告",
     "lifecycle": "生命周期",
-    "friendLinks": "友情链接"
+    "friendLinks": "友情链接",
+    "contribute": "参与贡献"
   },
   "status": {
     "pageTitle": "构建状态",
