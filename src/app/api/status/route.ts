@@ -73,6 +73,11 @@ const OBS_API = "https://api.opensuse.org";
 const OBS_PROJECT = "home:LingmoOS";
 
 /** 让路由始终在请求时执行，避免被静态化后在构建期就去打上游接口 */
+// 站点当前部署在 Cloudflare Pages + @cloudflare/next-on-pages，该适配器要求
+// 路由处理器声明 edge runtime，否则运行时直接 500。
+// 若将来迁移到 @opennextjs/cloudflare（Workers），需删除下面这一行。
+export const runtime = "edge";
+
 export const dynamic = "force-dynamic";
 
 /** 带错误标识的上游失败，便于逐段返回 { ok: false, error } */
