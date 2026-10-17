@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lingmo.org";
-  const pages = ["", "about", "download", "documentation", "releases", "blog", "community", "gallery", "donate", "sponsors", "faq", "privacy", "license", "search", "status", "security", "lifecycle"];
+  const pages = ["", "about", "download", "documentation", "releases", "blog", "community", "gallery", "donate", "sponsors", "faq", "privacy", "license", "search", "status", "security", "lifecycle", "download/bootable-usb"];
 
   /**
    * 语言前缀必须与 `routing.locales` 完全一致（`zh-CN` / `zh-TW` 大小写敏感）。

@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DownloadDialog } from "@/components/download/DownloadDialog";
+import { Link } from "@/i18n/navigation";
 import type { DownloadConfig } from "@/types";
 
 const systemRequirements = [
@@ -126,6 +127,21 @@ export default function DownloadPage() {
               </Button>
             </Card>
           ))}
+        </div>
+      </Section>
+
+      {/* 启动盘制作指引：从下载页进入 /download/bootable-usb */}
+      <Section className="bg-black/[0.02] dark:bg-white/[0.02]">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-bold">{t("bootableUsbTitle")}</h2>
+          <p className="mt-3 text-sm text-muted dark:text-muted-dark">
+            {t("bootableUsbDescription")}
+          </p>
+          <div className="mt-6 flex justify-center">
+            <Link href="/download/bootable-usb">
+              <Button variant="glass">{t("bootableUsbCta")}</Button>
+            </Link>
+          </div>
         </div>
       </Section>
 
