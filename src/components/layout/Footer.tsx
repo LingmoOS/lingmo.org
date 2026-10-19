@@ -71,6 +71,16 @@ export function Footer() {
           <p>{t("copyright")}</p>
           <p className="mt-1">{t("poweredBy")} Next.js</p>
           <p>{t("builtWith")} React</p>
+          <p className="mt-2">
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground dark:hover:text-foreground-dark transition-colors"
+            >
+              陇ICP备2024012028号
+            </a>
+          </p>
         </div>
       </div>
     </footer>

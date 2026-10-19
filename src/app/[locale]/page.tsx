@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Github, MessageCircle, Globe, Code2 } from "lucide-react";
@@ -35,6 +36,20 @@ const stats = [
 export default function HomePage() {
   const t = useTranslations();
   const { ref: statsRef, inView: statsInView } = useInView();
+  const [dlVersions, setDlVersions] = useState<Record<string, { version: string; date: string }>>({});
+
+  useEffect(() => {
+    fetch("/content/downloads.json")
+      .then((r) => r.json())
+      .then((data: any) => {
+        const map: Record<string, { version: string; date: string }> = {};
+        for (const v of data.versions ?? []) {
+          map[v.type as string] = { version: v.version, date: v.releaseDate ?? "" };
+        }
+        setDlVersions(map);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <>
@@ -155,8 +170,8 @@ export default function HomePage() {
             >
               <Card className="text-center">
                 <h3 className="text-xl font-bold">{t(`download.${type}`)}</h3>
-                <p className="mt-2 text-3xl font-bold text-primary">1.0.0</p>
-                <p className="mt-1 text-sm text-muted dark:text-muted-dark">{t("download.releaseDate")}: 2026-06-15</p>
+                <p className="mt-2 text-3xl font-bold text-primary">{dlVersions[type]?.version ?? "—"}</p>
+                <p className="mt-1 text-sm text-muted dark:text-muted-dark">{t("download.releaseDate")}: {dlVersions[type]?.date ?? "—"}</p>
                 <div className="mt-6 space-y-2">
                   <Link href={`/download`}>
                     <Button variant="primary" className="w-full">
@@ -205,7 +220,7 @@ export default function HomePage() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
               <Card hover={true} className="overflow-hidden p-0">
-                <NewsCoverSvg />
+                <NewsCoverSvg variant={i} />
                 <div className="p-5">
                   <p className="text-xs text-muted dark:text-muted-dark">June {15 + i}, 2026</p>
                   <h3 className="mt-2 font-semibold">Lingmo OS Update {i}</h3>
