@@ -35,7 +35,7 @@ export function NewsCoverSvg({ title = "Lingmo OS", variant = 1 }: NewsCoverSvgP
     },
   ];
 
-  const theme = themes[(variant - 1) % themes.length] ?? themes[0];
+  const theme = (themes[(variant - 1) % themes.length] ?? themes[0])!;
   const fg = "#FFFFFF";
   const muted = "rgba(255,255,255,0.65)";
   const cardBg = isDark ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.18)";
