@@ -1,4 +1,16 @@
 [
-  { "version": "1.0.0", "date": "2026-06-15", "title": "Lingmo OS 1.0 — Inception", "content": "We are proud to announce the first stable release of Lingmo OS. Built on Debian 13 with a custom desktop environment, Lingmo OS brings a fresh, modern experience to Linux users worldwide.\n\n## Key Features\n- **Lingmo Desktop Environment**: A modern, intuitive desktop built with GTK4 and tailored for productivity.\n- **Wayland by Default**: Experience smooth, secure graphics with Wayland as the default display server.\n- **Performance Optimizations**: Boot times under 5 seconds on modern hardware, with minimal memory usage.\n- **Enhanced Security**: Full disk encryption, secure boot support, and regular security updates.\n- **Software Center**: Curated app store with thousands of free and open-source applications.", "type": "stable" },
-  { "version": "1.1.0-beta", "date": "2026-07-01", "title": "Lingmo OS 1.1 Beta — Refinement", "content": "The beta release of Lingmo OS 1.1 is now available for testing. This release focuses on refinement and new features.\n\n## What's New\n- Redesigned Settings panel with improved navigation\n- Updated kernel to version 6.9\n- New default wallpaper collection\n- Performance improvements across the desktop\n- Bug fixes and stability enhancements", "type": "beta" }
+  {
+    "version": "26a17",
+    "date": "2026-11-03",
+    "title": "Lingmo OS 5.0 26a17 (Lithium)",
+    "content": "## What's New\n- New Software Update page in Settings with real-time download and install progress\n- Improved system service architecture with UpdateManager\n- Performance improvements across the desktop\n\n## Bug Fixes\n- Fixed sidebar category grouping in Settings\n- Fixed display manager startup sequence\n- Fixed font config update on language change\n\n## Known Issues\n- This is an Alpha release; some features may be unstable",
+    "type": "stable"
+  },
+  {
+    "version": "26a16",
+    "date": "2026-10-29",
+    "title": "Lingmo OS 5.0 26a16 (Lithium)",
+    "content": "## What's New\n- Redesigned Settings sidebar with grouped category panels\n- About page system details dialog\n- GTK application palette matching Lingmo theme\n\n## Bug Fixes\n- Fixed sidebar translucent cards regression\n- Fixed wayland-sessions desktop entry\n- Fixed Chinese translation fallback",
+    "type": "stable"
+  }
 ]
