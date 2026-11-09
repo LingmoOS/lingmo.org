@@ -41,7 +41,9 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
     setSelectedArch(finalArch);
     const defaultEdition = config.editions.find((e) => e.available)?.id || "";
     setSelectedEdition(defaultEdition);
-    setSource("official");
+    const version = config.versions.find((v) => v.edition === defaultEdition) || config.versions[0];
+    const archInfo = version?.architectures[finalArch];
+    setSource(archInfo?.iso ? "official" : archInfo?.sourceforge ? "sourceforge" : "official");
     setStep(1);
     setDownloading(false);
   }, [open, config]);
@@ -185,11 +187,13 @@ export function DownloadDialog({ open, onOpenChange, config }: DownloadDialogPro
                     <div className="grid grid-cols-2 gap-3">
                       <button
                         onClick={() => setSource("official")}
+                        disabled={!archInfo?.iso}
                         className={cn(
                           "rounded-xl border p-4 text-left transition-all duration-150",
-                          source === "official"
+                          source === "official" && archInfo?.iso
                             ? "border-primary bg-primary/5 dark:bg-primary/10"
-                            : "border-border dark:border-border-dark hover:border-primary/40"
+                            : "border-border dark:border-border-dark hover:border-primary/40",
+                          !archInfo?.iso && "opacity-40 cursor-not-allowed"
                         )}
                       >
                         <p className="font-medium">{t("officialSource")}</p>

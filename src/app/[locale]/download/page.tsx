@@ -73,7 +73,7 @@ export default function DownloadPage() {
                   );
                 })()}
                 <div className="mt-6 space-y-3 flex-1 flex flex-col justify-end">
-                  {type === "stable" && (
+                  {v && (
                     <Button
                       variant="primary"
                       className="w-full"

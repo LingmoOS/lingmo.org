@@ -1,5 +1,5 @@
 {
-  "latest": "3.0.5",
+  "latest": "5.0.0",
   "editions": [
     { "id": "standard", "name": "Standard", "recommended": true, "available": true },
     { "id": "full", "name": "Full", "recommended": false, "available": false },
@@ -12,23 +12,23 @@
   ],
   "versions": [
     {
-      "version": "3.0.5",
-      "type": "stable",
-      "releaseDate": "2025-11-02",
+      "version": "5.0.0",
+      "type": "nightly",
+      "releaseDate": "2026-11-10",
       "edition": "standard",
       "architectures": {
         "x86_64": {
           "available": true,
-          "size": "3.4 GB",
-          "iso": "https://packages.lingmo.org/d/lh/release/25R06/images/lingmo-os-3.0.5-25R06-desktop-amd64.iso",
-          "sha256": "https://sourceforge.net/projects/lingmo-os/files/release/iso/helium/3.0.5/sha256sum.txt/download",
+          "size": "3.1 GB",
+          "iso": "",
+          "sha256": "25752b169383d4eef501b062b1bd8ccc776db40a8e29c6d3eb996d19b76654b9",
           "torrent": "",
-          "sourceforge": "https://sourceforge.net/projects/lingmo-os/files/release/iso/helium/3.0.5/lingmo-os-3.0.5-25R06-desktop-amd64.iso/download"
+          "sourceforge": "https://sourceforge.net/projects/lingmo-os/files/release/iso/lithium/26b04/lingmoOS-5.0-unstable-26b04-desktop-amd64.iso/download"
         },
         "arm64": { "available": false },
         "loongarch": { "available": false }
       },
-      "releaseNotes": "/releases/3.0.5",
+      "releaseNotes": "",
       "installationGuide": "/docs/install",
       "systemRequirements": "/docs/system-requirements",
       "mirrors": "/downloads/mirrors",
@@ -36,13 +36,11 @@
     }
   ],
   "historicalVersions": [
-    { "version": "2.0.24", "date": "2026-05-15", "type": "stable" },
-    { "version": "2.0.23", "date": "2026-04-01", "type": "stable" },
-    { "version": "2.0.22", "date": "2026-02-15", "type": "stable" }
+    { "version": "3.0.5", "date": "2025-11-02", "type": "stable" }
   ],
   "quickLinks": {
-    "sha256": "https://sourceforge.net/projects/lingmo-os/files/release/iso/helium/3.0.5/sha256sum.txt/download",
-    "releaseNotes": "/releases/3.0.5",
+    "sha256": "",
+    "releaseNotes": "",
     "installationGuide": "/docs/install",
     "systemRequirements": "/docs/system-requirements",
     "mirrors": "/downloads/mirrors",
