@@ -46,7 +46,9 @@ export default function DownloadPage() {
       {/* All Release Types */}
       <Section>
         <div className="grid gap-8 md:grid-cols-3">
-          {downloadTypes.map((type, i) => (
+          {downloadTypes.map((type, i) => {
+            const v = versionByType(type);
+            return (
             <motion.div
               key={type}
               initial={{ opacity: 0, y: 20 }}
@@ -60,18 +62,14 @@ export default function DownloadPage() {
                   </span>
                 )}
                 <h3 className="text-2xl font-bold">{t(type)}</h3>
-                {(() => {
-                  const v = versionByType(type);
-                  if (!v) return null;
-                  return (
+                {v && (
                     <>
                       <p className="mt-2 text-4xl font-bold text-primary">{v.version}</p>
                       <p className="mt-1 text-sm text-muted dark:text-muted-dark">
                         {t("releaseDate")}: {v.releaseDate}
                       </p>
                     </>
-                  );
-                })()}
+                )}
                 <div className="mt-6 space-y-3 flex-1 flex flex-col justify-end">
                   {v && (
                     <Button
@@ -83,7 +81,7 @@ export default function DownloadPage() {
                       {t("downloadButton")}
                     </Button>
                   )}
-                  {type !== "stable" && (
+                  {!v && (
                     <Button variant="outline" className="w-full" disabled>
                       {t("comingSoon")}
                     </Button>
@@ -91,7 +89,8 @@ export default function DownloadPage() {
                 </div>
               </Card>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </Section>
 
