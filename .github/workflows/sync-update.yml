@@ -18,8 +18,8 @@ on:
       build_version:
         description: 'Build version, e.g. 26a17 or 26R01'
         required: true
-      build_code:
-        description: 'Numeric build code, e.g. 2026110301'
+      build_time:
+        description: 'BUILD_TIME from os-release, e.g. 26118183'
         required: true
       release_date:
         description: 'Release date (YYYY-MM-DD); empty uses today'
@@ -98,7 +98,7 @@ jobs:
           INPUT_CHANNEL: ${{ inputs.channel }}
           INPUT_VERSION: ${{ inputs.version }}
           INPUT_BUILD_VERSION: ${{ inputs.build_version }}
-          INPUT_BUILD_CODE: ${{ inputs.build_code }}
+          INPUT_BUILD_TIME: ${{ inputs.build_time }}
           INPUT_RELEASE_DATE: ${{ inputs.release_date }}
           INPUT_CODENAME: ${{ inputs.codename }}
           INPUT_TITLE: ${{ inputs.title }}
@@ -119,7 +119,7 @@ jobs:
             --channel "$INPUT_CHANNEL"
             --version "$INPUT_VERSION"
             --build-version "$INPUT_BUILD_VERSION"
-            --build-code "$INPUT_BUILD_CODE"
+            --build-time "$INPUT_BUILD_TIME"
             --notes-locale "$INPUT_NOTES_LOCALE"
             --architectures "$INPUT_ARCHITECTURES"
             --mirror-base "$INPUT_MIRROR_BASE"

@@ -91,7 +91,7 @@ def parse_args(argv):
     parser.add_argument("--channel", required=True, choices=CHANNELS)
     parser.add_argument("--version", required=True, help="release version, e.g. 5.0")
     parser.add_argument("--build-version", required=True, help="build version, e.g. 26a17")
-    parser.add_argument("--build-code", required=True, help="numeric build code, e.g. 2026110301")
+    parser.add_argument("--build-time", required=True, help="BUILD_TIME from os-release, e.g. 26118183")
     parser.add_argument("--release-date", default="", help="YYYY-MM-DD; empty uses today")
     parser.add_argument("--codename", default="")
     parser.add_argument("--title", default="")
@@ -118,8 +118,8 @@ def validate(args):
         fail("invalid build version")
     if not BUILD_VERSION_RE.fullmatch(args.version):
         fail("invalid release version")
-    if not args.build_code.isdigit():
-        fail("build code must be numeric")
+    if not args.build_time.isdigit():
+        fail("BUILD_TIME must be numeric")
     if args.release_date and not DATE_RE.fullmatch(args.release_date):
         fail("release date must be YYYY-MM-DD")
     if not args.architectures.strip():
@@ -202,7 +202,7 @@ def main(argv=None):
 
     updates["channels"][args.channel] = {
         "version": args.build_version,
-        "build": int(args.build_code),
+        "build": int(args.build_time),
         "mandatory": args.mandatory,
         "releaseNotes": notes_url,
         "architectures": {
@@ -215,7 +215,7 @@ def main(argv=None):
         "latest": {
             "version": args.version,
             "buildVersion": args.build_version,
-            "buildCode": int(args.build_code),
+            "buildCode": int(args.build_time),
             "releaseDate": release_date,
             "security": args.security,
             "critical": args.critical,
@@ -245,7 +245,7 @@ def main(argv=None):
     if not args.dry_run:
         print(
             f"updated {args.channel}: {args.version} / {args.build_version} / "
-            f"{args.build_code} ({release_date})"
+            f"{args.build_time} ({release_date})"
         )
 
 

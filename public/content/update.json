@@ -4,7 +4,7 @@
       "latest": {
         "version": "5.0",
         "buildVersion": "26a17",
-        "buildCode": 2026110301,
+        "buildCode": 26113173,
         "releaseDate": "2026-11-03",
         "security": false,
         "critical": false,
@@ -34,7 +34,7 @@
       "latest": {
         "version": "5.0",
         "buildVersion": "26b01",
-        "buildCode": 2026110302,
+        "buildCode": 2611562,
         "releaseDate": "2026-11-03",
         "security": false,
         "critical": false,
@@ -60,7 +60,7 @@
       "latest": {
         "version": "5.0",
         "buildVersion": "26a18",
-        "buildCode": 2026110303,
+        "buildCode": 2611482,
         "releaseDate": "2026-11-03",
         "security": false,
         "critical": false,

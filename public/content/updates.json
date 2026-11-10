@@ -2,7 +2,7 @@
   "channels": {
     "stable": {
       "version": "26a17",
-      "build": 2026110301,
+      "build": 26113173,
       "mandatory": false,
       "releaseNotes": "/releases/26a17",
       "architectures": {
@@ -22,7 +22,7 @@
     },
     "beta": {
       "version": "26b01",
-      "build": 2026110302,
+      "build": 2611562,
       "mandatory": false,
       "releaseNotes": "/releases/26b01",
       "architectures": {
@@ -38,7 +38,7 @@
     },
     "nightly": {
       "version": "26a18",
-      "build": 2026110303,
+      "build": 2611482,
       "mandatory": false,
       "releaseNotes": "/releases/nightly",
       "architectures": {
