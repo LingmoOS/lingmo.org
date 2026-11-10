@@ -2,65 +2,65 @@
   "channels": {
     "stable": {
       "latest": {
-        "version": "2.0.26",
-        "buildVersion": "26R01",
-        "buildCode": 2026070101,
-        "releaseDate": "2026-07-01",
+        "version": "5.0",
+        "buildVersion": "26a17",
+        "buildCode": 2026110301,
+        "releaseDate": "2026-11-03",
         "security": false,
         "critical": false,
         "mandatory": false,
-        "releaseNotesUrl": "/releases/26R01",
-        "summary": "<h2>Lingmo OS 2.0.26</h2><p><strong>Release Date:</strong> July 1, 2026</p><h3>What's New</h3><ul><li>New Settings Panel with redesigned layout</li><li>Performance improvements for older hardware</li><li>Updated kernel to Linux 6.10</li></ul><h3>Bug Fixes</h3><ul><li>Fixed file manager crash when opening large directories</li><li>Fixed network settings not applying after reboot</li><li>Fixed display scaling issues on HiDPI monitors</li></ul><h3>Known Issues</h3><ul><li>ARM64 build not yet available</li></ul>",
+        "releaseNotesUrl": "/releases/26a17",
+        "summary": "<h2>What's New</h2>\n<ul><li>New Software Update page in Settings with real-time download and install progress</li>\n<li>Improved system service architecture with UpdateManager</li>\n<li>Performance improvements across the desktop</li></ul>\n<h2>Bug Fixes</h2>\n<ul><li>Fixed sidebar category grouping in Settings</li>\n<li>Fixed display manager startup sequence</li>\n<li>Fixed font config update on language change</li></ul>\n<h2>Known Issues</h2>\n<ul><li>This is an Alpha release; some features may be unstable</li></ul>",
         "download": {
           "x86_64": {
-            "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso",
-            "checksum": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-amd64.iso.sha256"
+            "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-amd64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-amd64.iso.sha256"
           },
           "arm64": {
-            "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-arm64.iso",
-            "checksum": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-arm64.iso.sha256"
+            "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-arm64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-arm64.iso.sha256"
           },
           "loongarch": {
-            "iso": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-loongarch.iso",
-            "checksum": "https://mirrors.lingmo.org/releases/2.0.26/lingmo-os-2.0.26-loongarch.iso.sha256"
+            "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-loongarch64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-loongarch64.iso.sha256"
           }
         }
       }
     },
     "beta": {
       "latest": {
-        "version": "2.1.0-beta2",
+        "version": "5.0",
         "buildVersion": "26b01",
-        "buildCode": 2026070102,
-        "releaseDate": "2026-07-01",
+        "buildCode": 2026110302,
+        "releaseDate": "2026-11-03",
         "security": false,
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/26b01",
-        "summary": "<h2>Lingmo OS 2.1.0-beta2</h2><p><strong>Release Date:</strong> July 1, 2026</p><h3>What's New</h3><ul><li>Next-gen desktop environment preview</li><li>Experimental Wayland improvements</li><li>Updated core applications</li></ul>",
+        "summary": "<h2>Lingmo OS 5.0 26b01</h2><p>Beta build for testing upcoming features.</p>",
         "download": {
           "x86_64": {
-            "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso",
-            "checksum": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-amd64.iso.sha256"
+            "iso": "https://mirrors.lingmo.org/releases/26b01/lingmo-os-5.0-26b01-desktop-amd64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/26b01/lingmo-os-5.0-26b01-desktop-amd64.iso.sha256"
           },
           "arm64": {
-            "iso": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-arm64.iso",
-            "checksum": "https://mirrors.lingmo.org/releases/2.1.0-beta2/lingmo-os-2.1.0-beta2-arm64.iso.sha256"
+            "iso": "https://mirrors.lingmo.org/releases/26b01/lingmo-os-5.0-26b01-desktop-arm64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/26b01/lingmo-os-5.0-26b01-desktop-arm64.iso.sha256"
           }
         }
       }
     },
     "nightly": {
       "latest": {
-        "version": "20260701",
-        "buildVersion": "26a20",
-        "buildCode": 2026070103,
-        "releaseDate": "2026-07-01",
+        "version": "5.0",
+        "buildVersion": "26a18",
+        "buildCode": 2026110303,
+        "releaseDate": "2026-11-03",
         "security": false,
         "critical": false,
         "mandatory": false,
-        "releaseNotesUrl": "/releases/26a20",
-        "summary": "<h2>Lingmo OS Nightly (20260701)</h2><p><strong>Build:</strong> 26a20</p><ul><li>Latest development snapshot</li><li>Includes experimental features</li><li>May contain unstable changes</li></ul>",
+        "releaseNotesUrl": "/releases/nightly",
+        "summary": "<h2>Lingmo OS 5.0 26a18</h2><p>Nightly development snapshot.</p>",
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso",
