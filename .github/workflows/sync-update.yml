@@ -1,0 +1,154 @@
+name: Sync update metadata
+
+# Manual release metadata update: version, build version, build code, ISO
+# locations and release notes. The script updates public/content/update.json,
+# updates.json and releases.json together and pushes the result.
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Release channel
+        type: choice
+        options: [stable, beta, nightly]
+        default: stable
+        required: true
+      version:
+        description: 'Release version, e.g. 5.0'
+        required: true
+      build_version:
+        description: 'Build version, e.g. 26a17 or 26R01'
+        required: true
+      build_code:
+        description: 'Numeric build code, e.g. 2026110301'
+        required: true
+      release_date:
+        description: 'Release date (YYYY-MM-DD); empty uses today'
+        required: false
+      codename:
+        description: 'Codename, e.g. Lithium'
+        required: false
+      title:
+        description: 'Release title; empty is derived from version and build'
+        required: false
+      release_notes_url:
+        description: 'Release notes path; empty is /releases/<build_version>'
+        required: false
+      summary:
+        description: 'HTML summary for update.json; empty uses the release Markdown or existing text'
+        required: false
+      changelog:
+        description: 'Markdown for releases.json; empty uses public/content/releases/<build>/<locale>.md'
+        required: false
+      notes_locale:
+        description: Markdown release notes locale
+        default: en
+        required: false
+      architectures:
+        description: 'Comma-separated architectures: x86_64,arm64,loongarch'
+        default: x86_64,arm64
+        required: false
+      mirror_base:
+        description: ISO mirror base
+        default: https://mirrors.lingmo.org/releases
+        required: false
+      iso_pattern:
+        description: 'ISO filename pattern with {version}, {build} and {arch}'
+        default: 'lingmo-os-{version}-{build}-desktop-{arch}.iso'
+        required: false
+      mandatory:
+        description: Mark the update as mandatory
+        type: boolean
+        default: false
+        required: false
+      security:
+        description: Mark the update as a security update
+        type: boolean
+        default: false
+        required: false
+      critical:
+        description: Mark the update as critical
+        type: boolean
+        default: false
+        required: false
+      dry_run:
+        description: Print the diff without committing
+        type: boolean
+        default: false
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-update-metadata
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update update metadata
+        env:
+          INPUT_CHANNEL: ${{ inputs.channel }}
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_BUILD_VERSION: ${{ inputs.build_version }}
+          INPUT_BUILD_CODE: ${{ inputs.build_code }}
+          INPUT_RELEASE_DATE: ${{ inputs.release_date }}
+          INPUT_CODENAME: ${{ inputs.codename }}
+          INPUT_TITLE: ${{ inputs.title }}
+          INPUT_RELEASE_NOTES_URL: ${{ inputs.release_notes_url }}
+          INPUT_SUMMARY: ${{ inputs.summary }}
+          INPUT_CHANGELOG: ${{ inputs.changelog }}
+          INPUT_NOTES_LOCALE: ${{ inputs.notes_locale }}
+          INPUT_ARCHITECTURES: ${{ inputs.architectures }}
+          INPUT_MIRROR_BASE: ${{ inputs.mirror_base }}
+          INPUT_ISO_PATTERN: ${{ inputs.iso_pattern }}
+          INPUT_MANDATORY: ${{ inputs.mandatory }}
+          INPUT_SECURITY: ${{ inputs.security }}
+          INPUT_CRITICAL: ${{ inputs.critical }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=(
+            --channel "$INPUT_CHANNEL"
+            --version "$INPUT_VERSION"
+            --build-version "$INPUT_BUILD_VERSION"
+            --build-code "$INPUT_BUILD_CODE"
+            --notes-locale "$INPUT_NOTES_LOCALE"
+            --architectures "$INPUT_ARCHITECTURES"
+            --mirror-base "$INPUT_MIRROR_BASE"
+            --iso-pattern "$INPUT_ISO_PATTERN"
+          )
+          if [ -n "$INPUT_RELEASE_DATE" ]; then args+=(--release-date "$INPUT_RELEASE_DATE"); fi
+          if [ -n "$INPUT_CODENAME" ]; then args+=(--codename "$INPUT_CODENAME"); fi
+          if [ -n "$INPUT_TITLE" ]; then args+=(--title "$INPUT_TITLE"); fi
+          if [ -n "$INPUT_RELEASE_NOTES_URL" ]; then args+=(--release-notes-url "$INPUT_RELEASE_NOTES_URL"); fi
+          if [ -n "$INPUT_SUMMARY" ]; then args+=(--summary "$INPUT_SUMMARY"); fi
+          if [ -n "$INPUT_CHANGELOG" ]; then args+=(--changelog "$INPUT_CHANGELOG"); fi
+          if [ "$INPUT_MANDATORY" = "true" ]; then args+=(--mandatory); fi
+          if [ "$INPUT_SECURITY" = "true" ]; then args+=(--security); fi
+          if [ "$INPUT_CRITICAL" = "true" ]; then args+=(--critical); fi
+          if [ "$INPUT_DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          python3 scripts/sync_update.py "${args[@]}"
+
+      - name: Commit and push
+        if: ${{ !inputs.dry_run }}
+        env:
+          BUILD_VERSION: ${{ inputs.build_version }}
+        run: |
+          set -euo pipefail
+          git config user.name "lingmo-bot"
+          git config user.email "team@lingmo.org"
+          git add public/content/update.json public/content/updates.json public/content/releases.json
+          if git diff --cached --quiet; then
+            echo "No content changes"
+            exit 0
+          fi
+          git commit -m "content: sync update metadata for ${BUILD_VERSION}"
+          git push
