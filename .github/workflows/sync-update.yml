@@ -34,7 +34,7 @@ on:
         description: 'Release notes path; empty is /releases/<build_version>'
         required: false
       summary:
-        description: 'HTML summary for update.json; empty uses the release Markdown or existing text'
+        description: 'HTML summary for update.json at notes_locale; empty uses the release Markdown or existing text'
         required: false
       changelog:
         description: 'Markdown for releases.json; empty uses public/content/releases/<build>/<locale>.md'

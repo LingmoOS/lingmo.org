@@ -4,6 +4,7 @@ import { isUpdateAvailable, parseBuildVersion } from "@/lib/buildVersion";
 // 当前部署是 Cloudflare Pages + @cloudflare/next-on-pages：该适配器只把声明了
 // Edge Runtime 的路由打进 `_worker.js`，因此这里保留 edge 声明（与迁移前一致）。
 export const runtime = "edge";
+type LocalizedSummary = string | Record<string, string>;
 type UpdateChannel = {
   latest: {
     version: string;
@@ -14,7 +15,7 @@ type UpdateChannel = {
     critical: boolean;
     mandatory: boolean;
     releaseNotesUrl: string;
-    summary: string;
+    summary: LocalizedSummary;
     download: Record<string, { iso: string; checksum: string }>;
   };
 };
@@ -29,6 +30,25 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",
 };
+
+function pickSummary(summary: LocalizedSummary | undefined, locale: string): string {
+  if (!summary) return "";
+  if (typeof summary === "string") return summary;
+
+  const normalized = (locale || "en").replace(/_/g, "-").toLowerCase();
+  const exact = Object.entries(summary).find(
+    ([key]) => key.replace(/_/g, "-").toLowerCase() === normalized,
+  );
+  if (exact) return exact[1];
+
+  const language = normalized.split("-")[0];
+  const languageMatch = Object.entries(summary).find(
+    ([key]) => key.replace(/_/g, "-").toLowerCase().split("-")[0] === language,
+  );
+  if (languageMatch) return languageMatch[1];
+
+  return summary.en ?? Object.values(summary)[0] ?? "";
+}
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -75,7 +95,7 @@ export async function GET(request: NextRequest) {
       critical: latest.critical,
       mandatory: latest.mandatory,
     };
-    response.summary = latest.summary;
+    response.summary = pickSummary(latest.summary, locale);
     response.releaseNotesUrl = latest.releaseNotesUrl;
     response.download = {
       iso: archDownload.iso,

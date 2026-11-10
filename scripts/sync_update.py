@@ -96,7 +96,7 @@ def parse_args(argv):
     parser.add_argument("--codename", default="")
     parser.add_argument("--title", default="")
     parser.add_argument("--release-notes-url", default="")
-    parser.add_argument("--summary", default="", help="HTML summary for update.json")
+    parser.add_argument("--summary", default="", help="HTML summary for update.json at --notes-locale")
     parser.add_argument("--changelog", default="", help="Markdown for releases.json")
     parser.add_argument("--notes-locale", default="en")
     parser.add_argument("--architectures", default="x86_64,arm64")
@@ -159,8 +159,12 @@ def main(argv=None):
         iso = f"{args.mirror_base.rstrip('/')}/{path_segment}/{filename}"
         downloads[arch] = {"iso": iso, "checksum": iso + ".sha256"}
 
-    notes_path = root / "public/content/releases" / args.build_version / f"{args.notes_locale}.md"
-    notes = notes_path.read_text(encoding="utf-8") if notes_path.exists() else ""
+    notes_dir = root / "public/content/releases" / args.build_version
+    notes_by_locale = {}
+    if notes_dir.is_dir():
+        for path in sorted(notes_dir.glob("*.md")):
+            notes_by_locale[path.stem] = path.read_text(encoding="utf-8")
+    notes = notes_by_locale.get(args.notes_locale, "")
 
     updates = load_json(updates_path)
     update = load_json(update_path)
@@ -170,16 +174,22 @@ def main(argv=None):
         (entry for entry in releases if entry.get("version") == args.build_version), None
     )
     previous_latest = update["channels"].get(args.channel, {}).get("latest", {})
+    summary_map = {}
+    if previous_latest.get("buildVersion") == args.build_version:
+        previous_summary = previous_latest.get("summary")
+        if isinstance(previous_summary, dict):
+            summary_map.update({str(k): str(v) for k, v in previous_summary.items() if v})
+        elif isinstance(previous_summary, str) and previous_summary:
+            summary_map["en"] = previous_summary
+    for locale, markdown in notes_by_locale.items():
+        summary_map[locale] = md_to_html(markdown)
     if args.summary:
-        summary = args.summary
-    elif notes:
-        summary = md_to_html(notes)
-    elif existing_release and existing_release.get("content"):
-        summary = md_to_html(existing_release["content"])
-    elif previous_latest.get("buildVersion") == args.build_version:
-        summary = previous_latest.get("summary", "")
-    else:
-        summary = f"<h2>{title}</h2><p>Release date: {release_date}</p>"
+        summary_map[args.notes_locale] = args.summary
+    if not summary_map:
+        if existing_release and existing_release.get("content"):
+            summary_map["en"] = md_to_html(existing_release["content"])
+        else:
+            summary_map["en"] = f"<h2>{title}</h2><p>Release date: {release_date}</p>"
 
     if args.changelog:
         changelog = args.changelog
@@ -211,7 +221,7 @@ def main(argv=None):
             "critical": args.critical,
             "mandatory": args.mandatory,
             "releaseNotesUrl": notes_url,
-            "summary": summary,
+            "summary": summary_map,
             "download": downloads,
         }
     }

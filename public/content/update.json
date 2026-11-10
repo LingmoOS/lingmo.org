@@ -10,7 +10,10 @@
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/26a17",
-        "summary": "<h2>What's New</h2>\n<ul><li>New Software Update page in Settings with real-time download and install progress</li>\n<li>Improved system service architecture with UpdateManager</li>\n<li>Performance improvements across the desktop</li></ul>\n<h2>Bug Fixes</h2>\n<ul><li>Fixed sidebar category grouping in Settings</li>\n<li>Fixed display manager startup sequence</li>\n<li>Fixed font config update on language change</li></ul>\n<h2>Known Issues</h2>\n<ul><li>This is an Alpha release; some features may be unstable</li></ul>",
+        "summary": {
+          "en": "<h2>What's New</h2>\n<ul><li>New Software Update page in Settings with real-time download and install progress</li>\n<li>Improved system service architecture with UpdateManager</li>\n<li>Performance improvements across the desktop</li></ul>\n<h2>Bug Fixes</h2>\n<ul><li>Fixed sidebar category grouping in Settings</li>\n<li>Fixed display manager startup sequence</li>\n<li>Fixed font config update on language change</li></ul>\n<h2>Known Issues</h2>\n<ul><li>This is an Alpha release; some features may be unstable</li></ul>",
+          "zh-CN": "<h2>新增功能</h2>\n<ul><li>设置中新增软件更新页面，支持实时下载和安装进度</li>\n<li>改进系统服务架构，引入 UpdateManager</li>\n<li>桌面整体性能优化</li></ul>\n<h2>问题修复</h2>\n<ul><li>修复设置侧边栏分类分组</li>\n<li>修复显示管理器启动顺序</li>\n<li>修复语言切换时字体配置未更新</li></ul>\n<h2>已知问题</h2>\n<ul><li>这是 Alpha 版本，部分功能可能不稳定</li></ul>"
+        },
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-amd64.iso",
@@ -37,7 +40,10 @@
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/26b01",
-        "summary": "<h2>Lingmo OS 5.0 26b01</h2><p>Beta build for testing upcoming features.</p>",
+        "summary": {
+          "en": "<h2>Lingmo OS 5.0 26b01</h2><p>Beta build for testing upcoming features.</p>",
+          "zh-CN": "<h2>Lingmo OS 5.0 26b01</h2><p>用于测试即将推出的功能的 Beta 版本。</p>"
+        },
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/26b01/lingmo-os-5.0-26b01-desktop-amd64.iso",
@@ -60,7 +66,10 @@
         "critical": false,
         "mandatory": false,
         "releaseNotesUrl": "/releases/nightly",
-        "summary": "<h2>Lingmo OS 5.0 26a18</h2><p>Nightly development snapshot.</p>",
+        "summary": {
+          "en": "<h2>Lingmo OS 5.0 26a18</h2><p>Nightly development snapshot.</p>",
+          "zh-CN": "<h2>Lingmo OS 5.0 26a18</h2><p>每日构建开发快照。</p>"
+        },
         "download": {
           "x86_64": {
             "iso": "https://mirrors.lingmo.org/releases/nightly/lingmo-os-nightly-amd64.iso",
