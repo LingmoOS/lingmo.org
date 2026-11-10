@@ -1,25 +1,5 @@
 {
   "channels": {
-    "stable": {
-      "version": "26a17",
-      "build": 26113173,
-      "mandatory": false,
-      "releaseNotes": "/releases/26a17",
-      "architectures": {
-        "x86_64": {
-          "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-amd64.iso",
-          "sha256": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-amd64.iso.sha256"
-        },
-        "arm64": {
-          "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-arm64.iso",
-          "sha256": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-arm64.iso.sha256"
-        },
-        "loongarch": {
-          "iso": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-loongarch64.iso",
-          "sha256": "https://mirrors.lingmo.org/releases/26a17/lingmo-os-5.0-26a17-desktop-loongarch64.iso.sha256"
-        }
-      }
-    },
     "beta": {
       "version": "26b01",
       "build": 2611562,

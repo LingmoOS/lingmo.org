@@ -4,13 +4,13 @@
     "date": "2026-11-03",
     "title": "Lingmo OS 5.0 26a17 (Lithium)",
     "content": "## What's New\n- New Software Update page in Settings with real-time download and install progress\n- Improved system service architecture with UpdateManager\n- Performance improvements across the desktop\n\n## Bug Fixes\n- Fixed sidebar category grouping in Settings\n- Fixed display manager startup sequence\n- Fixed font config update on language change\n\n## Known Issues\n- This is an Alpha release; some features may be unstable",
-    "type": "stable"
+    "type": "nightly"
   },
   {
     "version": "26a16",
     "date": "2026-10-29",
     "title": "Lingmo OS 5.0 26a16 (Lithium)",
     "content": "## What's New\n- Redesigned Settings sidebar with grouped category panels\n- About page system details dialog\n- GTK application palette matching Lingmo theme\n\n## Bug Fixes\n- Fixed sidebar translucent cards regression\n- Fixed wayland-sessions desktop entry\n- Fixed Chinese translation fallback",
-    "type": "stable"
+    "type": "nightly"
   }
 ]
