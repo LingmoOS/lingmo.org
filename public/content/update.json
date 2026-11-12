@@ -3,20 +3,20 @@
     "beta": {
       "latest": {
         "version": "5.0",
-        "buildVersion": "26b05",
-        "buildCode": 26118183,
-        "releaseDate": "2026-11-10",
+        "buildVersion": "26b07",
+        "buildCode": 261112173,
+        "releaseDate": "2026-11-12",
         "security": false,
         "critical": false,
         "mandatory": true,
-        "releaseNotesUrl": "/releases/26b05",
+        "releaseNotesUrl": "/releases/26b07",
         "summary": {
-          "zh-CN": "<p><strong>功能更新：</strong>新增定时检查更新、高级更新设置及通知中心更新进度显示，支持本地化更新说明和富文本展示；新增通知中心共享小组件、组件外观设置及屏幕键盘快捷键配置。</p> <p><strong>优化：</strong>调整设置页面布局和预览效果，完善主题同步及图标缓存刷新，改进更新版本识别和更新渠道匹配。</p> <p><strong>修复：</strong>修复桌面启动器误打开文本编辑器、隐藏桌面图标后右键菜单不可用、固定应用后 Dock 放大不稳定、启动时主题未正确应用及状态图标未及时刷新等问题；修正构建时间格式。</p>"
+          "en": "<h2>Lingmo OS 5.0 26b07 (Lithium)</h2><p>Release date: 2026-11-12</p>"
         },
         "download": {
           "x86_64": {
-            "iso": "https://mirrors.lingmo.org/releases/26b05/lingmo-os-5.0-26b05-desktop-amd64.iso",
-            "checksum": "https://mirrors.lingmo.org/releases/26b05/lingmo-os-5.0-26b05-desktop-amd64.iso.sha256"
+            "iso": "https://mirrors.lingmo.org/releases/26b07/lingmo-os-5.0-26b07-desktop-amd64.iso",
+            "checksum": "https://mirrors.lingmo.org/releases/26b07/lingmo-os-5.0-26b07-desktop-amd64.iso.sha256"
           }
         }
       }
