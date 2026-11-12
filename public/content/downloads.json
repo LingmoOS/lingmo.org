@@ -16,7 +16,6 @@
       "type": "nightly",
       "releaseDate": "2026-11-12",
       "edition": "standard",
-      "recommended": true,
       "architectures": {
         "x86_64": {
           "available": true,
