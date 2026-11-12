@@ -1,5 +1,5 @@
 {
-  "latest": "5.0(26b07)",
+  "latest": "5.0-26b07",
   "editions": [
     { "id": "standard", "name": "Standard", "recommended": true, "available": true },
     { "id": "full", "name": "Full", "recommended": false, "available": false },
@@ -12,7 +12,7 @@
   ],
   "versions": [
     {
-      "version": "5.0(26b07)",
+      "version": "5.0-26b07",
       "type": "nightly",
       "releaseDate": "2026-11-12",
       "edition": "standard",
@@ -36,7 +36,7 @@
     }
   ],
   "historicalVersions": [
-    { "version": "5.0(26b04)", "date": "2025-11-10", "type": "nightly" }
+    { "version": "5.0-26b04", "date": "2025-11-10", "type": "nightly" },
     { "version": "3.0.5", "date": "2025-11-02", "type": "stable" }
   ],
   "quickLinks": {
