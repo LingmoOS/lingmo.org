@@ -1,14 +1,14 @@
 {
   "channels": {
     "beta": {
-      "version": "26b07",
-      "build": 261112173,
+      "version": "26b08",
+      "build": 2611190228,
       "mandatory": true,
-      "releaseNotes": "/releases/26b07",
+      "releaseNotes": "/releases/26b08",
       "architectures": {
         "x86_64": {
-          "iso": "https://mirrors.lingmo.org/releases/26b07/lingmo-os-5.0-26b07-desktop-amd64.iso",
-          "sha256": "https://mirrors.lingmo.org/releases/26b07/lingmo-os-5.0-26b07-desktop-amd64.iso.sha256"
+          "iso": "https://mirrors.lingmo.org/releases/26b08/lingmo-os-5.0-26b08-desktop-amd64.iso",
+          "sha256": "https://mirrors.lingmo.org/releases/26b08/lingmo-os-5.0-26b08-desktop-amd64.iso.sha256"
         }
       }
     },

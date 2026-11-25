@@ -3,7 +3,7 @@
     "version": "26b08",
     "date": "2026-11-25",
     "title": "Lingmo OS 5.0 26b08 (Lithium)",
-    "content": "## Lingmo OS 5.0 26b08 (Lithium)\n\nStage Manager settings and launcher/file-manager interaction fixes, plus update page improvements.\n",
+    "content": "# Lingmo OS 5.0 26b08 (Lithium)\n\n**Release Date:** November 25, 2026\n\n### New Features\n\n- Added a Recheck action below Update now in Settings when an update is available.\n- Added a Stage Manager switch in Settings. The preference is persisted as `StageManager/Enabled` and applied by the compositor preference watcher.\n\n### Updates\n\n- Updated Aurora to version `1.1.12` and synchronized the Debian package version.\n- The About page now reads the installed Aurora version from the `aurora-version` metadata.\n- Stage Manager is disabled by default when no user preference has been saved; explicit preferences are preserved.\n\n### Optimizations\n\n- Refined Stage Manager cards with full-card thumbnails, overlaid application icons, alternating tilt and recent-use ordering.\n\n### Bug Fixes\n\n- Notification banners no longer dismiss the launcher while appearing as non-interactive overlays.\n- Clicking empty launcher space after renaming a folder commits the rename without closing the launcher.\n- The file manager Properties dialog now sizes itself to its content and centers the page content.\n\n### Scope\n\nThis release note covers the published package changes in the 26b08 batch. The pending Stage Manager implementation and architecture research remain outside the published feature list.\n",
     "type": "beta"
   },
   {
