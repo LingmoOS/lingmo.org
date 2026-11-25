@@ -28,19 +28,39 @@ export default function ReleaseDetailPage() {
   const params = useParams();
 
   const version = params.version as string;
+  const locale = params.locale as string;
   const [release, setRelease] = useState<ReleaseNote | null>(null);
+  const [content, setContent] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+
     fetch("/content/releases.json")
       .then((res) => res.json() as Promise<ReleaseNote[]>)
-      .then((data) => {
+      .then(async (data) => {
         const found = data.find((r) => r.version === version);
+        if (!active) return;
         setRelease(found ?? null);
-        setLoading(false);
+
+        if (found) {
+          const localized = await fetch(
+            `/content/releases/${encodeURIComponent(version)}/${encodeURIComponent(locale)}.md`,
+          );
+          if (active) {
+            setContent(localized.ok ? await localized.text() : found.content);
+          }
+        }
+        if (active) setLoading(false);
       })
-      .catch(() => setLoading(false));
-  }, [version]);
+      .catch(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [locale, version]);
 
   if (loading) {
     return (
@@ -78,7 +98,7 @@ export default function ReleaseDetailPage() {
     );
   }
 
-  const htmlContent = mdToHtml(release.content);
+  const htmlContent = mdToHtml(content ?? release.content);
 
   return (
     <>

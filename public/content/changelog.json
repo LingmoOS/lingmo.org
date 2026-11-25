@@ -1,3 +1,38 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "version": "26b08",
+      "date": "2026-11-25",
+      "highlights": {
+        "en": [
+          "Added a Recheck action to the Settings update page when updates are available.",
+          "Added a persistent Stage Manager switch in Settings; it is disabled by default without a saved preference.",
+          "Improved Stage Manager cards with full thumbnails, app icons, alternating tilt and recent-use ordering.",
+          "Fixed launcher dismissal caused by notification banners and folder-rename background clicks.",
+          "Centered and compacted the file manager Properties dialog; the About page now shows the installed Aurora version."
+        ],
+        "zh-CN": [
+          "更新页面在有可用更新时新增“重新检查”操作。",
+          "设置中新增持久化 Stage Manager 开关；没有已保存偏好时默认关闭。",
+          "优化 Stage Manager 卡片的完整缩略图、应用图标、交替倾斜和最近使用排序。",
+          "修复系统通知和文件夹重命名后的空白点击导致启动台关闭的问题。",
+          "属性窗口改为紧凑并居中显示；关于页面现在显示已安装的 Aurora 版本。"
+        ],
+        "zh-TW": [
+          "更新頁面在有可用更新時新增「重新檢查」操作。",
+          "設定中新增持久化 Stage Manager 開關；沒有已儲存偏好時預設關閉。",
+          "改善 Stage Manager 卡片的完整縮圖、應用程式圖示、交錯傾斜與最近使用排序。",
+          "修復系統通知與資料夾重新命名後的空白點擊導致啟動台關閉的問題。",
+          "屬性視窗改為緊湊並置中顯示；關於頁面現在會顯示已安裝的 Aurora 版本。"
+        ],
+        "ja": [
+          "更新が利用可能な場合、設定の更新ページに「再チェック」操作を追加しました。",
+          "設定に永続的な Stage Manager スイッチを追加し、保存された設定がない場合は既定で無効にしました。",
+          "Stage Manager の完全なサムネイル、アプリアイコン、交互の傾き、最近の使用順を改善しました。",
+          "通知バナーやフォルダー名変更後の空白クリックでランチャーが閉じる問題を修正しました。",
+          "プロパティウィンドウをコンパクトかつ中央揃えにし、About ページにインストール済み Aurora バージョンを表示します。"
+        ]
+      }
+    }
+  ]
 }

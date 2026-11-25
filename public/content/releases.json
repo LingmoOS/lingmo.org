@@ -1,5 +1,12 @@
 [
   {
+    "version": "26b08",
+    "date": "2026-11-25",
+    "title": "Lingmo OS 5.0 26b08 (Lithium)",
+    "content": "## Lingmo OS 5.0 26b08 (Lithium)\n\nStage Manager settings and launcher/file-manager interaction fixes, plus update page improvements.\n",
+    "type": "beta"
+  },
+  {
     "version": "26b07",
     "date": "2026-11-12",
     "title": "Lingmo OS 5.0 26b07 (Lithium)",

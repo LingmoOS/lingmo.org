@@ -14,10 +14,24 @@ import changelogFile from "@/../public/content/changelog.json";
  * 不声明 `generateStaticParams()`：`[locale]/layout.tsx` 已声明 `runtime = "edge"`。
  */
 
+type Locale = "en" | "zh-CN" | "zh-TW" | "ja";
+type LocalizedHighlights = Partial<Record<Locale, string[]>>;
+
 interface ChangelogEntry {
   version: string;
   date: string;
-  highlights?: string[];
+  highlights?: string[] | LocalizedHighlights;
+}
+
+function highlightsForLocale(
+  highlights: ChangelogEntry["highlights"],
+  locale: string,
+): string[] {
+  if (Array.isArray(highlights)) return highlights;
+  if (!highlights) return [];
+
+  const localized = highlights as LocalizedHighlights;
+  return localized[locale as Locale] ?? localized.en ?? [];
 }
 
 const entries = (changelogFile as unknown as { entries: ChangelogEntry[] }).entries;
@@ -74,7 +88,7 @@ export default async function ChangelogPage({
                 </div>
                 <h3 className="mt-4 text-sm font-semibold">{t("highlightsLabel")}</h3>
                 <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted dark:text-muted-dark">
-                  {(entry.highlights ?? []).map((item, index) => (
+                  {highlightsForLocale(entry.highlights, locale).map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
