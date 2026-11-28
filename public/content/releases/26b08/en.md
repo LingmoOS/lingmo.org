@@ -1,28 +1,36 @@
 # Lingmo OS 5.0 26b08 (Lithium)
 
-**Release Date:** November 25, 2026
+**Release Date:** November 28, 2026
 
 ### New Features
 
-- Added a Recheck action below Update now in Settings when an update is available.
-- Added a Stage Manager switch in Settings. The preference is persisted as `StageManager/Enabled` and applied by the compositor preference watcher.
+- Added a "Recheck" action below "Update Now" on the Updates page in Settings when updates are detected.
+- Added a Stage Manager toggle in Settings. Its configuration is saved as `StageManager/Enabled` and applied immediately by the compositor preference listener.
+- Added a "Control Style" selection in Settings.
+- Introduced the "Efficiency Mode" interface.
 
 ### Updates
 
-- Updated Aurora to version `1.1.12` and synchronized the Debian package version.
-- The About page now reads the installed Aurora version from the `aurora-version` metadata.
-- Stage Manager is disabled by default when no user preference has been saved; explicit preferences are preserved.
+- Updated the kernel to 7.3.4.
+- Updated the Photos app.
+- Updated the Clock app.
+- Updated Aurora to `1.2.3` and synchronized the Debian package version.
+- Changed the About page to read the installed `aurora-version` metadata.
+- Stage Manager is now disabled by default when no user preference has been saved. Explicitly saved preferences remain unchanged.
+- Updated Debian to 13.8.
 
-### Optimizations
+### Improvements
 
-- Refined Stage Manager cards with full-card thumbnails, overlaid application icons, alternating tilt and recent-use ordering.
+- Improved Stage Manager cards with full-card thumbnails, overlaid application icons, alternating tilt effects, and sorting by most recently used.
 
 ### Bug Fixes
 
-- Notification banners no longer dismiss the launcher while appearing as non-interactive overlays.
-- Clicking empty launcher space after renaming a folder commits the rename without closing the launcher.
-- The file manager Properties dialog now sizes itself to its content and centers the page content.
+- Fixed an issue where system notifications displayed as non-interactive overlays would close the launcher.
+- Fixed an issue where clicking an empty area of the launcher after renaming a folder would only commit the rename without closing the launcher.
+- Updated the file manager's properties window to resize according to its content and center the page content.
+- Fixed a desktop crash caused by opening the properties window.
+- Fixed an issue that prevented the video player from playing videos correctly.
 
-### Scope
+### Release Scope
 
-This release note covers the published package changes in the 26b08 batch. The pending Stage Manager implementation and architecture research remain outside the published feature list.
+These release notes cover software package changes published in the 26b08 batch.

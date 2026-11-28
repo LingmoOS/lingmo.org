@@ -11,9 +11,19 @@ import { PageHeader } from "@/components/ui/PageHeader";
 const donateMethods = [
   { icon: Github, title: "GitHub Sponsors", description: "Sponsor via GitHub", href: "https://github.com/sponsors/LingmoOS" },
   { icon: CreditCard, title: "OpenCollective", description: "Open collective funding", href: "https://opencollective.com/lingmo" },
-  { icon: Wallet, title: "PayPal", description: "One-time or monthly via PayPal", href: "https://paypal.me/lingmo" },
-  { icon: Banknote, title: "Alipay", description: "支付宝扫码支付" },
-  { icon: Banknote, title: "WeChat Pay", description: "微信支付" },
+  { icon: Wallet, title: "PayPal", description: "One-time or monthly via PayPal", href: "https://paypal.me/lingmoos" },
+  {
+    icon: Banknote,
+    title: "Alipay",
+    description: "支付宝扫码支付",
+    image: "/images/donate/alipay-qrcode.png",
+  },
+  {
+    icon: Banknote,
+    title: "WeChat Pay",
+    description: "微信支付",
+    image: "/images/donate/wechat-qrcode.png",
+  },
   { icon: CreditCard, title: "Bank Transfer", description: "Direct bank transfer" },
 ];
 
@@ -48,11 +58,19 @@ export default function DonatePage() {
                     </Button>
                   </a>
                 ) : (
-                  <div className="mt-4">
-                    <div className="mx-auto h-32 w-32 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <span className="text-sm text-muted dark:text-muted-dark">QR Code</span>
-                    </div>
+                  {method.image ? (
+                  <div className="mx-auto mt-2 overflow-hidden rounded-xl border border-black/5 dark:border-white/10 bg-white p-2">
+                    <img
+                      src={method.image}
+                      alt={`${method.title} payment QR code`}
+                      className="h-40 w-40 object-contain"
+                    />
                   </div>
+                  ) : (
+                    <div className="mt-4 text-sm text-muted dark:text-muted-dark">
+                      Contact us for bank transfer details.
+                    </div>
+                  )}
                 )}
               </Card>
             </motion.div>

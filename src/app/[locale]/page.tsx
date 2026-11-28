@@ -222,10 +222,15 @@ export default function HomePage() {
               <Card hover={true} className="overflow-hidden p-0">
                 <NewsCoverSvg variant={i} />
                 <div className="p-5">
-                  <p className="text-xs text-muted dark:text-muted-dark">June {15 + i}, 2026</p>
-                  <h3 className="mt-2 font-semibold">Lingmo OS Update {i}</h3>
+                  <p className="text-xs text-muted dark:text-muted-dark">
+                    November 28, 2026
+                  </p>
+                  <h3 className="mt-2 font-semibold">
+                    Lingmo OS 5.0 26b08 (Lithium)
+                  </h3>
                   <p className="mt-1 text-sm text-muted dark:text-muted-dark line-clamp-2">
-                    Latest news and updates from the Lingmo OS development team.
+                    Introducing new desktop features, Stage Manager improvements,
+                    system updates and application enhancements.
                   </p>
                 </div>
               </Card>
