@@ -87,15 +87,15 @@ export default function DonatePage() {
         <Card className="mx-auto max-w-2xl text-center">
           <div className="grid grid-cols-3 gap-8">
             <div>
-              <div className="text-3xl font-bold text-primary">$250K+</div>
+              <div className="text-3xl font-bold text-primary">$0.00</div>
               <p className="mt-1 text-sm text-muted dark:text-muted-dark">Total Raised</p>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary">1,200+</div>
+              <div className="text-3xl font-bold text-primary">--</div>
               <p className="mt-1 text-sm text-muted dark:text-muted-dark">Supporters</p>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary">96%</div>
+              <div className="text-3xl font-bold text-primary">--%</div>
               <p className="mt-1 text-sm text-muted dark:text-muted-dark">To Development</p>
             </div>
           </div>
