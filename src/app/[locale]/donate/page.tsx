@@ -58,19 +58,19 @@ export default function DonatePage() {
                     </Button>
                   </a>
                 ) : (
-                  {method.image ? (
-                  <div className="mx-auto mt-2 overflow-hidden rounded-xl border border-black/5 dark:border-white/10 bg-white p-2">
-                    <img
-                      src={method.image}
-                      alt={`${method.title} payment QR code`}
-                      className="h-40 w-40 object-contain"
-                    />
-                  </div>
+                  method.image ? (
+                    <div className="mx-auto mt-2 overflow-hidden rounded-xl border border-black/5 dark:border-white/10 bg-white p-2">
+                      <img
+                        src={method.image}
+                        alt={`${method.title} payment QR code`}
+                        className="h-40 w-40 object-contain"
+                      />
+                    </div>
                   ) : (
                     <div className="mt-4 text-sm text-muted dark:text-muted-dark">
                       Contact us for bank transfer details.
                     </div>
-                  )}
+                  )
                 )}
               </Card>
             </motion.div>
